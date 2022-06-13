@@ -13,6 +13,10 @@
 		<AssemblyVersion>$(SharedVersion)</AssemblyVersion>
 	</PropertyGroup>
 
+	<PropertyGroup>
+		<AllowedReferenceRelatedFileExtensions>Amperka.IO.Library.xml</AllowedReferenceRelatedFileExtensions>
+	</PropertyGroup>
+
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
 		<DebugType>none</DebugType>
 		<DebugSymbols>false</DebugSymbols>
@@ -26,6 +30,10 @@
 		<ProjectReference Include="..\Amperka.IO.Library\Amperka.IO.Library.csproj" />
 	</ItemGroup>
 
-	<ProjectExtensions><VisualStudio><UserProperties properties_4launchsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
+	<ProjectExtensions>
+		<VisualStudio>
+			<UserProperties properties_4launchsettings_1json__JsonSchema="" />
+		</VisualStudio>
+	</ProjectExtensions>
 
 </Project>

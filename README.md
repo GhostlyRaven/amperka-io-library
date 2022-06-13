@@ -1,13 +1,14 @@
-# <img src="https://github.com/GhostlyRaven/troyka-cap-dotnet/raw/master/logos/amperka-logo-32.png"></img> **Amperka.IO.Library**
+# <img src="https://github.com/GhostlyRaven/amperka-io-library/raw/master/img/amperka-logo-32.png"></img> **Amperka.IO.Library**
 
 **Implementation of the library for devices from Amperka on the dotnet platform.**
 
 **Target framework – .NET 6.**
 
 # Development plan
-The list contains the devices expected in the future in the project:
+The list contains the devices expected in the future in the library:
 - [x] Troyka CAP/HAT;
 - [x] GPIO Expander;
+- [] P-FET/N-FET;
 - [x] I2C Hub.
 
 # Additional information
