@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Amperka.IO.Debugger": {
+      "commandName": "Project",
+      "commandLineArgs": "--help"
+    }
+  }
+}

@@ -1,0 +1,472 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Amperka.IO.Library</name>
+    </assembly>
+    <members>
+        <member name="T:Amperka.IO.Devices.AmperkaDevices">
+            <summary>
+            A class providing devices from Amperka.
+            </summary>
+        </member>
+        <member name="M:Amperka.IO.Devices.AmperkaDevices.CreateGpioExpander">
+            <summary>
+            Initializes a new IGpioExpander.
+            </summary>
+            <returns>Instance of IGpioExpander.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">The device address on the bus or the bus id is in an invalid range.</exception>
+        </member>
+        <member name="M:Amperka.IO.Devices.AmperkaDevices.CreateGpioExpander(System.Device.I2c.I2cConnectionSettings)">
+            <summary>
+            Initializes a new IGpioExpander.
+            </summary>
+            <param name="settings">I2C bus settings on this device.</param>
+            <returns>Instance of IGpioExpander.</returns>
+            <exception cref="T:System.ArgumentNullException">The bus settings object can't be a null reference.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">The device address on the bus or the bus id is in an invalid range.</exception>
+        </member>
+        <member name="M:Amperka.IO.Devices.AmperkaDevices.CreateGpioExpanderAsync(System.Threading.CancellationToken)">
+            <summary>
+            Async initializes a new IGpioExpander.
+            </summary>
+            <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
+            <returns>Instance of IGpioExpander.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">The device address on the bus or the bus id is in an invalid range.</exception>
+            <exception cref="T:System.OperationCanceledException">The operation was canceled.</exception>
+        </member>
+        <member name="M:Amperka.IO.Devices.AmperkaDevices.CreateGpioExpanderAsync(System.Device.I2c.I2cConnectionSettings,System.Threading.CancellationToken)">
+            <summary>
+            Async initializes a new IGpioExpander.
+            </summary>
+            <param name="settings">I2C bus settings on this device.</param>
+            <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
+            <returns>Instance of IGpioExpander.</returns>
+            <exception cref="T:System.ArgumentNullException">The bus settings object can't be a null reference.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">The device address on the bus or the bus id is in an invalid range.</exception>
+            <exception cref="T:System.OperationCanceledException">The operation was canceled.</exception>
+        </member>
+        <member name="M:Amperka.IO.Devices.AmperkaDevices.CreateI2CHub">
+            <summary>
+            Initializes a new II2CHub.
+            </summary>
+            <returns>Instance of II2CHub.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">The device address on the bus or the bus id is in an invalid range.</exception>
+        </member>
+        <member name="M:Amperka.IO.Devices.AmperkaDevices.CreateI2CHub(System.Device.I2c.I2cConnectionSettings)">
+            <summary>
+            Initializes a new II2CHub.
+            </summary>
+            <param name="settings">I2C bus settings on this device.</param>
+            <returns>Instance of II2CHub.</returns>
+            <exception cref="T:System.ArgumentNullException">The bus settings object can't be a null reference.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">The device address on the bus or the bus id is in an invalid range.</exception>
+        </member>
+        <member name="M:Amperka.IO.Devices.AmperkaDevices.CreateI2CHubAsync(System.Threading.CancellationToken)">
+            <summary>
+            Async initializes a new II2CHub.
+            </summary>
+            <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
+            <returns>Instance of II2CHub.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">The device address on the bus or the bus id is in an invalid range.</exception>
+            <exception cref="T:System.OperationCanceledException">The operation was canceled.</exception>
+        </member>
+        <member name="M:Amperka.IO.Devices.AmperkaDevices.CreateI2CHubAsync(System.Device.I2c.I2cConnectionSettings,System.Threading.CancellationToken)">
+            <summary>
+            Async initializes a new II2CHub.
+            </summary>
+            <param name="settings">I2C bus settings on this device.</param>
+            <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
+            <returns>Instance of II2CHub.</returns>
+            <exception cref="T:System.ArgumentNullException">The bus settings object can't be a null reference.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">The device address on the bus or the bus id is in an invalid range.</exception>
+            <exception cref="T:System.OperationCanceledException">The operation was canceled.</exception>
+        </member>
+        <member name="T:Amperka.IO.Devices.IGpioExpander">
+            <summary>
+            A interface for working with Troyka Hat, Troyka Cap and GPIO expander.
+            </summary>
+        </member>
+        <member name="M:Amperka.IO.Devices.IGpioExpander.DigitalReadPort">
+            <summary>
+            Reads data from the device port.
+            </summary>
+            <returns>The value of the data read from the port.</returns>
+            <exception cref="T:System.ObjectDisposedException">The device is closed.</exception>
+        </member>
+        <member name="M:Amperka.IO.Devices.IGpioExpander.DigitalReadPortAsync(System.Threading.CancellationToken)">
+            <summary>
+            Async reads data from the device port.
+            </summary>
+            <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
+            <returns>The value of the data read from the port.</returns>
+            <exception cref="T:System.ObjectDisposedException">The device is closed.</exception>
+            <exception cref="T:System.OperationCanceledException">The operation was canceled.</exception>
+        </member>
+        <member name="M:Amperka.IO.Devices.IGpioExpander.DigitalWritePort(System.Int32)">
+            <summary>
+            Writes data from the device port.
+            </summary>
+            <param name="value">The value written to the port is from 0 to 1023.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Invalid value for writing to the port.</exception>
+            <exception cref="T:System.ObjectDisposedException">The device is closed.</exception>
+        </member>
+        <member name="M:Amperka.IO.Devices.IGpioExpander.DigitalWritePortAsync(System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Async writes data from the device port.
+            </summary>
+            <param name="value">The value written to the port is from 0 to 1023.</param>
+            <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Invalid value for writing to the port.</exception>
+            <exception cref="T:System.ObjectDisposedException">The device is closed.</exception>
+            <exception cref="T:System.OperationCanceledException">The operation was canceled.</exception>
+        </member>
+        <member name="M:Amperka.IO.Devices.IGpioExpander.DigitalRead(System.Int32)">
+            <summary>
+            Reads the high or low signal level from the selected pin.
+            </summary>
+            <param name="pin">Pin number on the device.</param>
+            <returns>High or low signal level.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">Invalid pin number value on the device.</exception>
+            <exception cref="T:System.ObjectDisposedException">The device is closed.</exception>
+        </member>
+        <member name="M:Amperka.IO.Devices.IGpioExpander.DigitalReadAsync(System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Async reads the high or low signal level from the selected pin.
+            </summary>
+            <param name="pin">Pin number on the device.</param>
+            <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
+            <returns>High or low signal level.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">Invalid pin number value on the device.</exception>
+            <exception cref="T:System.ObjectDisposedException">The device is closed.</exception>
+            <exception cref="T:System.OperationCanceledException">The operation was canceled.</exception>
+        </member>
+        <member name="M:Amperka.IO.Devices.IGpioExpander.DigitalWrite(System.Int32,System.Boolean)">
+            <summary>
+            Records the high or low signal level to the selected pin.
+            </summary>
+            <param name="pin">Pin number on the device.</param>
+            <param name="value">High or low signal level.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Invalid pin number value on the device.</exception>
+            <exception cref="T:System.ObjectDisposedException">The device is closed.</exception>
+        </member>
+        <member name="M:Amperka.IO.Devices.IGpioExpander.DigitalWriteAsync(System.Int32,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            Async records the high or low signal level to the selected pin.
+            </summary>
+            <param name="pin">Pin number on the device.</param>
+            <param name="value">High or low signal level.</param>
+            <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Invalid pin number value on the device.</exception>
+            <exception cref="T:System.ObjectDisposedException">The device is closed.</exception>
+            <exception cref="T:System.OperationCanceledException">The operation was canceled.</exception>
+        </member>
+        <member name="M:Amperka.IO.Devices.IGpioExpander.PinMode(System.Int32,Amperka.IO.Devices.GpioExpander.PinMode)">
+            <summary>
+            Sets the operating mode of the selected pin.
+            </summary>
+            <param name="pin">Pin number on the device.</param>
+            <param name="mode">Pin mode.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Invalid value is the pin number on the device or operating mode.</exception>
+            <exception cref="T:System.ObjectDisposedException">The device is closed.</exception>
+        </member>
+        <member name="M:Amperka.IO.Devices.IGpioExpander.PinModeAsync(System.Int32,Amperka.IO.Devices.GpioExpander.PinMode,System.Threading.CancellationToken)">
+            <summary>
+            Async sets the operating mode of the selected pin.
+            </summary>
+            <param name="pin">Pin number on the device.</param>
+            <param name="mode">Pin mode.</param>
+            <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Invalid value is the pin number on the device or operating mode.</exception>
+            <exception cref="T:System.ObjectDisposedException">The device is closed.</exception>
+            <exception cref="T:System.OperationCanceledException">The operation was canceled.</exception>
+        </member>
+        <member name="M:Amperka.IO.Devices.IGpioExpander.AnalogRead(System.Int32)">
+            <summary>
+            Reads the value of the analog signal from the selected pin.
+            </summary>
+            <param name="pin">Pin number on the device.</param>
+            <returns>The value of the analog signal is in the range from 0 to 4095.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">Invalid pin number value on the device.</exception>
+            <exception cref="T:System.ObjectDisposedException">The device is closed.</exception>
+        </member>
+        <member name="M:Amperka.IO.Devices.IGpioExpander.AnalogReadAsync(System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Async reads the value of the analog signal from the selected pin.
+            </summary>
+            <param name="pin">Pin number on the device.</param>
+            <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
+            <returns>The value of the analog signal is in the range from 0 to 4095.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">Invalid pin number value on the device.</exception>
+            <exception cref="T:System.ObjectDisposedException">The device is closed.</exception>
+            <exception cref="T:System.OperationCanceledException">The operation was canceled.</exception>
+        </member>
+        <member name="M:Amperka.IO.Devices.IGpioExpander.AnalogWrite(System.Int32,System.Int32,Amperka.IO.Devices.GpioExpander.ScaleMode)">
+            <summary>
+            Writes the PWM signal value to the selected pin.
+            </summary>
+            <param name="pin">Pin number on the device.</param>
+            <param name="value">The PWM signal value is in the range from 0 to 255 or from 0 to 4095 in ADC mode.</param>
+            <param name="mode">Scale mode.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Invalid value is the pin number on the device, the operating mode or the value being recorded.</exception>
+            <exception cref="T:System.ObjectDisposedException">The device is closed.</exception>
+        </member>
+        <member name="M:Amperka.IO.Devices.IGpioExpander.AnalogWriteAsync(System.Int32,System.Int32,Amperka.IO.Devices.GpioExpander.ScaleMode,System.Threading.CancellationToken)">
+            <summary>
+            Async writes the PWM signal value to the selected pin.
+            </summary>
+            <param name="pin">Pin number on the device.</param>
+            <param name="value">The PWM signal value is in the range from 0 to 255 or from 0 to 4095 in ADC mode.</param>
+            <param name="mode">Scale mode.</param>
+            <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Invalid value is the pin number on the device, the operating mode or the value being recorded.</exception>
+            <exception cref="T:System.ObjectDisposedException">The device is closed.</exception>
+            <exception cref="T:System.OperationCanceledException">The operation was canceled.</exception>
+        </member>
+        <member name="M:Amperka.IO.Devices.IGpioExpander.PwmFreq(System.Int32)">
+            <summary>
+            Sets the frequency of the ADC operation.
+            </summary>
+            <param name="freq">The frequency of the ADC is from 100 Hz to 64 kHz.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Invalid value of the ADC frequency.</exception>
+            <exception cref="T:System.ObjectDisposedException">The device is closed.</exception>
+        </member>
+        <member name="M:Amperka.IO.Devices.IGpioExpander.PwmFreqAsync(System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Async sets the frequency of the ADC operation.
+            </summary>
+            <param name="freq">The frequency of the ADC is from 100 Hz to 64 kHz.</param>
+            <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Invalid value of the ADC frequency.</exception>
+            <exception cref="T:System.ObjectDisposedException">The device is closed.</exception>
+            <exception cref="T:System.OperationCanceledException">The operation was canceled.</exception>
+        </member>
+        <member name="M:Amperka.IO.Devices.IGpioExpander.AdcSpeed(System.Int32)">
+            <summary>
+            Sets the speed of the ADC.
+            </summary>
+            <param name="speed">The value of the ADC operation speed is from 0 to 7.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Invalid value of the ADC operation speed.</exception>
+            <exception cref="T:System.ObjectDisposedException">The device is closed.</exception>
+        </member>
+        <member name="M:Amperka.IO.Devices.IGpioExpander.AdcSpeedAsync(System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Async sets the speed of the ADC.
+            </summary>
+            <param name="speed">The value of the ADC operation speed is from 0 to 7.</param>
+            <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Invalid value of the ADC operation speed.</exception>
+            <exception cref="T:System.ObjectDisposedException">The device is closed.</exception>
+            <exception cref="T:System.OperationCanceledException">The operation was canceled.</exception>
+        </member>
+        <member name="M:Amperka.IO.Devices.IGpioExpander.ChangeAddress(System.Int32)">
+            <summary>
+            Sets a new address for the device.
+            </summary>
+            <param name="newAddress">The address of the device on the bus.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Invalid device address values on the bus.</exception>
+            <exception cref="T:System.ObjectDisposedException">The device is closed.</exception>
+        </member>
+        <member name="M:Amperka.IO.Devices.IGpioExpander.ChangeAddressAsync(System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Async sets a new address for the device.
+            </summary>
+            <param name="newAddress">The address of the device on the bus.</param>
+            <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Invalid device address values on the bus.</exception>
+            <exception cref="T:System.ObjectDisposedException">The device is closed.</exception>
+            <exception cref="T:System.OperationCanceledException">The operation was canceled.</exception>
+        </member>
+        <member name="M:Amperka.IO.Devices.IGpioExpander.SaveAddress">
+            <summary>
+            Saves the new address for the device.
+            </summary>
+            <exception cref="T:System.ObjectDisposedException">The device is closed.</exception>
+        </member>
+        <member name="M:Amperka.IO.Devices.IGpioExpander.SaveAddressAsync(System.Threading.CancellationToken)">
+            <summary>
+            Async saves the new address for the device.
+            </summary>
+            <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
+            <exception cref="T:System.ObjectDisposedException">The device is closed.</exception>
+            <exception cref="T:System.OperationCanceledException">The operation was canceled.</exception>
+        </member>
+        <member name="M:Amperka.IO.Devices.IGpioExpander.Reset">
+            <summary>
+            Resets the device address to the default value.
+            </summary>
+            <exception cref="T:System.ObjectDisposedException">The device is closed.</exception>
+        </member>
+        <member name="M:Amperka.IO.Devices.IGpioExpander.ResetAsync(System.Threading.CancellationToken)">
+            <summary>
+            Async resets the device address to the default value.
+            </summary>
+            <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
+            <exception cref="T:System.ObjectDisposedException">The device is closed.</exception>
+            <exception cref="T:System.OperationCanceledException">The operation was canceled.</exception>
+        </member>
+        <member name="T:Amperka.IO.Devices.GpioExpander.PinMode">
+            <summary>
+            Pin mode.
+            </summary>
+        </member>
+        <member name="F:Amperka.IO.Devices.GpioExpander.PinMode.Output">
+            <summary>
+            Output.
+            </summary>
+        </member>
+        <member name="F:Amperka.IO.Devices.GpioExpander.PinMode.Input">
+            <summary>
+            Input.
+            </summary>
+        </member>
+        <member name="F:Amperka.IO.Devices.GpioExpander.PinMode.InputPullUp">
+            <summary>
+            Input pull up.
+            </summary>
+        </member>
+        <member name="F:Amperka.IO.Devices.GpioExpander.PinMode.InputPullDown">
+            <summary>
+            Input pull down.
+            </summary>
+        </member>
+        <member name="T:Amperka.IO.Devices.GpioExpander.ScaleMode">
+            <summary>
+            Defines the dimension of the input value.
+            </summary>
+        </member>
+        <member name="F:Amperka.IO.Devices.GpioExpander.ScaleMode.PWM">
+            <summary>
+            PWM.
+            </summary>
+        </member>
+        <member name="F:Amperka.IO.Devices.GpioExpander.ScaleMode.ADC">
+            <summary>
+            ADC.
+            </summary>
+        </member>
+        <member name="T:Amperka.IO.Devices.II2CHub">
+            <summary>
+            A interface for working with I2C Hub.
+            </summary>
+        </member>
+        <member name="M:Amperka.IO.Devices.II2CHub.SetChannel(System.Int32)">
+            <summary>
+            Switches the I2C hub to the selected channel.
+            </summary>
+            <param name="channel">Channel number.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Invalid value of the channel.</exception>
+            <exception cref="T:System.ObjectDisposedException">The device is closed.</exception>
+        </member>
+        <member name="M:Amperka.IO.Devices.II2CHub.SetChannelAsync(System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Async switches the I2C hub to the selected channel.
+            </summary>
+            <param name="channel">Channel number.</param>
+            <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Invalid value of the channel.</exception>
+            <exception cref="T:System.ObjectDisposedException">The device is closed.</exception>
+            <exception cref="T:System.OperationCanceledException">The operation was canceled.</exception>
+        </member>
+        <member name="T:Amperka.IO.AmperkaDeviceException">
+            <summary>
+            The exception that is thrown when an Amperka device error occurs.
+            </summary>
+        </member>
+        <member name="M:Amperka.IO.AmperkaDeviceException.#ctor">
+            <inheritdoc />
+        </member>
+        <member name="M:Amperka.IO.AmperkaDeviceException.#ctor(System.Exception)">
+            <summary>
+            Initializes a new instance of the Exception class with a reference to the inner exception that is the cause of this exception.
+            </summary>
+            <param name="innerException">The exception that is the cause of the current exception, or a null reference if no inner exception is specified.</param>
+        </member>
+        <member name="M:Amperka.IO.AmperkaDeviceException.#ctor(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Amperka.IO.AmperkaDeviceException.#ctor(System.String,System.Exception)">
+            <inheritdoc />
+        </member>
+        <member name="M:Amperka.IO.AmperkaDeviceException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <inheritdoc />
+        </member>
+        <member name="T:Amperka.IO.Extensions.GpioExpanderExtensions">
+            <summary>
+            Provides additional functions for working with the GPIO expander.
+            </summary>
+        </member>
+        <member name="M:Amperka.IO.Extensions.GpioExpanderExtensions.TroykaButtonClick(Amperka.IO.Devices.IGpioExpander,System.Int32)">
+            <summary>
+            Fixes click of the TroykaButton.
+            </summary>
+            <param name="expander">Instance of IGpioExpander.</param>
+            <param name="pin">Pin number on the device.</param>
+            <returns>True - click, False - not click.</returns>
+            <exception cref="T:System.ArgumentNullException">The GPIO expander object can't be a null reference.</exception>
+        </member>
+        <member name="M:Amperka.IO.Extensions.GpioExpanderExtensions.TroykaButtonClickAsync(Amperka.IO.Devices.IGpioExpander,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Async fixes click of the TroykaButton.
+            </summary>
+            <param name="expander">Instance of IGpioExpander.</param>
+            <param name="pin">Pin number on the device.</param>
+            <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
+            <returns>True - click, False - not click.</returns>
+            <exception cref="T:System.ArgumentNullException">The GPIO expander object can't be a null reference.</exception>
+            <exception cref="T:System.OperationCanceledException">The operation was canceled.</exception>
+        </member>
+        <member name="M:Amperka.IO.Extensions.GpioExpanderExtensions.DigitalPortHighLevel(Amperka.IO.Devices.IGpioExpander)">
+            <summary>
+            Sets all pins to high level.
+            </summary>
+            <param name="expander">Instance of IGpioExpander.</param>
+            <exception cref="T:System.ArgumentNullException">The GPIO expander object can't be a null reference.</exception>
+        </member>
+        <member name="M:Amperka.IO.Extensions.GpioExpanderExtensions.DigitalPortHighLevelAsync(Amperka.IO.Devices.IGpioExpander,System.Threading.CancellationToken)">
+            <summary>
+            Async sets all pins to high level.
+            </summary>
+            <param name="expander">Instance of IGpioExpander.</param>
+            <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
+            <exception cref="T:System.ArgumentNullException">The GPIO expander object can't be a null reference.</exception>
+            <exception cref="T:System.OperationCanceledException">The operation was canceled.</exception>
+        </member>
+        <member name="M:Amperka.IO.Extensions.GpioExpanderExtensions.DigitalPortLowLevel(Amperka.IO.Devices.IGpioExpander)">
+            <summary>
+            Sets all pins to low level.
+            </summary>
+            <param name="expander">Instance of IGpioExpander.</param>
+            <exception cref="T:System.ArgumentNullException">The GPIO expander object can't be a null reference.</exception>
+        </member>
+        <member name="M:Amperka.IO.Extensions.GpioExpanderExtensions.DigitalPortLowLevelAsync(Amperka.IO.Devices.IGpioExpander,System.Threading.CancellationToken)">
+            <summary>
+            Async sets all pins to low level.
+            </summary>
+            <param name="expander">Instance of IGpioExpander.</param>
+            <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
+            <exception cref="T:System.ArgumentNullException">The GPIO expander object can't be a null reference.</exception>
+            <exception cref="T:System.OperationCanceledException">The operation was canceled.</exception>
+        </member>
+        <member name="T:Amperka.IO.Resources.Strings">
+            <summary>
+              Класс ресурса со строгой типизацией для поиска локализованных строк и т.д.
+            </summary>
+        </member>
+        <member name="P:Amperka.IO.Resources.Strings.ResourceManager">
+            <summary>
+              Возвращает кэшированный экземпляр ResourceManager, использованный этим классом.
+            </summary>
+        </member>
+        <member name="P:Amperka.IO.Resources.Strings.Culture">
+            <summary>
+              Перезаписывает свойство CurrentUICulture текущего потока для всех
+              обращений к ресурсу с помощью этого класса ресурса со строгой типизацией.
+            </summary>
+        </member>
+        <member name="P:Amperka.IO.Resources.Strings.Amperka_Device_Exception_Message">
+            <summary>
+              Ищет локализованную строку, похожую на An unexpected error occurred in the operation of the device from Amperka..
+            </summary>
+        </member>
+    </members>
+</doc>

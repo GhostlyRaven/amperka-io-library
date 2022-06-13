@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<DocumentationFile>$(ProjectDir)Amperka.IO.Library.xml</DocumentationFile>
+		<RootNamespace>$(MSBuildProjectName.Substring(0, $(MSBuildProjectName.IndexOf(".Library"))).Replace(" ", "_"))</RootNamespace>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<Nullable>disable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<FileVersion>$(SharedVersion)</FileVersion>
+		<AssemblyVersion>$(SharedVersion)</AssemblyVersion>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<DebugType>none</DebugType>
+		<DebugSymbols>false</DebugSymbols>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="System.Device.Gpio" Version="2.1.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Resources\Strings.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>Strings.resx</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Update="Resources\Strings.resx">
+	    <Generator>ResXFileCodeGenerator</Generator>
+	    <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+	  </EmbeddedResource>
+	</ItemGroup>
+
+</Project>

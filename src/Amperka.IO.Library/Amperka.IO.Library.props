@@ -1,0 +1,5 @@
+<Project>
+	<PropertyGroup>
+		<AllowedReferenceRelatedFileExtensions>Amperka.IO.Library.xml</AllowedReferenceRelatedFileExtensions>
+	</PropertyGroup>
+</Project>

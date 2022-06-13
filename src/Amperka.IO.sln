@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32228.430
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Amperka.IO.Compiler", "Amperka.IO.Compiler", "{B7F72EF1-AC8E-4C03-855F-6007CF388498}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Build.props = Directory.Build.props
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Amperka.IO.Library", "Amperka.IO.Library\Amperka.IO.Library.csproj", "{F3AD7BD0-D27D-4601-AE33-F1254F7ED48C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Amperka.IO.Debugger", "Amperka.IO.Debugger\Amperka.IO.Debugger.csproj", "{9C54BD0E-4A57-4E85-8CCF-85CB7ED67519}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F3AD7BD0-D27D-4601-AE33-F1254F7ED48C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3AD7BD0-D27D-4601-AE33-F1254F7ED48C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3AD7BD0-D27D-4601-AE33-F1254F7ED48C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3AD7BD0-D27D-4601-AE33-F1254F7ED48C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C54BD0E-4A57-4E85-8CCF-85CB7ED67519}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C54BD0E-4A57-4E85-8CCF-85CB7ED67519}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C54BD0E-4A57-4E85-8CCF-85CB7ED67519}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C54BD0E-4A57-4E85-8CCF-85CB7ED67519}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {274553EF-BBE7-43D7-9BB9-53A4FFFD7C7F}
+	EndGlobalSection
+EndGlobal
