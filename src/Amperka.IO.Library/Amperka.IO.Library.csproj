@@ -28,7 +28,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<None Include="..\..\img\amperka-logo-400.png">
+		<None Include="..\..\images\amperka-logo-400.png">
 			<Pack>True</Pack>
 			<PackagePath>\</PackagePath>
 		</None>

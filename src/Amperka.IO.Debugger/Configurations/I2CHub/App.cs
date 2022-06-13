@@ -45,7 +45,7 @@ namespace Amperka.IO.Debugger.Configurations
         {
             await using (II2CHub hub = await AmperkaDevices.CreateI2CHubAsync(new I2cConnectionSettings(busId, deviceAddress)))
             {
-                Console.WriteLine("Checking the set channel ({0}}).", channel);
+                Console.WriteLine("Checking the set channel ({0}).", channel);
 
                 await hub.SetChannelAsync(channel);
             }

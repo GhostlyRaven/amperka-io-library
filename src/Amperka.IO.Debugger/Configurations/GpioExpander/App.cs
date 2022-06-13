@@ -221,7 +221,7 @@ namespace Amperka.IO.Debugger.Configurations
         {
             await using (IGpioExpander expander = await AmperkaDevices.CreateGpioExpanderAsync(new I2cConnectionSettings(busId, deviceAddress)))
             {
-                Console.WriteLine("Checking the PWM signal ({0}}).", freq);
+                Console.WriteLine("Checking the PWM signal ({0}).", freq);
 
                 await expander.PwmFreqAsync(freq);
 
