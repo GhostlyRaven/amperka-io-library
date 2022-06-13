@@ -30,10 +30,10 @@
 
 # Development plan
 The list contains the devices expected in the future in the library:
-- [x] Troyka CAP/HAT;
-- [x] GPIO Expander;
-- [ ] P-FET/N-FET;
-- [x] I2C Hub.
+- [x] [Troyka CAP/HAT;](https://github.com/amperka/TroykaHatCpp)
+- [x] [GPIO Expander;](https://github.com/amperka/I2CioExpander)
+- [ ] [P-FET/N-FET;](https://github.com/amperka/AmperkaFet)
+- [x] [I2C Hub.](https://github.com/amperka/TroykaI2CHub)
 
 # Additional information
 
