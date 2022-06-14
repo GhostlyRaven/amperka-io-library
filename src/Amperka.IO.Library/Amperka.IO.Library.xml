@@ -457,35 +457,35 @@
             Cyclically performs the action on all channels.
             </summary>
             <param name="hub">Instance of II2CHub.</param>
-            <param name="body">A method for cyclic execution.</param>
-            <exception cref="T:System.ArgumentNullException">The I2C hub or method body object can't be a null reference.</exception>
+            <param name="method">A method for cyclic execution.</param>
+            <exception cref="T:System.ArgumentNullException">The I2C hub or method object can't be a null reference.</exception>
         </member>
-        <member name="M:Amperka.IO.Extensions.I2CHubExtensions.ForEachAsync(Amperka.IO.Devices.II2CHub,System.Action,System.Threading.CancellationToken)">
+        <member name="M:Amperka.IO.Extensions.I2CHubExtensions.ForEach(Amperka.IO.Devices.II2CHub,System.Func{System.Threading.Tasks.Task})">
             <summary>
             Cyclically performs the action on all channels.
             </summary>
             <param name="hub">Instance of II2CHub.</param>
-            <param name="body">A method for cyclic execution.</param>
+            <param name="method">A method for cyclic execution.</param>
+            <exception cref="T:System.ArgumentNullException">The I2C hub or method object can't be a null reference.</exception>
+        </member>
+        <member name="M:Amperka.IO.Extensions.I2CHubExtensions.ForEachAsync(Amperka.IO.Devices.II2CHub,System.Action,System.Threading.CancellationToken)">
+            <summary>
+            Cyclically performs async action on all channels.
+            </summary>
+            <param name="hub">Instance of II2CHub.</param>
+            <param name="method">A method for cyclic execution.</param>
             <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
-            <exception cref="T:System.ArgumentNullException">The I2C hub or method body object can't be a null reference.</exception>
+            <exception cref="T:System.ArgumentNullException">The I2C hub or method object can't be a null reference.</exception>
             <exception cref="T:System.OperationCanceledException">The operation was canceled.</exception>
         </member>
-        <member name="M:Amperka.IO.Extensions.I2CHubExtensions.ForEach(Amperka.IO.Devices.II2CHub,System.Func{System.Threading.Tasks.Task})">
+        <member name="M:Amperka.IO.Extensions.I2CHubExtensions.ForEachAsync(Amperka.IO.Devices.II2CHub,System.Func{System.Threading.CancellationToken,System.Threading.Tasks.Task},System.Threading.CancellationToken)">
             <summary>
             Cyclically performs async action on all channels.
             </summary>
             <param name="hub">Instance of II2CHub.</param>
-            <param name="body">A method for cyclic execution.</param>
-            <exception cref="T:System.ArgumentNullException">The I2C hub or method body object can't be a null reference.</exception>
-        </member>
-        <member name="M:Amperka.IO.Extensions.I2CHubExtensions.ForEachAsync(Amperka.IO.Devices.II2CHub,System.Func{System.Threading.Tasks.Task},System.Threading.CancellationToken)">
-            <summary>
-            Cyclically performs async action on all channels.
-            </summary>
-            <param name="hub">Instance of II2CHub.</param>
-            <param name="body">A method for cyclic execution.</param>
+            <param name="method">A method for cyclic execution.</param>
             <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
-            <exception cref="T:System.ArgumentNullException">The I2C hub or method body object can't be a null reference.</exception>
+            <exception cref="T:System.ArgumentNullException">The I2C hub or method object can't be a null reference.</exception>
             <exception cref="T:System.OperationCanceledException">The operation was canceled.</exception>
         </member>
         <member name="T:Amperka.IO.Resources.Strings">
