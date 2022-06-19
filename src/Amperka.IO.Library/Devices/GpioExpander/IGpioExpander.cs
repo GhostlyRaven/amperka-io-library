@@ -213,7 +213,6 @@ namespace Amperka.IO.Devices
         /// Sets a new address for the device.
         /// </summary>
         /// <param name="newAddress">The address of the device on the bus.</param>
-        /// <exception cref="AmperkaDeviceException">There was a malfunction of the device.</exception>
         /// <exception cref="ArgumentOutOfRangeException">Invalid device address values on the bus.</exception>
         /// <exception cref="ObjectDisposedException">The device is closed.</exception>
         void ChangeAddress(int newAddress);
@@ -223,7 +222,6 @@ namespace Amperka.IO.Devices
         /// </summary>
         /// <param name="newAddress">The address of the device on the bus.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
-        /// <exception cref="AmperkaDeviceException">There was a malfunction of the device.</exception>
         /// <exception cref="ArgumentOutOfRangeException">Invalid device address values on the bus.</exception>
         /// <exception cref="ObjectDisposedException">The device is closed.</exception>
         /// <exception cref="OperationCanceledException">The operation was canceled.</exception>
@@ -244,13 +242,13 @@ namespace Amperka.IO.Devices
         ValueTask SaveAddressAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Resets the device address to the default value.
+        /// Resets the device.
         /// </summary>
         /// <exception cref="ObjectDisposedException">The device is closed.</exception>
         void Reset();
 
         /// <summary>
-        /// Async resets the device address to the default value.
+        /// Async resets the device.
         /// </summary>
         /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
         /// <exception cref="ObjectDisposedException">The device is closed.</exception>

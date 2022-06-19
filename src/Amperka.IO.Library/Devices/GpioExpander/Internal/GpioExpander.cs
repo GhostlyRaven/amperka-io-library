@@ -261,7 +261,7 @@ namespace Amperka.IO.Devices.GpioExpander.Internal
 
             Shutdown();
 
-            Write(Stm32Command.ChangeI2CAddress, newAddress, false);
+            Write(Stm32Command.ChangeI2CAddress, newAddress, true);
 
             _device.Dispose();
 
