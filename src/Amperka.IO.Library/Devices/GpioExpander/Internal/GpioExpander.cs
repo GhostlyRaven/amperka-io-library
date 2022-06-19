@@ -1,4 +1,5 @@
 ﻿using System.Device.I2c;
+using System.Diagnostics;
 using Amperka.IO.Exceptions.Internal;
 using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
@@ -353,6 +354,7 @@ namespace Amperka.IO.Devices.GpioExpander.Internal
             }
         }
 
+        [StackTraceHidden]
         private void Write(Stm32Command command, int data, bool ignoreThrow)
         {
             try

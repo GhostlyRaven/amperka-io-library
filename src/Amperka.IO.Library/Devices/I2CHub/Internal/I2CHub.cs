@@ -1,4 +1,5 @@
 ﻿using System.Device.I2c;
+using System.Diagnostics;
 using Amperka.IO.Exceptions.Internal;
 using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
@@ -54,6 +55,7 @@ namespace Amperka.IO.Devices.I2CHub.Internal
             Write(0, true);
         }
 
+        [StackTraceHidden]
         private void Write(int channel, bool ignoreThrow)
         {
             try

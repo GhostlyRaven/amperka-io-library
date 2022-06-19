@@ -17,7 +17,7 @@ namespace Amperka.IO.Debugger.Configurations
             #region Options
 
             Option<int> pwmOption = new Option<int>("--pwm", () => 255);
-            Option<int> freqOption = new Option<int>("--freq", () => 60);
+            Option<int> freqOption = new Option<int>("--freq", () => 100);
             Option<int> busIdOption = new Option<int>("--bus-id", () => 1);
             Option<int> delayOption = new Option<int>("--delay", () => 5000);
             Option<int> readPinOption = new Option<int>("--read-pin", () => 0);
@@ -147,21 +147,21 @@ namespace Amperka.IO.Debugger.Configurations
 
                 while (Exit())
                 {
-                    await expander.DigitalWritePortAsync(1023);
-
                     Console.WriteLine("Result: {0}", await expander.DigitalReadPortAsync());
 
+                    await expander.DigitalPortLowLevelAsync();
+
                     await Task.Delay(delay);
+
+                    Console.WriteLine("Result: {0}", await expander.DigitalReadPortAsync());
 
                     await expander.DigitalWritePortAsync(31);
 
-                    Console.WriteLine("Result: {0}", await expander.DigitalReadPortAsync());
-
                     await Task.Delay(delay);
 
-                    await expander.DigitalWritePortAsync(0);
-
                     Console.WriteLine("Result: {0}", await expander.DigitalReadPortAsync());
+
+                    await expander.DigitalPortHighLevelAsync();
 
                     await Task.Delay(delay);
                 }
@@ -198,20 +198,20 @@ namespace Amperka.IO.Debugger.Configurations
                 {
                     while (Exit())
                     {
-                        int result = await expander.AnalogReadAsync(readPin);
+                        double result = await expander.AnalogReadAsync(readPin) / 4095.0;
 
                         Console.WriteLine("Result: {0}", result);
-
-                        await expander.AnalogWriteAsync(writePin, result, ScaleMode.ADC);
                     }
                 }
                 else
                 {
                     while (Exit())
                     {
-                        double result = await expander.AnalogReadAsync(readPin) / 4095.0;
+                        int result = await expander.AnalogReadAsync(readPin);
 
                         Console.WriteLine("Result: {0}", result);
+
+                        await expander.AnalogWriteAsync(writePin, result, ScaleMode.ADC);
                     }
                 }
             }

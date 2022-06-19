@@ -6,6 +6,8 @@ namespace Amperka.IO.Debugger.Configurations
 {
     internal static partial class App
     {
+        private static long _exitDelay;
+
         internal static Task<int> Run(string[] args)
         {
             RootCommand root = new RootCommand();
@@ -26,12 +28,11 @@ namespace Amperka.IO.Debugger.Configurations
             return Task.CompletedTask;
         }
 
-        internal static async Task Close()
+        internal static Task InitExitDelay(long exitDelay)
         {
-            while (Exit())
-            {
-                await Task.Delay(10);
-            }
+            _exitDelay = exitDelay > 0 ? exitDelay : 0;
+
+            return Task.CompletedTask;
         }
 
         private static void DefaultHandler()
@@ -41,6 +42,15 @@ namespace Amperka.IO.Debugger.Configurations
 
         private static bool Exit()
         {
+            if (Console.IsInputRedirected)
+            {
+                bool exit = _exitDelay > 0;
+
+                _exitDelay--;
+
+                return exit;
+            }
+
             return !(Console.KeyAvailable && Console.ReadKey(true).Key == ConsoleKey.Escape);
         }
     }
