@@ -14,6 +14,7 @@
             Initializes a new IGpioExpander.
             </summary>
             <returns>Instance of IGpioExpander.</returns>
+            <exception cref="T:Amperka.IO.AmperkaDeviceException">There was a malfunction of the device.</exception>
             <exception cref="T:System.ArgumentOutOfRangeException">The device address on the bus or the bus id is in an invalid range.</exception>
         </member>
         <member name="M:Amperka.IO.Devices.AmperkaDevices.CreateGpioExpander(System.Device.I2c.I2cConnectionSettings)">
@@ -22,6 +23,7 @@
             </summary>
             <param name="settings">I2C bus settings on this device.</param>
             <returns>Instance of IGpioExpander.</returns>
+            <exception cref="T:Amperka.IO.AmperkaDeviceException">There was a malfunction of the device.</exception>
             <exception cref="T:System.ArgumentNullException">The bus settings object can't be a null reference.</exception>
             <exception cref="T:System.ArgumentOutOfRangeException">The device address on the bus or the bus id is in an invalid range.</exception>
         </member>
@@ -31,6 +33,7 @@
             </summary>
             <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
             <returns>Instance of IGpioExpander.</returns>
+            <exception cref="T:Amperka.IO.AmperkaDeviceException">There was a malfunction of the device.</exception>
             <exception cref="T:System.ArgumentOutOfRangeException">The device address on the bus or the bus id is in an invalid range.</exception>
             <exception cref="T:System.OperationCanceledException">The operation was canceled.</exception>
         </member>
@@ -41,6 +44,7 @@
             <param name="settings">I2C bus settings on this device.</param>
             <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
             <returns>Instance of IGpioExpander.</returns>
+            <exception cref="T:Amperka.IO.AmperkaDeviceException">There was a malfunction of the device.</exception>
             <exception cref="T:System.ArgumentNullException">The bus settings object can't be a null reference.</exception>
             <exception cref="T:System.ArgumentOutOfRangeException">The device address on the bus or the bus id is in an invalid range.</exception>
             <exception cref="T:System.OperationCanceledException">The operation was canceled.</exception>
@@ -50,6 +54,7 @@
             Initializes a new II2CHub.
             </summary>
             <returns>Instance of II2CHub.</returns>
+            <exception cref="T:Amperka.IO.AmperkaDeviceException">There was a malfunction of the device.</exception>
             <exception cref="T:System.ArgumentOutOfRangeException">The device address on the bus or the bus id is in an invalid range.</exception>
         </member>
         <member name="M:Amperka.IO.Devices.AmperkaDevices.CreateI2CHub(System.Device.I2c.I2cConnectionSettings)">
@@ -58,6 +63,7 @@
             </summary>
             <param name="settings">I2C bus settings on this device.</param>
             <returns>Instance of II2CHub.</returns>
+            <exception cref="T:Amperka.IO.AmperkaDeviceException">There was a malfunction of the device.</exception>
             <exception cref="T:System.ArgumentNullException">The bus settings object can't be a null reference.</exception>
             <exception cref="T:System.ArgumentOutOfRangeException">The device address on the bus or the bus id is in an invalid range.</exception>
         </member>
@@ -67,6 +73,7 @@
             </summary>
             <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
             <returns>Instance of II2CHub.</returns>
+            <exception cref="T:Amperka.IO.AmperkaDeviceException">There was a malfunction of the device.</exception>
             <exception cref="T:System.ArgumentOutOfRangeException">The device address on the bus or the bus id is in an invalid range.</exception>
             <exception cref="T:System.OperationCanceledException">The operation was canceled.</exception>
         </member>
@@ -77,6 +84,7 @@
             <param name="settings">I2C bus settings on this device.</param>
             <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
             <returns>Instance of II2CHub.</returns>
+            <exception cref="T:Amperka.IO.AmperkaDeviceException">There was a malfunction of the device.</exception>
             <exception cref="T:System.ArgumentNullException">The bus settings object can't be a null reference.</exception>
             <exception cref="T:System.ArgumentOutOfRangeException">The device address on the bus or the bus id is in an invalid range.</exception>
             <exception cref="T:System.OperationCanceledException">The operation was canceled.</exception>
@@ -91,6 +99,7 @@
             Reads data from the device port.
             </summary>
             <returns>The value of the data read from the port.</returns>
+            <exception cref="T:Amperka.IO.AmperkaDeviceException">There was a malfunction of the device.</exception>
             <exception cref="T:System.ObjectDisposedException">The device is closed.</exception>
         </member>
         <member name="M:Amperka.IO.Devices.IGpioExpander.DigitalReadPortAsync(System.Threading.CancellationToken)">
@@ -99,6 +108,7 @@
             </summary>
             <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
             <returns>The value of the data read from the port.</returns>
+            <exception cref="T:Amperka.IO.AmperkaDeviceException">There was a malfunction of the device.</exception>
             <exception cref="T:System.ObjectDisposedException">The device is closed.</exception>
             <exception cref="T:System.OperationCanceledException">The operation was canceled.</exception>
         </member>
@@ -107,6 +117,7 @@
             Writes data from the device port.
             </summary>
             <param name="value">The value written to the port is from 0 to 1023.</param>
+            <exception cref="T:Amperka.IO.AmperkaDeviceException">There was a malfunction of the device.</exception>
             <exception cref="T:System.ArgumentOutOfRangeException">Invalid value for writing to the port.</exception>
             <exception cref="T:System.ObjectDisposedException">The device is closed.</exception>
         </member>
@@ -116,6 +127,7 @@
             </summary>
             <param name="value">The value written to the port is from 0 to 1023.</param>
             <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
+            <exception cref="T:Amperka.IO.AmperkaDeviceException">There was a malfunction of the device.</exception>
             <exception cref="T:System.ArgumentOutOfRangeException">Invalid value for writing to the port.</exception>
             <exception cref="T:System.ObjectDisposedException">The device is closed.</exception>
             <exception cref="T:System.OperationCanceledException">The operation was canceled.</exception>
@@ -126,6 +138,7 @@
             </summary>
             <param name="pin">Pin number on the device.</param>
             <returns>High or low signal level.</returns>
+            <exception cref="T:Amperka.IO.AmperkaDeviceException">There was a malfunction of the device.</exception>
             <exception cref="T:System.ArgumentOutOfRangeException">Invalid pin number value on the device.</exception>
             <exception cref="T:System.ObjectDisposedException">The device is closed.</exception>
         </member>
@@ -136,6 +149,7 @@
             <param name="pin">Pin number on the device.</param>
             <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
             <returns>High or low signal level.</returns>
+            <exception cref="T:Amperka.IO.AmperkaDeviceException">There was a malfunction of the device.</exception>
             <exception cref="T:System.ArgumentOutOfRangeException">Invalid pin number value on the device.</exception>
             <exception cref="T:System.ObjectDisposedException">The device is closed.</exception>
             <exception cref="T:System.OperationCanceledException">The operation was canceled.</exception>
@@ -146,6 +160,7 @@
             </summary>
             <param name="pin">Pin number on the device.</param>
             <param name="value">High or low signal level.</param>
+            <exception cref="T:Amperka.IO.AmperkaDeviceException">There was a malfunction of the device.</exception>
             <exception cref="T:System.ArgumentOutOfRangeException">Invalid pin number value on the device.</exception>
             <exception cref="T:System.ObjectDisposedException">The device is closed.</exception>
         </member>
@@ -156,6 +171,7 @@
             <param name="pin">Pin number on the device.</param>
             <param name="value">High or low signal level.</param>
             <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
+            <exception cref="T:Amperka.IO.AmperkaDeviceException">There was a malfunction of the device.</exception>
             <exception cref="T:System.ArgumentOutOfRangeException">Invalid pin number value on the device.</exception>
             <exception cref="T:System.ObjectDisposedException">The device is closed.</exception>
             <exception cref="T:System.OperationCanceledException">The operation was canceled.</exception>
@@ -166,6 +182,7 @@
             </summary>
             <param name="pin">Pin number on the device.</param>
             <param name="mode">Pin mode.</param>
+            <exception cref="T:Amperka.IO.AmperkaDeviceException">There was a malfunction of the device.</exception>
             <exception cref="T:System.ArgumentOutOfRangeException">Invalid value is the pin number on the device or operating mode.</exception>
             <exception cref="T:System.ObjectDisposedException">The device is closed.</exception>
         </member>
@@ -176,6 +193,7 @@
             <param name="pin">Pin number on the device.</param>
             <param name="mode">Pin mode.</param>
             <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
+            <exception cref="T:Amperka.IO.AmperkaDeviceException">There was a malfunction of the device.</exception>
             <exception cref="T:System.ArgumentOutOfRangeException">Invalid value is the pin number on the device or operating mode.</exception>
             <exception cref="T:System.ObjectDisposedException">The device is closed.</exception>
             <exception cref="T:System.OperationCanceledException">The operation was canceled.</exception>
@@ -186,6 +204,7 @@
             </summary>
             <param name="pin">Pin number on the device.</param>
             <returns>The value of the analog signal is in the range from 0 to 4095.</returns>
+            <exception cref="T:Amperka.IO.AmperkaDeviceException">There was a malfunction of the device.</exception>
             <exception cref="T:System.ArgumentOutOfRangeException">Invalid pin number value on the device.</exception>
             <exception cref="T:System.ObjectDisposedException">The device is closed.</exception>
         </member>
@@ -196,6 +215,7 @@
             <param name="pin">Pin number on the device.</param>
             <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
             <returns>The value of the analog signal is in the range from 0 to 4095.</returns>
+            <exception cref="T:Amperka.IO.AmperkaDeviceException">There was a malfunction of the device.</exception>
             <exception cref="T:System.ArgumentOutOfRangeException">Invalid pin number value on the device.</exception>
             <exception cref="T:System.ObjectDisposedException">The device is closed.</exception>
             <exception cref="T:System.OperationCanceledException">The operation was canceled.</exception>
@@ -207,6 +227,7 @@
             <param name="pin">Pin number on the device.</param>
             <param name="value">The PWM signal value is in the range from 0 to 255 or from 0 to 4095 in ADC mode.</param>
             <param name="mode">Scale mode.</param>
+            <exception cref="T:Amperka.IO.AmperkaDeviceException">There was a malfunction of the device.</exception>
             <exception cref="T:System.ArgumentOutOfRangeException">Invalid value is the pin number on the device, the operating mode or the value being recorded.</exception>
             <exception cref="T:System.ObjectDisposedException">The device is closed.</exception>
         </member>
@@ -218,6 +239,7 @@
             <param name="value">The PWM signal value is in the range from 0 to 255 or from 0 to 4095 in ADC mode.</param>
             <param name="mode">Scale mode.</param>
             <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
+            <exception cref="T:Amperka.IO.AmperkaDeviceException">There was a malfunction of the device.</exception>
             <exception cref="T:System.ArgumentOutOfRangeException">Invalid value is the pin number on the device, the operating mode or the value being recorded.</exception>
             <exception cref="T:System.ObjectDisposedException">The device is closed.</exception>
             <exception cref="T:System.OperationCanceledException">The operation was canceled.</exception>
@@ -227,6 +249,7 @@
             Sets the frequency of the ADC operation.
             </summary>
             <param name="freq">The frequency of the ADC is from 100 Hz to 64 kHz.</param>
+            <exception cref="T:Amperka.IO.AmperkaDeviceException">There was a malfunction of the device.</exception>
             <exception cref="T:System.ArgumentOutOfRangeException">Invalid value of the ADC frequency.</exception>
             <exception cref="T:System.ObjectDisposedException">The device is closed.</exception>
         </member>
@@ -236,6 +259,7 @@
             </summary>
             <param name="freq">The frequency of the ADC is from 100 Hz to 64 kHz.</param>
             <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
+            <exception cref="T:Amperka.IO.AmperkaDeviceException">There was a malfunction of the device.</exception>
             <exception cref="T:System.ArgumentOutOfRangeException">Invalid value of the ADC frequency.</exception>
             <exception cref="T:System.ObjectDisposedException">The device is closed.</exception>
             <exception cref="T:System.OperationCanceledException">The operation was canceled.</exception>
@@ -245,6 +269,7 @@
             Sets the speed of the ADC.
             </summary>
             <param name="speed">The value of the ADC operation speed is from 0 to 7.</param>
+            <exception cref="T:Amperka.IO.AmperkaDeviceException">There was a malfunction of the device.</exception>
             <exception cref="T:System.ArgumentOutOfRangeException">Invalid value of the ADC operation speed.</exception>
             <exception cref="T:System.ObjectDisposedException">The device is closed.</exception>
         </member>
@@ -254,6 +279,7 @@
             </summary>
             <param name="speed">The value of the ADC operation speed is from 0 to 7.</param>
             <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
+            <exception cref="T:Amperka.IO.AmperkaDeviceException">There was a malfunction of the device.</exception>
             <exception cref="T:System.ArgumentOutOfRangeException">Invalid value of the ADC operation speed.</exception>
             <exception cref="T:System.ObjectDisposedException">The device is closed.</exception>
             <exception cref="T:System.OperationCanceledException">The operation was canceled.</exception>
@@ -263,6 +289,7 @@
             Sets a new address for the device.
             </summary>
             <param name="newAddress">The address of the device on the bus.</param>
+            <exception cref="T:Amperka.IO.AmperkaDeviceException">There was a malfunction of the device.</exception>
             <exception cref="T:System.ArgumentOutOfRangeException">Invalid device address values on the bus.</exception>
             <exception cref="T:System.ObjectDisposedException">The device is closed.</exception>
         </member>
@@ -272,6 +299,7 @@
             </summary>
             <param name="newAddress">The address of the device on the bus.</param>
             <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
+            <exception cref="T:Amperka.IO.AmperkaDeviceException">There was a malfunction of the device.</exception>
             <exception cref="T:System.ArgumentOutOfRangeException">Invalid device address values on the bus.</exception>
             <exception cref="T:System.ObjectDisposedException">The device is closed.</exception>
             <exception cref="T:System.OperationCanceledException">The operation was canceled.</exception>
@@ -354,6 +382,7 @@
             Switches the I2C hub to the selected channel.
             </summary>
             <param name="channel">Channel number.</param>
+            <exception cref="T:Amperka.IO.AmperkaDeviceException">There was a malfunction of the device.</exception>
             <exception cref="T:System.ArgumentOutOfRangeException">Invalid value of the channel.</exception>
             <exception cref="T:System.ObjectDisposedException">The device is closed.</exception>
         </member>
@@ -363,6 +392,7 @@
             </summary>
             <param name="channel">Channel number.</param>
             <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
+            <exception cref="T:Amperka.IO.AmperkaDeviceException">There was a malfunction of the device.</exception>
             <exception cref="T:System.ArgumentOutOfRangeException">Invalid value of the channel.</exception>
             <exception cref="T:System.ObjectDisposedException">The device is closed.</exception>
             <exception cref="T:System.OperationCanceledException">The operation was canceled.</exception>
@@ -402,6 +432,7 @@
             <param name="expander">Instance of IGpioExpander.</param>
             <param name="pin">Pin number on the device.</param>
             <returns>True - click, False - not click.</returns>
+            <exception cref="T:Amperka.IO.AmperkaDeviceException">There was a malfunction of the device.</exception>
             <exception cref="T:System.ArgumentNullException">The GPIO expander object can't be a null reference.</exception>
         </member>
         <member name="M:Amperka.IO.Extensions.GpioExpanderExtensions.TroykaButtonClickAsync(Amperka.IO.Devices.IGpioExpander,System.Int32,System.Threading.CancellationToken)">
@@ -412,6 +443,7 @@
             <param name="pin">Pin number on the device.</param>
             <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
             <returns>True - click, False - not click.</returns>
+            <exception cref="T:Amperka.IO.AmperkaDeviceException">There was a malfunction of the device.</exception>
             <exception cref="T:System.ArgumentNullException">The GPIO expander object can't be a null reference.</exception>
             <exception cref="T:System.OperationCanceledException">The operation was canceled.</exception>
         </member>
@@ -420,6 +452,7 @@
             Sets all pins to high level.
             </summary>
             <param name="expander">Instance of IGpioExpander.</param>
+            <exception cref="T:Amperka.IO.AmperkaDeviceException">There was a malfunction of the device.</exception>
             <exception cref="T:System.ArgumentNullException">The GPIO expander object can't be a null reference.</exception>
         </member>
         <member name="M:Amperka.IO.Extensions.GpioExpanderExtensions.DigitalPortHighLevelAsync(Amperka.IO.Devices.IGpioExpander,System.Threading.CancellationToken)">
@@ -428,6 +461,7 @@
             </summary>
             <param name="expander">Instance of IGpioExpander.</param>
             <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
+            <exception cref="T:Amperka.IO.AmperkaDeviceException">There was a malfunction of the device.</exception>
             <exception cref="T:System.ArgumentNullException">The GPIO expander object can't be a null reference.</exception>
             <exception cref="T:System.OperationCanceledException">The operation was canceled.</exception>
         </member>
@@ -436,6 +470,7 @@
             Sets all pins to low level.
             </summary>
             <param name="expander">Instance of IGpioExpander.</param>
+            <exception cref="T:Amperka.IO.AmperkaDeviceException">There was a malfunction of the device.</exception>
             <exception cref="T:System.ArgumentNullException">The GPIO expander object can't be a null reference.</exception>
         </member>
         <member name="M:Amperka.IO.Extensions.GpioExpanderExtensions.DigitalPortLowLevelAsync(Amperka.IO.Devices.IGpioExpander,System.Threading.CancellationToken)">
@@ -444,6 +479,7 @@
             </summary>
             <param name="expander">Instance of IGpioExpander.</param>
             <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
+            <exception cref="T:Amperka.IO.AmperkaDeviceException">There was a malfunction of the device.</exception>
             <exception cref="T:System.ArgumentNullException">The GPIO expander object can't be a null reference.</exception>
             <exception cref="T:System.OperationCanceledException">The operation was canceled.</exception>
         </member>
@@ -458,6 +494,16 @@
             </summary>
             <param name="hub">Instance of II2CHub.</param>
             <param name="method">A method for cyclic execution.</param>
+            <exception cref="T:Amperka.IO.AmperkaDeviceException">There was a malfunction of the device.</exception>
+            <exception cref="T:System.ArgumentNullException">The I2C hub or method object can't be a null reference.</exception>
+        </member>
+        <member name="M:Amperka.IO.Extensions.I2CHubExtensions.ForEach(Amperka.IO.Devices.II2CHub,System.Action{System.Int32})">
+            <summary>
+            Cyclically performs the action on all channels with number.
+            </summary>
+            <param name="hub">Instance of II2CHub.</param>
+            <param name="method">A method for cyclic execution.</param>
+            <exception cref="T:Amperka.IO.AmperkaDeviceException">There was a malfunction of the device.</exception>
             <exception cref="T:System.ArgumentNullException">The I2C hub or method object can't be a null reference.</exception>
         </member>
         <member name="M:Amperka.IO.Extensions.I2CHubExtensions.ForEach(Amperka.IO.Devices.II2CHub,System.Func{System.Threading.Tasks.Task})">
@@ -466,6 +512,16 @@
             </summary>
             <param name="hub">Instance of II2CHub.</param>
             <param name="method">A method for cyclic execution.</param>
+            <exception cref="T:Amperka.IO.AmperkaDeviceException">There was a malfunction of the device.</exception>
+            <exception cref="T:System.ArgumentNullException">The I2C hub or method object can't be a null reference.</exception>
+        </member>
+        <member name="M:Amperka.IO.Extensions.I2CHubExtensions.ForEach(Amperka.IO.Devices.II2CHub,System.Func{System.Int32,System.Threading.Tasks.Task})">
+            <summary>
+            Cyclically performs the action on all channels with number.
+            </summary>
+            <param name="hub">Instance of II2CHub.</param>
+            <param name="method">A method for cyclic execution.</param>
+            <exception cref="T:Amperka.IO.AmperkaDeviceException">There was a malfunction of the device.</exception>
             <exception cref="T:System.ArgumentNullException">The I2C hub or method object can't be a null reference.</exception>
         </member>
         <member name="M:Amperka.IO.Extensions.I2CHubExtensions.ForEachAsync(Amperka.IO.Devices.II2CHub,System.Action,System.Threading.CancellationToken)">
@@ -475,6 +531,18 @@
             <param name="hub">Instance of II2CHub.</param>
             <param name="method">A method for cyclic execution.</param>
             <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
+            <exception cref="T:Amperka.IO.AmperkaDeviceException">There was a malfunction of the device.</exception>
+            <exception cref="T:System.ArgumentNullException">The I2C hub or method object can't be a null reference.</exception>
+            <exception cref="T:System.OperationCanceledException">The operation was canceled.</exception>
+        </member>
+        <member name="M:Amperka.IO.Extensions.I2CHubExtensions.ForEachAsync(Amperka.IO.Devices.II2CHub,System.Action{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Cyclically performs async action on all channels with number.
+            </summary>
+            <param name="hub">Instance of II2CHub.</param>
+            <param name="method">A method for cyclic execution.</param>
+            <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
+            <exception cref="T:Amperka.IO.AmperkaDeviceException">There was a malfunction of the device.</exception>
             <exception cref="T:System.ArgumentNullException">The I2C hub or method object can't be a null reference.</exception>
             <exception cref="T:System.OperationCanceledException">The operation was canceled.</exception>
         </member>
@@ -485,6 +553,18 @@
             <param name="hub">Instance of II2CHub.</param>
             <param name="method">A method for cyclic execution.</param>
             <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
+            <exception cref="T:Amperka.IO.AmperkaDeviceException">There was a malfunction of the device.</exception>
+            <exception cref="T:System.ArgumentNullException">The I2C hub or method object can't be a null reference.</exception>
+            <exception cref="T:System.OperationCanceledException">The operation was canceled.</exception>
+        </member>
+        <member name="M:Amperka.IO.Extensions.I2CHubExtensions.ForEachAsync(Amperka.IO.Devices.II2CHub,System.Func{System.Int32,System.Threading.CancellationToken,System.Threading.Tasks.Task},System.Threading.CancellationToken)">
+            <summary>
+            Cyclically performs async action on all channels with number.
+            </summary>
+            <param name="hub">Instance of II2CHub.</param>
+            <param name="method">A method for cyclic execution.</param>
+            <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
+            <exception cref="T:Amperka.IO.AmperkaDeviceException">There was a malfunction of the device.</exception>
             <exception cref="T:System.ArgumentNullException">The I2C hub or method object can't be a null reference.</exception>
             <exception cref="T:System.OperationCanceledException">The operation was canceled.</exception>
         </member>

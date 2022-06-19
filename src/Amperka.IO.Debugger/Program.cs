@@ -12,9 +12,18 @@ namespace Amperka.IO.Debugger
 
 #if DEBUG
             await App.InitExitDelay(ushort.MaxValue);
-#endif
 
+            int exitCode = await App.Run(args);
+
+            while (App.Exit())
+            {
+                await Task.Delay(10);
+            }
+
+            return exitCode;
+#else
             return await App.Run(args);
+#endif
         }
     }
 }

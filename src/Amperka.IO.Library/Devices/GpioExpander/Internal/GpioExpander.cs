@@ -335,6 +335,7 @@ namespace Amperka.IO.Devices.GpioExpander.Internal
             return ((value & 0xFF) << 8) | ((value >> 8) & 0xFF);
         }
 
+        [StackTraceHidden]
         private int Read(Stm32Command command, int data)
         {
             try

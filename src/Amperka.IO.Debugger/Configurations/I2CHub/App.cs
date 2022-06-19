@@ -89,18 +89,18 @@ namespace Amperka.IO.Debugger.Configurations
         {
             await using (II2CHub hub = await AmperkaDevices.CreateI2CHubAsync(new I2cConnectionSettings(busId, deviceAddress)))
             {
-                hub.ForEach(() =>
+                hub.ForEach((number) =>
                 {
-                    Console.WriteLine("Channel delay started.");
+                    Console.WriteLine("Channel {0} delay started.", number);
 
                     Task.Delay(delay).Wait();
                 });
 
                 Console.WriteLine();
 
-                hub.ForEach(async () =>
+                hub.ForEach(async (number) =>
                 {
-                    Console.WriteLine("Channel delay started.");
+                    Console.WriteLine("Channel {0} delay started.", number);
 
                     await Task.Delay(delay);
                 });
@@ -111,18 +111,18 @@ namespace Amperka.IO.Debugger.Configurations
         {
             await using (II2CHub hub = await AmperkaDevices.CreateI2CHubAsync(new I2cConnectionSettings(busId, deviceAddress)))
             {
-                await hub.ForEachAsync(() =>
+                await hub.ForEachAsync((number) =>
                 {
-                    Console.WriteLine("Channel delay started.");
+                    Console.WriteLine("Channel {0} delay started.", number);
 
                     Task.Delay(delay).Wait();
                 });
 
                 Console.WriteLine();
 
-                await hub.ForEachAsync(async cancellationToken =>
+                await hub.ForEachAsync(async (number, cancellationToken) =>
                 {
-                    Console.WriteLine("Channel delay started.");
+                    Console.WriteLine("Channel {0} delay started.", number);
 
                     await Task.Delay(delay, cancellationToken);
                 });

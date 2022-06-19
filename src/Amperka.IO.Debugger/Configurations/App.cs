@@ -6,7 +6,16 @@ namespace Amperka.IO.Debugger.Configurations
 {
     internal static partial class App
     {
+#if DEBUG
         private static long _exitDelay;
+
+        internal static Task InitExitDelay(long exitDelay)
+        {
+            _exitDelay = exitDelay > 0 ? exitDelay : 0;
+
+            return Task.CompletedTask;
+        }
+#endif
 
         internal static Task<int> Run(string[] args)
         {
@@ -28,30 +37,22 @@ namespace Amperka.IO.Debugger.Configurations
             return Task.CompletedTask;
         }
 
-        internal static Task InitExitDelay(long exitDelay)
+        internal static bool Exit()
         {
-            _exitDelay = exitDelay > 0 ? exitDelay : 0;
+#if DEBUG
+            bool exit = _exitDelay > 0;
 
-            return Task.CompletedTask;
+            _exitDelay--;
+
+            return exit;
+#else
+            return !(Console.KeyAvailable && Console.ReadKey(true).Key == ConsoleKey.Escape);
+#endif
         }
 
         private static void DefaultHandler()
         {
             Console.WriteLine("Call help to find out the capabilities of the application.");
-        }
-
-        private static bool Exit()
-        {
-            if (Console.IsInputRedirected)
-            {
-                bool exit = _exitDelay > 0;
-
-                _exitDelay--;
-
-                return exit;
-            }
-
-            return !(Console.KeyAvailable && Console.ReadKey(true).Key == ConsoleKey.Escape);
         }
     }
 }

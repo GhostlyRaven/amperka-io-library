@@ -13,6 +13,7 @@ namespace Amperka.IO.Devices
         /// Switches the I2C hub to the selected channel.
         /// </summary>
         /// <param name="channel">Channel number.</param>
+        /// <exception cref="AmperkaDeviceException">There was a malfunction of the device.</exception>
         /// <exception cref="ArgumentOutOfRangeException">Invalid value of the channel.</exception>
         /// <exception cref="ObjectDisposedException">The device is closed.</exception>
         void SetChannel(int channel);
@@ -22,6 +23,7 @@ namespace Amperka.IO.Devices
         /// </summary>
         /// <param name="channel">Channel number.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
+        /// <exception cref="AmperkaDeviceException">There was a malfunction of the device.</exception>
         /// <exception cref="ArgumentOutOfRangeException">Invalid value of the channel.</exception>
         /// <exception cref="ObjectDisposedException">The device is closed.</exception>
         /// <exception cref="OperationCanceledException">The operation was canceled.</exception>

@@ -16,6 +16,7 @@ namespace Amperka.IO.Extensions
         /// <param name="expander">Instance of IGpioExpander.</param>
         /// <param name="pin">Pin number on the device.</param>
         /// <returns>True - click, False - not click.</returns>
+        /// <exception cref="AmperkaDeviceException">There was a malfunction of the device.</exception>
         /// <exception cref="ArgumentNullException">The GPIO expander object can't be a null reference.</exception>
         public static bool TroykaButtonClick(this IGpioExpander expander, int pin)
         {
@@ -34,6 +35,7 @@ namespace Amperka.IO.Extensions
         /// <param name="pin">Pin number on the device.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
         /// <returns>True - click, False - not click.</returns>
+        /// <exception cref="AmperkaDeviceException">There was a malfunction of the device.</exception>
         /// <exception cref="ArgumentNullException">The GPIO expander object can't be a null reference.</exception>
         /// <exception cref="OperationCanceledException">The operation was canceled.</exception>
         public static async ValueTask<bool> TroykaButtonClickAsync(this IGpioExpander expander, int pin, CancellationToken cancellationToken = default)
@@ -50,6 +52,7 @@ namespace Amperka.IO.Extensions
         /// Sets all pins to high level.
         /// </summary>
         /// <param name="expander">Instance of IGpioExpander.</param>
+        /// <exception cref="AmperkaDeviceException">There was a malfunction of the device.</exception>
         /// <exception cref="ArgumentNullException">The GPIO expander object can't be a null reference.</exception>
         public static void DigitalPortHighLevel(this IGpioExpander expander)
         {
@@ -66,6 +69,7 @@ namespace Amperka.IO.Extensions
         /// </summary>
         /// <param name="expander">Instance of IGpioExpander.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
+        /// <exception cref="AmperkaDeviceException">There was a malfunction of the device.</exception>
         /// <exception cref="ArgumentNullException">The GPIO expander object can't be a null reference.</exception>
         /// <exception cref="OperationCanceledException">The operation was canceled.</exception>
         public static async ValueTask DigitalPortHighLevelAsync(this IGpioExpander expander, CancellationToken cancellationToken = default)
@@ -82,6 +86,7 @@ namespace Amperka.IO.Extensions
         /// Sets all pins to low level.
         /// </summary>
         /// <param name="expander">Instance of IGpioExpander.</param>
+        /// <exception cref="AmperkaDeviceException">There was a malfunction of the device.</exception>
         /// <exception cref="ArgumentNullException">The GPIO expander object can't be a null reference.</exception>
         public static void DigitalPortLowLevel(this IGpioExpander expander)
         {
@@ -98,6 +103,7 @@ namespace Amperka.IO.Extensions
         /// </summary>
         /// <param name="expander">Instance of IGpioExpander.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
+        /// <exception cref="AmperkaDeviceException">There was a malfunction of the device.</exception>
         /// <exception cref="ArgumentNullException">The GPIO expander object can't be a null reference.</exception>
         /// <exception cref="OperationCanceledException">The operation was canceled.</exception>
         public static async ValueTask DigitalPortLowLevelAsync(this IGpioExpander expander, CancellationToken cancellationToken = default)
