@@ -259,7 +259,13 @@ namespace Amperka.IO.Devices.GpioExpander.Internal
 
             ThrowHelper.ThrowObjectDisposedException(_disposed, nameof(GpioExpander));
 
+            Shutdown();
+
             Write(Stm32Command.ChangeI2CAddress, newAddress, false);
+
+            _device.Dispose();
+
+            _disposed = true;
         }
 
         public ValueTask ChangeAddressAsync(int newAddress, CancellationToken cancellationToken = default)

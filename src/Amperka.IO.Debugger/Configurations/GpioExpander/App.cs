@@ -266,11 +266,15 @@ namespace Amperka.IO.Debugger.Configurations
 
         private static async Task AddressHandler(int busId, int deviceAddress, int newAddress)
         {
+            Console.WriteLine("Checking the chip change and save address ({0}).", newAddress);
+
             await using (IGpioExpander expander = await AmperkaDevices.CreateGpioExpanderAsync(new I2cConnectionSettings(busId, deviceAddress)))
             {
-                Console.WriteLine("Checking the chip change and save address ({0}).", newAddress);
-
                 await expander.ChangeAddressAsync(newAddress);
+            }
+
+            await using (IGpioExpander expander = await AmperkaDevices.CreateGpioExpanderAsync(new I2cConnectionSettings(busId, newAddress)))
+            {
                 await expander.SaveAddressAsync();
             }
         }
