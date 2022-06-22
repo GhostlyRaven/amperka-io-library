@@ -103,22 +103,27 @@ namespace Amperka.IO.Debugger.Configurations
 
             #endregion
 
-            #region Adress command
+            #region Save address command
 
-            Command address = new Command("address", "Checking the chip change and save address.")
+            Command saveAddress = new Command("save-address", "Checking the chip change and save address.")
             {
-                newAddressOption
+                newAddressOption,
+                delayOption
             };
 
-            address.SetHandler(AddressHandler, busIdOption, deviceAddressOption, newAddressOption);
+            saveAddress.SetHandler(SaveAddressHandler, busIdOption, deviceAddressOption, newAddressOption, delayOption);
 
             #endregion
 
-            #region Reset command 
+            #region Reset address command
 
-            Command reset = new Command("reset", "Checking the chip reset.");
+            Command resetAddress = new Command("reset-address", "Checking the chip reset.")
+            {
+                newAddressOption,
+                delayOption
+            };
 
-            reset.SetHandler(ResetHandler, busIdOption, deviceAddressOption);
+            resetAddress.SetHandler(ResetAddressHandler, busIdOption, deviceAddressOption, newAddressOption, delayOption);
 
             #endregion
 
@@ -129,10 +134,10 @@ namespace Amperka.IO.Debugger.Configurations
             gpioExpander.AddCommand(pwm);
             gpioExpander.AddCommand(port);
             gpioExpander.AddCommand(anlog);
-            gpioExpander.AddCommand(reset);
-            gpioExpander.AddCommand(address);
             gpioExpander.AddCommand(digital);
             gpioExpander.AddCommand(pwmRandom);
+            gpioExpander.AddCommand(saveAddress);
+            gpioExpander.AddCommand(resetAddress);
 
             root.AddCommand(gpioExpander);
         }
@@ -264,7 +269,7 @@ namespace Amperka.IO.Debugger.Configurations
             }
         }
 
-        private static async Task AddressHandler(int busId, int deviceAddress, int newAddress)
+        private static async Task SaveAddressHandler(int busId, int deviceAddress, int newAddress, int delay)
         {
             Console.WriteLine("Checking the chip change and save address ({0}).", newAddress);
 
@@ -273,18 +278,27 @@ namespace Amperka.IO.Debugger.Configurations
                 await expander.ChangeAddressAsync(newAddress);
             }
 
+            await Task.Delay(delay);
+
             await using (IGpioExpander expander = await AmperkaDevices.CreateGpioExpanderAsync(new I2cConnectionSettings(busId, newAddress)))
             {
                 await expander.SaveAddressAsync();
             }
         }
 
-        private static async Task ResetHandler(int busId, int deviceAddress)
+        private static async Task ResetAddressHandler(int busId, int deviceAddress, int newAddress, int delay)
         {
+            Console.WriteLine("Checking the chip change and reset address ({0}).", newAddress);
+
             await using (IGpioExpander expander = await AmperkaDevices.CreateGpioExpanderAsync(new I2cConnectionSettings(busId, deviceAddress)))
             {
-                Console.WriteLine("Checking the chip reset.");
+                await expander.ChangeAddressAsync(newAddress);
+            }
 
+            await Task.Delay(delay);
+
+            await using (IGpioExpander expander = await AmperkaDevices.CreateGpioExpanderAsync(new I2cConnectionSettings(busId, newAddress)))
+            {
                 await expander.ResetAsync();
             }
         }
