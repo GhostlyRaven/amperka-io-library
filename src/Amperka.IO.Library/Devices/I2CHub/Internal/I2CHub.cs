@@ -50,9 +50,16 @@ namespace Amperka.IO.Devices.I2CHub.Internal
 
         #region Private functions
 
-        private void Shutdown()
+        private void Shutdown(bool disposing)
         {
             Write(0, true);
+
+            if (disposing)
+            {
+                _device.Dispose();
+            }
+
+            _disposed = true;
         }
 
         [StackTraceHidden]
@@ -83,14 +90,7 @@ namespace Amperka.IO.Devices.I2CHub.Internal
                 return;
             }
 
-            Shutdown();
-
-            if (disposing)
-            {
-                _device.Dispose();
-            }
-
-            _disposed = true;
+            Shutdown(disposing);
         }
 
         public ValueTask DisposeAsync()

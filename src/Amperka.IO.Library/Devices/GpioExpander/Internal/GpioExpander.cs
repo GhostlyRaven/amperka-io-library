@@ -259,13 +259,9 @@ namespace Amperka.IO.Devices.GpioExpander.Internal
 
             ThrowHelper.ThrowObjectDisposedException(_disposed, nameof(GpioExpander));
 
-            Shutdown();
-
             Write(Stm32Command.ChangeI2CAddress, newAddress, true);
 
-            _device.Dispose();
-
-            _disposed = true;
+            Shutdown(true);
         }
 
         public ValueTask ChangeAddressAsync(int newAddress, CancellationToken cancellationToken = default)
@@ -281,13 +277,9 @@ namespace Amperka.IO.Devices.GpioExpander.Internal
         {
             ThrowHelper.ThrowObjectDisposedException(_disposed, nameof(GpioExpander));
 
-            Shutdown();
-
             Write(Stm32Command.SaveI2CAddress, default, true);
 
-            _device.Dispose();
-
-            _disposed = true;
+            Shutdown(true);
         }
 
         public ValueTask SaveAddressAsync(CancellationToken cancellationToken = default)
@@ -303,13 +295,9 @@ namespace Amperka.IO.Devices.GpioExpander.Internal
         {
             ThrowHelper.ThrowObjectDisposedException(_disposed, nameof(GpioExpander));
 
-            Shutdown();
-
             Write(Stm32Command.Reset, default, true);
 
-            _device.Dispose();
-
-            _disposed = true;
+            Shutdown(true);
         }
 
         public ValueTask ResetAsync(CancellationToken cancellationToken = default)
@@ -325,10 +313,17 @@ namespace Amperka.IO.Devices.GpioExpander.Internal
 
         #region Private functions
 
-        private void Shutdown()
+        private void Shutdown(bool disposing)
         {
             Write(Stm32Command.DigitalWriteHigh, 0, true);
             Write(Stm32Command.DigitalWriteLow, -1, true);
+
+            if (disposing)
+            {
+                _device.Dispose();
+            }
+
+            _disposed = true;
         }
 
         private int Mask(int value)
@@ -389,14 +384,7 @@ namespace Amperka.IO.Devices.GpioExpander.Internal
                 return;
             }
 
-            Shutdown();
-
-            if (disposing)
-            {
-                _device.Dispose();
-            }
-
-            _disposed = true;
+            Shutdown(disposing);
         }
 
         public ValueTask DisposeAsync()

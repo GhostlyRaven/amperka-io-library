@@ -18,14 +18,14 @@ namespace Amperka.IO.Debugger.Configurations
 
             Option<int> pwmOption = new Option<int>("--pwm", () => 255);
             Option<int> freqOption = new Option<int>("--freq", () => 100);
+            Option<int> delayOption = new Option<int>("--delay", () => 25);
             Option<int> busIdOption = new Option<int>("--bus-id", () => 1);
-            Option<int> delayOption = new Option<int>("--delay", () => 5000);
             Option<int> readPinOption = new Option<int>("--read-pin", () => 0);
             Option<int> adcSpeedOption = new Option<int>("--adc-speed", () => 7);
             Option<int> writePinOption = new Option<int>("--write-pin", () => 1);
-            Option<int> deviceAddressOption = new Option<int>("--address", () => 42);
             Option<bool> readonlyOption = new Option<bool>("--readonly", () => false);
-            Option<int> newAddressOption = new Option<int>("--new-address", () => 42);
+            Option<int> deviceAddressOption = new Option<int>("--device-address", () => 42);
+            Option<int> newDeviceAddressOption = new Option<int>("--new-device-address", () => 42);
 
             #endregion
 
@@ -44,11 +44,12 @@ namespace Amperka.IO.Debugger.Configurations
 
             Command digital = new Command("digital", "Checking the digital signal.")
             {
+                delayOption,
                 readPinOption,
                 writePinOption
             };
 
-            digital.SetHandler(DigitalHandler, busIdOption, deviceAddressOption, readPinOption, writePinOption);
+            digital.SetHandler(DigitalHandler, busIdOption, deviceAddressOption, delayOption, writePinOption, readPinOption);
 
             #endregion
 
@@ -56,12 +57,13 @@ namespace Amperka.IO.Debugger.Configurations
 
             Command anlog = new Command("analog", "Checking the analog signal.")
             {
+                delayOption,
                 readPinOption,
                 writePinOption,
                 readonlyOption
             };
 
-            anlog.SetHandler(AnalogHandler, busIdOption, deviceAddressOption, readPinOption, writePinOption, readonlyOption);
+            anlog.SetHandler(AnalogHandler, busIdOption, deviceAddressOption, delayOption, writePinOption, readPinOption, readonlyOption);
 
             #endregion
 
@@ -70,11 +72,11 @@ namespace Amperka.IO.Debugger.Configurations
             Command pwmRandom = new Command("pwm-random".ToLower(), "Checking the PWM signal.")
             {
                 freqOption,
-                writePinOption,
-                delayOption
+                delayOption,
+                writePinOption
             };
 
-            pwmRandom.SetHandler(PwmRandomHandler, busIdOption, deviceAddressOption, freqOption, writePinOption, delayOption);
+            pwmRandom.SetHandler(PwmRandomHandler, busIdOption, deviceAddressOption, delayOption, writePinOption, freqOption);
 
             #endregion
 
@@ -82,13 +84,13 @@ namespace Amperka.IO.Debugger.Configurations
 
             Command pwm = new Command("pwm", "Checking the PWM signal.")
             {
-                freqOption,
-                writePinOption,
                 pwmOption,
-                delayOption
+                freqOption,
+                delayOption,
+                writePinOption
             };
 
-            pwm.SetHandler(PwmHandler, busIdOption, deviceAddressOption, freqOption, writePinOption, pwmOption, delayOption);
+            pwm.SetHandler(PwmHandler, busIdOption, deviceAddressOption, delayOption, writePinOption, freqOption, pwmOption);
 
             #endregion
 
@@ -103,27 +105,30 @@ namespace Amperka.IO.Debugger.Configurations
 
             #endregion
 
-            #region Save address command
+            #region Change address command
 
-            Command saveAddress = new Command("save-address", "Checking the chip change and save address.")
+            Command changeChipAddress = new Command("change-chip-address", "Checking the chip change address.")
             {
-                newAddressOption,
-                delayOption
+                newDeviceAddressOption
             };
 
-            saveAddress.SetHandler(SaveAddressHandler, busIdOption, deviceAddressOption, newAddressOption, delayOption);
+            changeChipAddress.SetHandler(ChangeChipAddressHandler, busIdOption, deviceAddressOption, newDeviceAddressOption);
 
             #endregion
 
-            #region Reset address command
+            #region Save address command
 
-            Command resetAddress = new Command("reset-address", "Checking the chip reset.")
-            {
-                newAddressOption,
-                delayOption
-            };
+            Command saveChipAddress = new Command("save-chip-address", "Checking the chip save address.");
 
-            resetAddress.SetHandler(ResetAddressHandler, busIdOption, deviceAddressOption, newAddressOption, delayOption);
+            saveChipAddress.SetHandler(SaveAddressHandler, busIdOption, deviceAddressOption);
+
+            #endregion
+
+            #region Reset chip command
+
+            Command resetChip = new Command("reset-address", "Checking the chip reset.");
+
+            resetChip.SetHandler(ResetChipHandler, busIdOption, deviceAddressOption);
 
             #endregion
 
@@ -136,8 +141,9 @@ namespace Amperka.IO.Debugger.Configurations
             gpioExpander.AddCommand(anlog);
             gpioExpander.AddCommand(digital);
             gpioExpander.AddCommand(pwmRandom);
-            gpioExpander.AddCommand(saveAddress);
-            gpioExpander.AddCommand(resetAddress);
+            gpioExpander.AddCommand(resetChip);
+            gpioExpander.AddCommand(saveChipAddress);
+            gpioExpander.AddCommand(changeChipAddress);
 
             root.AddCommand(gpioExpander);
         }
@@ -173,7 +179,7 @@ namespace Amperka.IO.Debugger.Configurations
             }
         }
 
-        private static async Task DigitalHandler(int busId, int deviceAddress, int readPin, int writePin)
+        private static async Task DigitalHandler(int busId, int deviceAddress, int delay, int writePin, int readPin)
         {
             await using (IGpioExpander expander = await AmperkaDevices.CreateGpioExpanderAsync(new I2cConnectionSettings(busId, deviceAddress)))
             {
@@ -189,11 +195,13 @@ namespace Amperka.IO.Debugger.Configurations
                     Console.WriteLine("Result: {0}", result);
 
                     expander.DigitalWrite(writePin, result);
+
+                    await Task.Delay(delay);
                 }
             }
         }
 
-        private static async Task AnalogHandler(int busId, int deviceAddress, int readPin, int writePin, bool @readonly)
+        private static async Task AnalogHandler(int busId, int deviceAddress, int delay, int writePin, int readPin, bool @readonly)
         {
             await using (IGpioExpander expander = await AmperkaDevices.CreateGpioExpanderAsync(new I2cConnectionSettings(busId, deviceAddress)))
             {
@@ -206,6 +214,8 @@ namespace Amperka.IO.Debugger.Configurations
                         double result = await expander.AnalogReadAsync(readPin) / 4095.0;
 
                         Console.WriteLine("Result: {0}", result);
+
+                        await Task.Delay(delay);
                     }
                 }
                 else
@@ -217,12 +227,14 @@ namespace Amperka.IO.Debugger.Configurations
                         Console.WriteLine("Result: {0}", result);
 
                         await expander.AnalogWriteAsync(writePin, result, ScaleMode.ADC);
+
+                        await Task.Delay(delay);
                     }
                 }
             }
         }
 
-        private static async Task PwmRandomHandler(int busId, int deviceAddress, int freq, int writePin, int delay)
+        private static async Task PwmRandomHandler(int busId, int deviceAddress, int delay, int writePin, int freq)
         {
             await using (IGpioExpander expander = await AmperkaDevices.CreateGpioExpanderAsync(new I2cConnectionSettings(busId, deviceAddress)))
             {
@@ -243,7 +255,7 @@ namespace Amperka.IO.Debugger.Configurations
             }
         }
 
-        private static async Task PwmHandler(int busId, int deviceAddress, int freq, int writePin, int pwm, int delay)
+        private static async Task PwmHandler(int busId, int deviceAddress, int delay, int writePin, int freq, int pwm)
         {
             await using (IGpioExpander expander = await AmperkaDevices.CreateGpioExpanderAsync(new I2cConnectionSettings(busId, deviceAddress)))
             {
@@ -269,35 +281,31 @@ namespace Amperka.IO.Debugger.Configurations
             }
         }
 
-        private static async Task SaveAddressHandler(int busId, int deviceAddress, int newAddress, int delay)
+        private static async Task ChangeChipAddressHandler(int busId, int deviceAddress, int newDeviceAddress)
         {
-            Console.WriteLine("Checking the chip change and save address ({0}).", newAddress);
+            Console.WriteLine("Checking the chip change address ({0} => {1}).", deviceAddress, newDeviceAddress);
 
             await using (IGpioExpander expander = await AmperkaDevices.CreateGpioExpanderAsync(new I2cConnectionSettings(busId, deviceAddress)))
             {
-                await expander.ChangeAddressAsync(newAddress);
+                await expander.ChangeAddressAsync(newDeviceAddress);
             }
+        }
 
-            await Task.Delay(delay);
+        private static async Task SaveAddressHandler(int busId, int deviceAddress)
+        {
+            Console.WriteLine("Checking the chip save address ({0}).", deviceAddress);
 
-            await using (IGpioExpander expander = await AmperkaDevices.CreateGpioExpanderAsync(new I2cConnectionSettings(busId, newAddress)))
+            await using (IGpioExpander expander = await AmperkaDevices.CreateGpioExpanderAsync(new I2cConnectionSettings(busId, deviceAddress)))
             {
                 await expander.SaveAddressAsync();
             }
         }
 
-        private static async Task ResetAddressHandler(int busId, int deviceAddress, int newAddress, int delay)
+        private static async Task ResetChipHandler(int busId, int deviceAddress)
         {
-            Console.WriteLine("Checking the chip change and reset address ({0}).", newAddress);
+            Console.WriteLine("Checking the chip reset ({0}).", deviceAddress);
 
             await using (IGpioExpander expander = await AmperkaDevices.CreateGpioExpanderAsync(new I2cConnectionSettings(busId, deviceAddress)))
-            {
-                await expander.ChangeAddressAsync(newAddress);
-            }
-
-            await Task.Delay(delay);
-
-            await using (IGpioExpander expander = await AmperkaDevices.CreateGpioExpanderAsync(new I2cConnectionSettings(busId, newAddress)))
             {
                 await expander.ResetAsync();
             }

@@ -18,7 +18,8 @@ namespace Amperka.IO.Debugger.Configurations
             Option<int> busIdOption = new Option<int>("--bus-id", () => 1);
             Option<int> delayOption = new Option<int>("--delay", () => 5000);
             Option<int> channelOption = new Option<int>("--channel", () => 0);
-            Option<int> deviceAddressOption = new Option<int>("--address", () => 112);
+            Option<bool> useIndexOption = new Option<bool>("--use-index", () => false);
+            Option<int> deviceAddressOption = new Option<int>("--device-address", () => 112);
 
             #endregion
 
@@ -38,11 +39,12 @@ namespace Amperka.IO.Debugger.Configurations
 
             Command forEach = new Command("for-each", "Checking the for each set channel.")
             {
+                useIndexOption,
                 channelOption,
                 delayOption
             };
 
-            forEach.SetHandler(ForEachHandler, busIdOption, deviceAddressOption, channelOption, delayOption);
+            forEach.SetHandler(ForEachHandler, busIdOption, deviceAddressOption, delayOption, useIndexOption);
 
             #endregion
 
@@ -50,11 +52,12 @@ namespace Amperka.IO.Debugger.Configurations
 
             Command forEachAsync = new Command("for-each-async", "Checking the for each set channel.")
             {
+                useIndexOption,
                 channelOption,
                 delayOption
             };
 
-            forEachAsync.SetHandler(ForEachAsyncHandler, busIdOption, deviceAddressOption, channelOption, delayOption);
+            forEachAsync.SetHandler(ForEachAsyncHandler, busIdOption, deviceAddressOption, delayOption, useIndexOption);
 
             #endregion
 
@@ -85,47 +88,89 @@ namespace Amperka.IO.Debugger.Configurations
             }
         }
 
-        private static async Task ForEachHandler(int busId, int deviceAddress, int channel, int delay)
+        private static async Task ForEachHandler(int busId, int deviceAddress, int delay, bool useIndex)
         {
             await using (II2CHub hub = await AmperkaDevices.CreateI2CHubAsync(new I2cConnectionSettings(busId, deviceAddress)))
             {
-                hub.ForEach((number) =>
+                if (useIndex)
                 {
-                    Console.WriteLine("Channel {0} delay started.", number);
+                    hub.ForEach((index) =>
+                    {
+                        Console.WriteLine("Channel {0} delay started.", index);
 
-                    Task.Delay(delay).Wait();
-                });
+                        Task.Delay(delay).Wait();
+                    });
 
-                Console.WriteLine();
+                    Console.WriteLine();
 
-                hub.ForEach(async (number) =>
+                    hub.ForEach(async (index) =>
+                    {
+                        Console.WriteLine("Channel {0} delay started.", index);
+
+                        await Task.Delay(delay);
+                    });
+                }
+                else
                 {
-                    Console.WriteLine("Channel {0} delay started.", number);
+                    hub.ForEach(() =>
+                    {
+                        Console.WriteLine("Channel delay started.");
 
-                    await Task.Delay(delay);
-                });
+                        Task.Delay(delay).Wait();
+                    });
+
+                    Console.WriteLine();
+
+                    hub.ForEach(async () =>
+                    {
+                        Console.WriteLine("Channel delay started.");
+
+                        await Task.Delay(delay);
+                    });
+                }
             }
         }
 
-        private static async Task ForEachAsyncHandler(int busId, int deviceAddress, int channel, int delay)
+        private static async Task ForEachAsyncHandler(int busId, int deviceAddress, int delay, bool useIndex)
         {
             await using (II2CHub hub = await AmperkaDevices.CreateI2CHubAsync(new I2cConnectionSettings(busId, deviceAddress)))
             {
-                await hub.ForEachAsync((number) =>
+                if (useIndex)
                 {
-                    Console.WriteLine("Channel {0} delay started.", number);
+                    await hub.ForEachAsync((index) =>
+                    {
+                        Console.WriteLine("Channel {0} delay started.", index);
 
-                    Task.Delay(delay).Wait();
-                });
+                        Task.Delay(delay).Wait();
+                    });
 
-                Console.WriteLine();
+                    Console.WriteLine();
 
-                await hub.ForEachAsync(async (number, cancellationToken) =>
+                    await hub.ForEachAsync(async (index, cancellationToken) =>
+                    {
+                        Console.WriteLine("Channel {0} delay started.", index);
+
+                        await Task.Delay(delay, cancellationToken);
+                    });
+                }
+                else
                 {
-                    Console.WriteLine("Channel {0} delay started.", number);
+                    await hub.ForEachAsync(() =>
+                    {
+                        Console.WriteLine("Channel delay started.");
 
-                    await Task.Delay(delay, cancellationToken);
-                });
+                        Task.Delay(delay).Wait();
+                    });
+
+                    Console.WriteLine();
+
+                    await hub.ForEachAsync(async (cancellationToken) =>
+                    {
+                        Console.WriteLine("Channel delay started.");
+
+                        await Task.Delay(delay, cancellationToken);
+                    });
+                }
             }
         }
 
