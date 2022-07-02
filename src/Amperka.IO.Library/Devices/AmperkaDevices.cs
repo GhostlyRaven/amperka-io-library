@@ -1,5 +1,4 @@
-﻿using System.Device.I2c;
-using Amperka.IO.Exceptions.Internal;
+﻿using Amperka.IO.Exceptions.Internal;
 
 // ReSharper disable All
 
@@ -10,168 +9,92 @@ namespace Amperka.IO.Devices
     /// <summary>
     /// A class providing devices from Amperka.
     /// </summary>
-    public static class AmperkaDevices
+    public static partial class AmperkaDevices
     {
-        #region GPIO expander creation functions
+        #region Convert pin functions
 
         /// <summary>
-        /// Initializes a new IGpioExpander.
+        /// Convert Wiring Pi pin to Bcm pin on the device.
         /// </summary>
-        /// <returns>Instance of IGpioExpander.</returns>
-        /// <exception cref="AmperkaDeviceException">There was a malfunction of the device.</exception>
-        /// <exception cref="ArgumentOutOfRangeException">The device address on the bus or the bus id is in an invalid range.</exception>
-        public static IGpioExpander CreateGpioExpander()
+        /// <param name="pin">Wiring Pi pin number on the device.</param>
+        /// <returns>Bcm pin number on the device.</returns>
+        /// <exception cref="ArgumentOutOfRangeException">Invalid pin number value on the device.</exception>
+        public static int WiringPiToBcm(int pin)
         {
-            return CreateGpioExpander(new I2cConnectionSettings(1, 42));
+            return pin switch
+            {
+                0 => 17,
+                1 => 18,
+                2 => 27,
+                3 => 22,
+                4 => 23,
+                5 => 24,
+                6 => 25,
+                7 => 4,
+                8 => 2,
+                9 => 3,
+                10 => 8,
+                11 => 7,
+                12 => 10,
+                13 => 9,
+                14 => 11,
+                15 => 14,
+                16 => 15,
+                21 => 5,
+                22 => 6,
+                23 => 13,
+                24 => 19,
+                25 => 26,
+                26 => 12,
+                27 => 16,
+                28 => 20,
+                29 => 21,
+                30 => 0,
+                31 => 1,
+                _ => throw ThrowHelper.GetArgumentOutOfRangeException(nameof(pin))
+            };
         }
 
         /// <summary>
-        /// Initializes a new IGpioExpander.
+        /// Convert Wiring Pi pin to Bcm pin on the device.
         /// </summary>
-        /// <param name="settings">I2C bus settings on this device.</param>
-        /// <returns>Instance of IGpioExpander.</returns>
-        /// <exception cref="AmperkaDeviceException">There was a malfunction of the device.</exception>
-        /// <exception cref="ArgumentNullException">The bus settings object can't be a null reference.</exception>
-        /// <exception cref="ArgumentOutOfRangeException">The device address on the bus or the bus id is in an invalid range.</exception>
-        public static IGpioExpander CreateGpioExpander(I2cConnectionSettings settings)
+        /// <param name="pin">Bcm pin number on the device.</param>
+        /// <returns>Wiring Pi pin number on the device.</returns>
+        /// <exception cref="ArgumentOutOfRangeException">Invalid pin number value on the device.</exception>
+        public static int BcmToWiringPi(int pin)
         {
-            if (settings is null)
+            return pin switch
             {
-                ThrowHelper.ThrowArgumentNullException(nameof(settings));
-            }
-
-            if (settings.BusId < 0)
-            {
-                ThrowHelper.ThrowArgumentOutOfRangeException(nameof(settings.BusId));
-            }
-
-            if (settings.DeviceAddress is < 0 or > 127)
-            {
-                ThrowHelper.ThrowArgumentOutOfRangeException(nameof(settings.DeviceAddress));
-            }
-
-            try
-            {
-                return new GpioExpander.Internal.GpioExpander(I2cDevice.Create(settings));
-            }
-            catch (Exception error)
-            {
-                throw ThrowHelper.GetAmperkaDeviceException(error);
-            }
-        }
-
-        /// <summary>
-        /// Async initializes a new IGpioExpander.
-        /// </summary>
-        /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
-        /// <returns>Instance of IGpioExpander.</returns>
-        /// <exception cref="AmperkaDeviceException">There was a malfunction of the device.</exception>
-        /// <exception cref="ArgumentOutOfRangeException">The device address on the bus or the bus id is in an invalid range.</exception>
-        /// <exception cref="OperationCanceledException">The operation was canceled.</exception>
-        public static ValueTask<IGpioExpander> CreateGpioExpanderAsync(CancellationToken cancellationToken = default)
-        {
-            cancellationToken.ThrowIfCancellationRequested();
-
-            return ValueTask.FromResult(CreateGpioExpander());
-        }
-
-        /// <summary>
-        /// Async initializes a new IGpioExpander.
-        /// </summary>
-        /// <param name="settings">I2C bus settings on this device.</param>
-        /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
-        /// <returns>Instance of IGpioExpander.</returns>
-        /// <exception cref="AmperkaDeviceException">There was a malfunction of the device.</exception>
-        /// <exception cref="ArgumentNullException">The bus settings object can't be a null reference.</exception>
-        /// <exception cref="ArgumentOutOfRangeException">The device address on the bus or the bus id is in an invalid range.</exception>
-        /// <exception cref="OperationCanceledException">The operation was canceled.</exception>
-        public static ValueTask<IGpioExpander> CreateGpioExpanderAsync(I2cConnectionSettings settings, CancellationToken cancellationToken = default)
-        {
-            cancellationToken.ThrowIfCancellationRequested();
-
-            return ValueTask.FromResult(CreateGpioExpander(settings));
-        }
-
-        #endregion
-
-        #region I2C hub creation functions
-
-        /// <summary>
-        /// Initializes a new II2CHub.
-        /// </summary>
-        /// <returns>Instance of II2CHub.</returns>
-        /// <exception cref="AmperkaDeviceException">There was a malfunction of the device.</exception>
-        /// <exception cref="ArgumentOutOfRangeException">The device address on the bus or the bus id is in an invalid range.</exception>
-        public static II2CHub CreateI2CHub()
-        {
-            return CreateI2CHub(new I2cConnectionSettings(1, 112));
-        }
-
-        /// <summary>
-        /// Initializes a new II2CHub.
-        /// </summary>
-        /// <param name="settings">I2C bus settings on this device.</param>
-        /// <returns>Instance of II2CHub.</returns>
-        /// <exception cref="AmperkaDeviceException">There was a malfunction of the device.</exception>
-        /// <exception cref="ArgumentNullException">The bus settings object can't be a null reference.</exception>
-        /// <exception cref="ArgumentOutOfRangeException">The device address on the bus or the bus id is in an invalid range.</exception>
-        public static II2CHub CreateI2CHub(I2cConnectionSettings settings)
-        {
-            if (settings is null)
-            {
-                ThrowHelper.ThrowArgumentNullException(nameof(settings));
-            }
-
-            if (settings.BusId < 0)
-            {
-                ThrowHelper.ThrowArgumentOutOfRangeException(nameof(settings.BusId));
-            }
-
-            if (settings.DeviceAddress is < 0 or > 127)
-            {
-                ThrowHelper.ThrowArgumentOutOfRangeException(nameof(settings.DeviceAddress));
-            }
-
-            try
-            {
-                return new I2CHub.Internal.I2CHub(I2cDevice.Create(settings));
-            }
-            catch (Exception error)
-            {
-                throw ThrowHelper.GetAmperkaDeviceException(error);
-            }
-        }
-
-        /// <summary>
-        /// Async initializes a new II2CHub.
-        /// </summary>
-        /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
-        /// <returns>Instance of II2CHub.</returns>
-        /// <exception cref="AmperkaDeviceException">There was a malfunction of the device.</exception>
-        /// <exception cref="ArgumentOutOfRangeException">The device address on the bus or the bus id is in an invalid range.</exception>
-        /// <exception cref="OperationCanceledException">The operation was canceled.</exception>
-        public static ValueTask<II2CHub> CreateI2CHubAsync(CancellationToken cancellationToken = default)
-        {
-            cancellationToken.ThrowIfCancellationRequested();
-
-            return ValueTask.FromResult(CreateI2CHub());
-        }
-
-        /// <summary>
-        /// Async initializes a new II2CHub.
-        /// </summary>
-        /// <param name="settings">I2C bus settings on this device.</param>
-        /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
-        /// <returns>Instance of II2CHub.</returns>
-        /// <exception cref="AmperkaDeviceException">There was a malfunction of the device.</exception>
-        /// <exception cref="ArgumentNullException">The bus settings object can't be a null reference.</exception>
-        /// <exception cref="ArgumentOutOfRangeException">The device address on the bus or the bus id is in an invalid range.</exception>
-        /// <exception cref="OperationCanceledException">The operation was canceled.</exception>
-        public static ValueTask<II2CHub> CreateI2CHubAsync(I2cConnectionSettings settings, CancellationToken cancellationToken = default)
-        {
-            cancellationToken.ThrowIfCancellationRequested();
-
-            return ValueTask.FromResult(CreateI2CHub(settings));
+                0 => 30,
+                1 => 31,
+                2 => 8,
+                3 => 9,
+                4 => 7,
+                5 => 21,
+                6 => 22,
+                7 => 11,
+                8 => 10,
+                9 => 13,
+                10 => 12,
+                11 => 14,
+                12 => 26,
+                13 => 23,
+                14 => 15,
+                15 => 16,
+                16 => 27,
+                17 => 0,
+                18 => 1,
+                19 => 24,
+                20 => 28,
+                21 => 29,
+                22 => 3,
+                23 => 4,
+                24 => 5,
+                25 => 6,
+                26 => 25,
+                27 => 2,
+                _ => throw ThrowHelper.GetArgumentOutOfRangeException(nameof(pin))
+            };
         }
 
         #endregion

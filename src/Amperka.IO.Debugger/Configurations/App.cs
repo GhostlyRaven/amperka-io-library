@@ -21,6 +21,7 @@ namespace Amperka.IO.Debugger.Configurations
         {
             RootCommand root = new RootCommand();
 
+            ConfigureGpioControllerCommand(root);
             ConfigureGpioExpanderCommand(root);
             ConfigureI2CHubCommand(root);
 

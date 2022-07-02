@@ -18,6 +18,7 @@ namespace Amperka.IO.Extensions
         /// <returns>True - click, False - not click.</returns>
         /// <exception cref="AmperkaDeviceException">There was a malfunction of the device.</exception>
         /// <exception cref="ArgumentNullException">The GPIO expander object can't be a null reference.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">Invalid pin number value on the device.</exception>
         public static bool TroykaButtonClick(this IGpioExpander expander, int pin)
         {
             if (expander is null)
@@ -37,6 +38,7 @@ namespace Amperka.IO.Extensions
         /// <returns>True - click, False - not click.</returns>
         /// <exception cref="AmperkaDeviceException">There was a malfunction of the device.</exception>
         /// <exception cref="ArgumentNullException">The GPIO expander object can't be a null reference.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">Invalid pin number value on the device.</exception>
         /// <exception cref="OperationCanceledException">The operation was canceled.</exception>
         public static async ValueTask<bool> TroykaButtonClickAsync(this IGpioExpander expander, int pin, CancellationToken cancellationToken = default)
         {
