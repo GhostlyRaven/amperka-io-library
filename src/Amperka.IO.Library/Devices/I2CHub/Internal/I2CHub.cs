@@ -27,7 +27,7 @@ namespace Amperka.IO.Devices.I2CHub.Internal
 
         public void SetChannel(int channel)
         {
-            if (channel is < 0 or > 8)
+            if (channel is < 0 or > 7)
             {
                 ThrowHelper.ThrowArgumentOutOfRangeException(nameof(channel));
             }
@@ -50,18 +50,6 @@ namespace Amperka.IO.Devices.I2CHub.Internal
 
         #region Private functions
 
-        private void Shutdown(bool disposing)
-        {
-            Write(0, true);
-
-            if (disposing)
-            {
-                _device.Dispose();
-            }
-
-            _disposed = true;
-        }
-
         [StackTraceHidden]
         private void Write(int channel, bool ignoreThrow)
         {
@@ -82,6 +70,18 @@ namespace Amperka.IO.Devices.I2CHub.Internal
         #endregion
 
         #region IAsyncDisposable and IDisposable
+
+        private void Shutdown(bool disposing)
+        {
+            Write(0, true);
+
+            if (disposing)
+            {
+                _device.Dispose();
+            }
+
+            _disposed = true;
+        }
 
         private void Dispose(bool disposing)
         {

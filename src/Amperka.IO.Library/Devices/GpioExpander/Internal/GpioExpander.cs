@@ -313,19 +313,6 @@ namespace Amperka.IO.Devices.GpioExpander.Internal
 
         #region Private functions
 
-        private void Shutdown(bool disposing)
-        {
-            Write(Stm32Command.DigitalWriteHigh, 0, true);
-            Write(Stm32Command.DigitalWriteLow, -1, true);
-
-            if (disposing)
-            {
-                _device.Dispose();
-            }
-
-            _disposed = true;
-        }
-
         private int Mask(int value)
         {
             return 0x0001 << value;
@@ -376,6 +363,19 @@ namespace Amperka.IO.Devices.GpioExpander.Internal
         #endregion
 
         #region IAsyncDisposable and IDisposable
+
+        private void Shutdown(bool disposing)
+        {
+            Write(Stm32Command.DigitalWriteHigh, 0, true);
+            Write(Stm32Command.DigitalWriteLow, -1, true);
+
+            if (disposing)
+            {
+                _device.Dispose();
+            }
+
+            _disposed = true;
+        }
 
         private void Dispose(bool disposing)
         {
