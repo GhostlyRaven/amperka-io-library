@@ -23,7 +23,7 @@ namespace Amperka.IO.Debugger.Configurations
             Option<int> readPinOption = new Option<int>("--read-pin", () => 0);
             Option<int> adcSpeedOption = new Option<int>("--adc-speed", () => 7);
             Option<int> writePinOption = new Option<int>("--write-pin", () => 1);
-            Option<bool> readonlyOption = new Option<bool>("--readonly", () => false);
+            Option<bool> useReadonlyOption = new Option<bool>("--use-readonly", () => false);
             Option<int> deviceAddressOption = new Option<int>("--device-address", () => 42);
             Option<int> newDeviceAddressOption = new Option<int>("--new-device-address", () => 42);
 
@@ -60,10 +60,10 @@ namespace Amperka.IO.Debugger.Configurations
                 delayOption,
                 readPinOption,
                 writePinOption,
-                readonlyOption
+                useReadonlyOption
             };
 
-            anlog.SetHandler(AnalogHandler, busIdOption, deviceAddressOption, delayOption, writePinOption, readPinOption, readonlyOption);
+            anlog.SetHandler(AnalogHandler, busIdOption, deviceAddressOption, delayOption, writePinOption, readPinOption, useReadonlyOption);
 
             #endregion
 
@@ -201,13 +201,13 @@ namespace Amperka.IO.Debugger.Configurations
             }
         }
 
-        private static async Task AnalogHandler(int busId, int deviceAddress, int delay, int writePin, int readPin, bool @readonly)
+        private static async Task AnalogHandler(int busId, int deviceAddress, int delay, int writePin, int readPin, bool useReadonly)
         {
             await using (IGpioExpander expander = await AmperkaDevices.CreateGpioExpanderAsync(new I2cConnectionSettings(busId, deviceAddress)))
             {
                 Console.WriteLine("Checking the analog signal.");
 
-                if (@readonly)
+                if (useReadonly)
                 {
                     while (Exit())
                     {

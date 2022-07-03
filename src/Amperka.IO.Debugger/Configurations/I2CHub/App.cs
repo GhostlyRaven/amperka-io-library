@@ -18,8 +18,8 @@ namespace Amperka.IO.Debugger.Configurations
             Option<int> delayOption = new Option<int>("--delay", () => 25);
             Option<int> busIdOption = new Option<int>("--bus-id", () => 1);
             Option<int> channelOption = new Option<int>("--channel", () => 0);
-            Option<bool> indexOption = new Option<bool>("--index", () => false);
-            Option<bool> asyncOption = new Option<bool>("--async", () => false);
+            Option<bool> useIndexOption = new Option<bool>("--use-index", () => false);
+            Option<bool> useAsyncOption = new Option<bool>("--use-async", () => false);
             Option<int> deviceAddressOption = new Option<int>("--device-address", () => 112);
 
             #endregion
@@ -41,12 +41,12 @@ namespace Amperka.IO.Debugger.Configurations
             Command forEach = new Command("for-each", "Checking the for each set channel.")
             {
                 channelOption,
-                indexOption,
-                asyncOption,
+                useIndexOption,
+                useAsyncOption,
                 delayOption
             };
 
-            forEach.SetHandler(ForEachHandler, busIdOption, deviceAddressOption, delayOption, indexOption, asyncOption);
+            forEach.SetHandler(ForEachHandler, busIdOption, deviceAddressOption, delayOption, useIndexOption, useAsyncOption);
 
             #endregion
 
@@ -55,12 +55,12 @@ namespace Amperka.IO.Debugger.Configurations
             Command forEachAsync = new Command("for-each-async", "Checking the for each set channel.")
             {
                 channelOption,
-                indexOption,
-                asyncOption,
+                useIndexOption,
+                useAsyncOption,
                 delayOption
             };
 
-            forEachAsync.SetHandler(ForEachAsyncHandler, busIdOption, deviceAddressOption, delayOption, indexOption, asyncOption);
+            forEachAsync.SetHandler(ForEachAsyncHandler, busIdOption, deviceAddressOption, delayOption, useIndexOption, useAsyncOption);
 
             #endregion
 
@@ -91,13 +91,13 @@ namespace Amperka.IO.Debugger.Configurations
             }
         }
 
-        private static async Task ForEachHandler(int busId, int deviceAddress, int delay, bool index, bool async)
+        private static async Task ForEachHandler(int busId, int deviceAddress, int delay, bool useIndex, bool useAsync)
         {
             await using (II2CHub hub = await AmperkaDevices.CreateI2CHubAsync(new I2cConnectionSettings(busId, deviceAddress)))
             {
-                if (index)
+                if (useIndex)
                 {
-                    if (async)
+                    if (useAsync)
                     {
                         hub.ForEach(async (index) =>
                         {
@@ -118,7 +118,7 @@ namespace Amperka.IO.Debugger.Configurations
                 }
                 else
                 {
-                    if (async)
+                    if (useAsync)
                     {
                         hub.ForEach(async () =>
                         {
@@ -140,13 +140,13 @@ namespace Amperka.IO.Debugger.Configurations
             }
         }
 
-        private static async Task ForEachAsyncHandler(int busId, int deviceAddress, int delay, bool index, bool async)
+        private static async Task ForEachAsyncHandler(int busId, int deviceAddress, int delay, bool useIndex, bool useAsync)
         {
             await using (II2CHub hub = await AmperkaDevices.CreateI2CHubAsync(new I2cConnectionSettings(busId, deviceAddress)))
             {
-                if (index)
+                if (useIndex)
                 {
-                    if (async)
+                    if (useAsync)
                     {
                         await hub.ForEachAsync(async (index, cancellationToken) =>
                         {
@@ -167,7 +167,7 @@ namespace Amperka.IO.Debugger.Configurations
                 }
                 else
                 {
-                    if (async)
+                    if (useAsync)
                     {
                         await hub.ForEachAsync(async (cancellationToken) =>
                         {

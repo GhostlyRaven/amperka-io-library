@@ -16,9 +16,9 @@ namespace Amperka.IO.Debugger.Configurations
             #region Options
 
             Option<int> delayOption = new Option<int>("--delay", () => 25);
-            Option<bool> bcmOption = new Option<bool>("--bcm", () => false);
             Option<int> readPinOption = new Option<int>("--read-pin", () => 0);
             Option<int> writePinOption = new Option<int>("--write-pin", () => 1);
+            Option<bool> useBcmOption = new Option<bool>("--use-bcm", () => false);
 
             #endregion
 
@@ -26,7 +26,7 @@ namespace Amperka.IO.Debugger.Configurations
 
             Command convertCommand = new Command("convert-pins", "Checking the convert pins.");
 
-            convertCommand.SetHandler(ConvertPinsHandler, readPinOption, writePinOption, bcmOption);
+            convertCommand.SetHandler(ConvertPinsHandler, readPinOption, writePinOption, useBcmOption);
 
             #endregion
 
@@ -37,7 +37,7 @@ namespace Amperka.IO.Debugger.Configurations
                 delayOption
             };
 
-            syncCommand.SetHandler(SyncButtonClickHandler, readPinOption, writePinOption, delayOption, bcmOption);
+            syncCommand.SetHandler(SyncButtonClickHandler, readPinOption, writePinOption, delayOption, useBcmOption);
 
             #endregion
 
@@ -48,11 +48,11 @@ namespace Amperka.IO.Debugger.Configurations
                 delayOption
             };
 
-            asyncCommand.SetHandler(AsyncButtonClickHandler, readPinOption, writePinOption, delayOption, bcmOption);
+            asyncCommand.SetHandler(AsyncButtonClickHandler, readPinOption, writePinOption, delayOption, useBcmOption);
 
             #endregion
 
-            gpioController.AddGlobalOption(bcmOption);
+            gpioController.AddGlobalOption(useBcmOption);
             gpioController.AddGlobalOption(readPinOption);
             gpioController.AddGlobalOption(writePinOption);
 
@@ -65,9 +65,9 @@ namespace Amperka.IO.Debugger.Configurations
 
         #region Handlers
 
-        private static Task ConvertPinsHandler(int readPin, int writePin, bool bcm)
+        private static Task ConvertPinsHandler(int readPin, int writePin, bool useBcm)
         {
-            if (bcm)
+            if (useBcm)
             {
                 Console.WriteLine("WiringPi read pin: {0}. BCM read pin: {1}", AmperkaDevices.BcmToWiringPi(readPin), readPin);
                 Console.WriteLine("WiringPi write pin: {0}. BCM write pin: {1}", AmperkaDevices.BcmToWiringPi(writePin), writePin);
@@ -81,10 +81,10 @@ namespace Amperka.IO.Debugger.Configurations
             return Task.CompletedTask;
         }
 
-        private static async Task SyncButtonClickHandler(int readPin, int writePin, int delay, bool bcm)
+        private static async Task SyncButtonClickHandler(int readPin, int writePin, int delay, bool useBcm)
         {
-            int bcmReadPin = bcm ? readPin : AmperkaDevices.WiringPiToBcm(readPin);
-            int bcmWritePin = bcm ? writePin : AmperkaDevices.WiringPiToBcm(writePin);
+            int bcmReadPin = useBcm ? readPin : AmperkaDevices.WiringPiToBcm(readPin);
+            int bcmWritePin = useBcm ? writePin : AmperkaDevices.WiringPiToBcm(writePin);
 
             using (GpioController controller = new GpioController())
             {
@@ -104,10 +104,10 @@ namespace Amperka.IO.Debugger.Configurations
             }
         }
 
-        private static async Task AsyncButtonClickHandler(int readPin, int writePin, int delay, bool bcm)
+        private static async Task AsyncButtonClickHandler(int readPin, int writePin, int delay, bool useBcm)
         {
-            int bcmReadPin = bcm ? readPin : AmperkaDevices.WiringPiToBcm(readPin);
-            int bcmWritePin = bcm ? writePin : AmperkaDevices.WiringPiToBcm(writePin);
+            int bcmReadPin = useBcm ? readPin : AmperkaDevices.WiringPiToBcm(readPin);
+            int bcmWritePin = useBcm ? writePin : AmperkaDevices.WiringPiToBcm(writePin);
 
             using (GpioController controller = new GpioController())
             {

@@ -5,8 +5,6 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Amperka.IO.Exceptions.Internal
 {
-    //https://github.com/dotnet/runtime/blob/215b39abf947da7a40b0cb137eab4bceb24ad3e3/src/libraries/System.Private.CoreLib/src/System/ThrowHelper.cs
-
     [StackTraceHidden]
     internal static class ThrowHelper
     {

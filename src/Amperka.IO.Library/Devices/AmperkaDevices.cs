@@ -4,8 +4,6 @@
 
 namespace Amperka.IO.Devices
 {
-    //Save link in other place. Methods for thermometer: https://www.circuitbasics.com/raspberry-pi-ds18b20-temperature-sensor-tutorial/
-
     /// <summary>
     /// A class providing devices from Amperka.
     /// </summary>
