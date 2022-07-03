@@ -26,13 +26,16 @@ namespace Amperka.IO.Debugger.Configurations
 
             Command convertCommand = new Command("convert-pins", "Checking the convert pins.");
 
-            convertCommand.SetHandler(ConvertPinsHandler, readPinOption, writePinOption, delayOption, bcmOption);
+            convertCommand.SetHandler(ConvertPinsHandler, readPinOption, writePinOption, bcmOption);
 
             #endregion
 
             #region Sync command
 
-            Command syncCommand = new Command("sync-button-click", "Checking the sync button click.");
+            Command syncCommand = new Command("sync-button-click", "Checking the sync button click.")
+            {
+                delayOption
+            };
 
             syncCommand.SetHandler(SyncButtonClickHandler, readPinOption, writePinOption, delayOption, bcmOption);
 
@@ -40,14 +43,16 @@ namespace Amperka.IO.Debugger.Configurations
 
             #region Async command
 
-            Command asyncCommand = new Command("async-button-click", "Checking the async button click.");
+            Command asyncCommand = new Command("async-button-click", "Checking the async button click.")
+            {
+                delayOption
+            };
 
             asyncCommand.SetHandler(AsyncButtonClickHandler, readPinOption, writePinOption, delayOption, bcmOption);
 
             #endregion
 
             gpioController.AddGlobalOption(bcmOption);
-            gpioController.AddGlobalOption(delayOption);
             gpioController.AddGlobalOption(readPinOption);
             gpioController.AddGlobalOption(writePinOption);
 
@@ -60,7 +65,7 @@ namespace Amperka.IO.Debugger.Configurations
 
         #region Handlers
 
-        private static async Task ConvertPinsHandler(int readPin, int writePin, int delay, bool bcm)
+        private static Task ConvertPinsHandler(int readPin, int writePin, bool bcm)
         {
             if (bcm)
             {
@@ -73,10 +78,7 @@ namespace Amperka.IO.Debugger.Configurations
                 Console.WriteLine("BCM write pin: {0}. WiringPi write pin: {1}", AmperkaDevices.WiringPiToBcm(writePin), writePin);
             }
 
-            while (Exit())
-            {
-                await Task.Delay(delay);
-            }
+            return Task.CompletedTask;
         }
 
         private static async Task SyncButtonClickHandler(int readPin, int writePin, int delay, bool bcm)

@@ -15,8 +15,8 @@ namespace Amperka.IO.Debugger.Configurations
 
             #region Options
 
+            Option<int> delayOption = new Option<int>("--delay", () => 25);
             Option<int> busIdOption = new Option<int>("--bus-id", () => 1);
-            Option<int> delayOption = new Option<int>("--delay", () => 5000);
             Option<int> channelOption = new Option<int>("--channel", () => 0);
             Option<bool> indexOption = new Option<bool>("--index", () => false);
             Option<bool> asyncOption = new Option<bool>("--async", () => false);
