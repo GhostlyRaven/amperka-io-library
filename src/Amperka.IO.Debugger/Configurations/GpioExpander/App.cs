@@ -126,7 +126,7 @@ namespace Amperka.IO.Debugger.Configurations
 
             #region Reset chip command
 
-            Command resetChip = new Command("reset-address", "Checking the chip reset.");
+            Command resetChip = new Command("reset-chip", "Checking the chip reset.");
 
             resetChip.SetHandler(ResetChipHandler, busIdOption, deviceAddressOption);
 

@@ -46,10 +46,10 @@ namespace Amperka.IO.Debugger.Configurations
 
             #endregion
 
-            root.AddGlobalOption(bcmOption);
-            root.AddGlobalOption(delayOption);
-            root.AddGlobalOption(readPinOption);
-            root.AddGlobalOption(writePinOption);
+            gpioController.AddGlobalOption(bcmOption);
+            gpioController.AddGlobalOption(delayOption);
+            gpioController.AddGlobalOption(readPinOption);
+            gpioController.AddGlobalOption(writePinOption);
 
             gpioController.AddCommand(convertCommand);
             gpioController.AddCommand(syncCommand);
