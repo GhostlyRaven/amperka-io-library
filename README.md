@@ -9,13 +9,13 @@
 ```csharp
     internal static class Program
     {
-        internal static void Main()
+        internal static async Task<int> Main()
         {
-            await using (II2CHub hub = await AmperkaDevices.CreateI2CHub())
+            using (II2CHub hub = AmperkaDevices.CreateI2CHub())
             {
                 Console.WriteLine("Checking the set channel (0).");
 
-                await hub.SetChannel(0);
+                hub.SetChannel(0);
             }
 
             await using (II2CHub hub = await AmperkaDevices.CreateI2CHubAsync())
@@ -24,6 +24,8 @@
 
                 await hub.SetChannelAsync(1);
             }
+
+            return 0;
         }
     }
 ```

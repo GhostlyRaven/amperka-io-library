@@ -20,6 +20,9 @@
 		<PackageProjectUrl>https://amperka.com</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/GhostlyRaven/amperka-io-library</RepositoryUrl>
 		<Description>Implementation of the library for devices from Amperka on the dotnet platform.</Description>
+
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

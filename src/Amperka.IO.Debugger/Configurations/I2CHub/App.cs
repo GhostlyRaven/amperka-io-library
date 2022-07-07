@@ -19,8 +19,8 @@ namespace Amperka.IO.Debugger.Configurations
             Option<int> busIdOption = new Option<int>("--bus-id", () => 1);
             Option<int> channelOption = new Option<int>("--channel", () => 0);
             Option<bool> useIndexOption = new Option<bool>("--use-index", () => false);
-            Option<bool> useAsyncOption = new Option<bool>("--use-async", () => false);
             Option<int> deviceAddressOption = new Option<int>("--device-address", () => 112);
+            Option<bool> useAsyncMethodOption = new Option<bool>("--use-async-method", () => false);
 
             #endregion
 
@@ -40,13 +40,13 @@ namespace Amperka.IO.Debugger.Configurations
 
             Command forEach = new Command("for-each", "Checking the for each set channel.")
             {
+                delayOption,
                 channelOption,
                 useIndexOption,
-                useAsyncOption,
-                delayOption
+                useAsyncMethodOption,
             };
 
-            forEach.SetHandler(ForEachHandler, busIdOption, deviceAddressOption, delayOption, useIndexOption, useAsyncOption);
+            forEach.SetHandler(ForEachHandler, busIdOption, deviceAddressOption, delayOption, useIndexOption, useAsyncMethodOption);
 
             #endregion
 
@@ -54,13 +54,13 @@ namespace Amperka.IO.Debugger.Configurations
 
             Command forEachAsync = new Command("for-each-async", "Checking the for each set channel.")
             {
+                delayOption,
                 channelOption,
                 useIndexOption,
-                useAsyncOption,
-                delayOption
+                useAsyncMethodOption,
             };
 
-            forEachAsync.SetHandler(ForEachAsyncHandler, busIdOption, deviceAddressOption, delayOption, useIndexOption, useAsyncOption);
+            forEachAsync.SetHandler(ForEachAsyncHandler, busIdOption, deviceAddressOption, delayOption, useIndexOption, useAsyncMethodOption);
 
             #endregion
 
@@ -91,13 +91,13 @@ namespace Amperka.IO.Debugger.Configurations
             }
         }
 
-        private static async Task ForEachHandler(int busId, int deviceAddress, int delay, bool useIndex, bool useAsync)
+        private static async Task ForEachHandler(int busId, int deviceAddress, int delay, bool useIndex, bool useAsyncMethod)
         {
             await using (II2CHub hub = await AmperkaDevices.CreateI2CHubAsync(new I2cConnectionSettings(busId, deviceAddress)))
             {
                 if (useIndex)
                 {
-                    if (useAsync)
+                    if (useAsyncMethod)
                     {
                         hub.ForEach(async (index) =>
                         {
@@ -118,7 +118,7 @@ namespace Amperka.IO.Debugger.Configurations
                 }
                 else
                 {
-                    if (useAsync)
+                    if (useAsyncMethod)
                     {
                         hub.ForEach(async () =>
                         {
@@ -140,13 +140,13 @@ namespace Amperka.IO.Debugger.Configurations
             }
         }
 
-        private static async Task ForEachAsyncHandler(int busId, int deviceAddress, int delay, bool useIndex, bool useAsync)
+        private static async Task ForEachAsyncHandler(int busId, int deviceAddress, int delay, bool useIndex, bool useAsyncMethod)
         {
             await using (II2CHub hub = await AmperkaDevices.CreateI2CHubAsync(new I2cConnectionSettings(busId, deviceAddress)))
             {
                 if (useIndex)
                 {
-                    if (useAsync)
+                    if (useAsyncMethod)
                     {
                         await hub.ForEachAsync(async (index, cancellationToken) =>
                         {
@@ -167,7 +167,7 @@ namespace Amperka.IO.Debugger.Configurations
                 }
                 else
                 {
-                    if (useAsync)
+                    if (useAsyncMethod)
                     {
                         await hub.ForEachAsync(async (cancellationToken) =>
                         {

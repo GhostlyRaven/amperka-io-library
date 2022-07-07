@@ -549,21 +549,23 @@
             <exception cref="T:Amperka.IO.AmperkaDeviceException">There was a malfunction of the device.</exception>
             <exception cref="T:System.ArgumentNullException">The I2C hub or method object can't be a null reference.</exception>
         </member>
-        <member name="M:Amperka.IO.Extensions.I2CHubExtensions.ForEach(Amperka.IO.Devices.II2CHub,System.Func{System.Threading.Tasks.Task})">
+        <member name="M:Amperka.IO.Extensions.I2CHubExtensions.ForEach(Amperka.IO.Devices.II2CHub,System.Func{System.Threading.CancellationToken,System.Threading.Tasks.Task},System.Threading.CancellationToken)">
             <summary>
             Cyclically performs the action on all channels.
             </summary>
             <param name="hub">Instance of II2CHub.</param>
             <param name="method">A method for cyclic execution.</param>
+            <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
             <exception cref="T:Amperka.IO.AmperkaDeviceException">There was a malfunction of the device.</exception>
             <exception cref="T:System.ArgumentNullException">The I2C hub or method object can't be a null reference.</exception>
         </member>
-        <member name="M:Amperka.IO.Extensions.I2CHubExtensions.ForEach(Amperka.IO.Devices.II2CHub,System.Func{System.Int32,System.Threading.Tasks.Task})">
+        <member name="M:Amperka.IO.Extensions.I2CHubExtensions.ForEach(Amperka.IO.Devices.II2CHub,System.Func{System.Int32,System.Threading.CancellationToken,System.Threading.Tasks.Task},System.Threading.CancellationToken)">
             <summary>
             Cyclically performs the action on all channels with number.
             </summary>
             <param name="hub">Instance of II2CHub.</param>
             <param name="method">A method for cyclic execution.</param>
+            <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
             <exception cref="T:Amperka.IO.AmperkaDeviceException">There was a malfunction of the device.</exception>
             <exception cref="T:System.ArgumentNullException">The I2C hub or method object can't be a null reference.</exception>
         </member>
