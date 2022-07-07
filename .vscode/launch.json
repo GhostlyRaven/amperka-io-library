@@ -1,0 +1,17 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch Amperka.IO.Debugger",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/src/Amperka.IO.Debugger/bin/Debug/net6.0/Amperka.IO.Debugger.dll",
+            "launchSettingsFilePath": "${workspaceFolder}/src/Amperka.IO.Debugger/Properties/launchSettings.json",
+            "cwd": "${workspaceFolder}/src/Amperka.IO.Debugger",
+            "launchSettingsProfile": "Amperka.IO.Debugger",
+            "console": "integratedTerminal",
+            "stopAtEntry": false
+        }
+    ]
+}
