@@ -3,7 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 
 // ReSharper disable All
 
-namespace Amperka.IO.Exceptions.Internal
+namespace Amperka.IO.Exceptions
 {
     [StackTraceHidden]
     internal static class ThrowHelper

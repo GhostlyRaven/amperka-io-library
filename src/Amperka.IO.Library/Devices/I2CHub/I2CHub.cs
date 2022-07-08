@@ -1,30 +1,49 @@
 ﻿using System.Device.I2c;
 using System.Diagnostics;
-using Amperka.IO.Exceptions.Internal;
+using Amperka.IO.Exceptions;
 using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
 
 // ReSharper disable All
 
-namespace Amperka.IO.Devices.I2CHub.Internal
+namespace Amperka.IO.Devices
 {
-    internal class I2CHub : II2CHub
+    /// <summary>
+    /// A class for working with I2C Hub.
+    /// </summary>
+    public sealed class I2CHub : IAsyncDisposable, IDisposable
     {
         #region Constructors and fields
 
         private bool _disposed;
+        private I2cDevice _device;
 
-        private readonly I2cDevice _device;
+        /// <summary>
+        /// Default device address.
+        /// </summary>
+        public const int DefaultAddress = 112;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="I2CHub"/> class.
+        /// </summary>
+        /// <param name="device">Instance of I2C device.</param>
+        /// <exception cref="ArgumentNullException">The I2C device object can't be a null reference.</exception>
         public I2CHub(I2cDevice device)
         {
-            _device = device;
+            _device = device ?? throw ThrowHelper.GetArgumentNullException(nameof(device));
         }
 
         #endregion
 
         #region Channel functions
 
+        /// <summary>
+        /// Switches the I2C hub to the selected channel.
+        /// </summary>
+        /// <param name="channel">Channel number.</param>
+        /// <exception cref="ArgumentOutOfRangeException">Invalid value of the channel.</exception>
+        /// <exception cref="AmperkaDeviceException">There was a malfunction of the device.</exception>
+        /// <exception cref="ObjectDisposedException">The device is closed.</exception>
         public void SetChannel(int channel)
         {
             if (channel is < 0 or > 7)
@@ -37,6 +56,15 @@ namespace Amperka.IO.Devices.I2CHub.Internal
             Write(channel, false);
         }
 
+        /// <summary>
+        /// Async switches the I2C hub to the selected channel.
+        /// </summary>
+        /// <param name="channel">Channel number.</param>
+        /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
+        /// <exception cref="ArgumentOutOfRangeException">Invalid value of the channel.</exception>
+        /// <exception cref="AmperkaDeviceException">There was a malfunction of the device.</exception>
+        /// <exception cref="OperationCanceledException">The operation was canceled.</exception>
+        /// <exception cref="ObjectDisposedException">The device is closed.</exception>
         public ValueTask SetChannelAsync(int channel, CancellationToken cancellationToken = default)
         {
             cancellationToken.ThrowIfCancellationRequested();
@@ -80,6 +108,8 @@ namespace Amperka.IO.Devices.I2CHub.Internal
                 _device.Dispose();
             }
 
+            _device = default;
+
             _disposed = true;
         }
 
@@ -93,6 +123,7 @@ namespace Amperka.IO.Devices.I2CHub.Internal
             Shutdown(disposing);
         }
 
+        /// <inheritdoc />
         public ValueTask DisposeAsync()
         {
             Dispose();
@@ -100,12 +131,14 @@ namespace Amperka.IO.Devices.I2CHub.Internal
             return default;
         }
 
+        /// <inheritdoc />
         public void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);
         }
 
+        /// <inheritdoc />
         ~I2CHub()
         {
             Dispose(false);

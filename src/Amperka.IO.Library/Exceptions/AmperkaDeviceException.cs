@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 
 // ReSharper disable All
 
-namespace Amperka.IO
+namespace Amperka.IO.Exceptions
 {
     /// <summary>
     /// The exception that is thrown when an Amperka device error occurs.

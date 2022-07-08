@@ -7,18 +7,23 @@
 # Usage example
 
 ```csharp
+using System.Device.I2c;
+using Amperka.IO.Devices;
+
+namespace Amperka.IO.Demo
+{
     internal static class Program
     {
         internal static async Task<int> Main()
         {
-            using (II2CHub hub = AmperkaDevices.CreateI2CHub())
+            using (I2CHub hub = new I2CHub(I2cDevice.Create(new I2cConnectionSettings(1, I2CHub.DefaultAddress))))
             {
                 Console.WriteLine("Checking the set channel (0).");
 
                 hub.SetChannel(0);
             }
 
-            await using (II2CHub hub = await AmperkaDevices.CreateI2CHubAsync())
+            await using (I2CHub hub = new I2CHub(I2cDevice.Create(new I2cConnectionSettings(1, I2CHub.DefaultAddress))))
             {
                 Console.WriteLine("Checking the set channel (1).");
 
@@ -28,14 +33,13 @@
             return 0;
         }
     }
+}
 ```
 
 # Development plan
 The list contains the devices expected in the future in the library:
-- [ ] [Digital weather sensor;](https://github.com/amperka/TroykaMeteoSensor)
 - [x] [Troyka CAP/HAT;](https://github.com/amperka/TroykaHatCpp)
 - [x] [GPIO Expander;](https://github.com/amperka/I2CioExpander)
-- [ ] [Barometer V2;](https://github.com/amperka/Troyka-IMU)
 - [ ] [P-FET/N-FET;](https://github.com/amperka/AmperkaFet)
 - [x] [I2C Hub.](https://github.com/amperka/TroykaI2CHub)
 

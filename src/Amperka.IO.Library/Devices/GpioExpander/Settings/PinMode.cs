@@ -1,9 +1,9 @@
 ﻿// ReSharper disable All
 
-namespace Amperka.IO.Devices.GpioExpander
+namespace Amperka.IO.Devices.Settings
 {
     /// <summary>
-    /// Pin mode.
+    /// GPIO expander pin mode.
     /// </summary>
     public enum PinMode
     {

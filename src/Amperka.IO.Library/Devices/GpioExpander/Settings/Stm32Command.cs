@@ -1,6 +1,6 @@
 ﻿// ReSharper disable All
 
-namespace Amperka.IO.Devices.GpioExpander.Internal
+namespace Amperka.IO.Devices.Settings
 {
     internal enum Stm32Command
     {

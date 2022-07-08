@@ -1,6 +1,6 @@
 ﻿// ReSharper disable All
 
-namespace Amperka.IO.Devices.GpioExpander
+namespace Amperka.IO.Devices.Settings
 {
     /// <summary>
     /// Defines the dimension of the input value.

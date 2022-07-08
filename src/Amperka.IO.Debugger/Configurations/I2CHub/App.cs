@@ -19,8 +19,8 @@ namespace Amperka.IO.Debugger.Configurations
             Option<int> busIdOption = new Option<int>("--bus-id", () => 1);
             Option<int> channelOption = new Option<int>("--channel", () => 0);
             Option<bool> useIndexOption = new Option<bool>("--use-index", () => false);
-            Option<int> deviceAddressOption = new Option<int>("--device-address", () => 112);
             Option<bool> useAsyncMethodOption = new Option<bool>("--use-async-method", () => false);
+            Option<int> deviceAddressOption = new Option<int>("--device-address", () => I2CHub.DefaultAddress);
 
             #endregion
 
@@ -78,7 +78,7 @@ namespace Amperka.IO.Debugger.Configurations
 
         private static async Task SetChannelHandler(int busId, int deviceAddress, int channel, int delay)
         {
-            await using (II2CHub hub = await AmperkaDevices.CreateI2CHubAsync(new I2cConnectionSettings(busId, deviceAddress)))
+            await using (I2CHub hub = new I2CHub(I2cDevice.Create(new I2cConnectionSettings(busId, deviceAddress))))
             {
                 Console.WriteLine("Checking the set channel ({0}).", channel);
 
@@ -93,7 +93,7 @@ namespace Amperka.IO.Debugger.Configurations
 
         private static async Task ForEachHandler(int busId, int deviceAddress, int delay, bool useIndex, bool useAsyncMethod)
         {
-            await using (II2CHub hub = await AmperkaDevices.CreateI2CHubAsync(new I2cConnectionSettings(busId, deviceAddress)))
+            await using (I2CHub hub = new I2CHub(I2cDevice.Create(new I2cConnectionSettings(busId, deviceAddress))))
             {
                 if (useIndex)
                 {
@@ -142,7 +142,7 @@ namespace Amperka.IO.Debugger.Configurations
 
         private static async Task ForEachAsyncHandler(int busId, int deviceAddress, int delay, bool useIndex, bool useAsyncMethod)
         {
-            await using (II2CHub hub = await AmperkaDevices.CreateI2CHubAsync(new I2cConnectionSettings(busId, deviceAddress)))
+            await using (I2CHub hub = new I2CHub(I2cDevice.Create(new I2cConnectionSettings(busId, deviceAddress))))
             {
                 if (useIndex)
                 {

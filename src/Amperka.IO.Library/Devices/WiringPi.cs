@@ -1,13 +1,13 @@
-﻿using Amperka.IO.Exceptions.Internal;
+﻿using Amperka.IO.Exceptions;
 
 // ReSharper disable All
 
 namespace Amperka.IO.Devices
 {
     /// <summary>
-    /// A class providing devices from Amperka.
+    /// A class for working with WiringPi pins.
     /// </summary>
-    public static partial class AmperkaDevices
+    public static class WiringPi
     {
         #region Convert pin functions
 
@@ -17,7 +17,7 @@ namespace Amperka.IO.Devices
         /// <param name="pin">Wiring Pi pin number on the device.</param>
         /// <returns>Bcm pin number on the device.</returns>
         /// <exception cref="ArgumentOutOfRangeException">Invalid pin number value on the device.</exception>
-        public static int WiringPiToBcm(int pin)
+        public static int ToBcm(int pin)
         {
             return pin switch
             {
@@ -59,7 +59,7 @@ namespace Amperka.IO.Devices
         /// <param name="pin">Bcm pin number on the device.</param>
         /// <returns>Wiring Pi pin number on the device.</returns>
         /// <exception cref="ArgumentOutOfRangeException">Invalid pin number value on the device.</exception>
-        public static int BcmToWiringPi(int pin)
+        public static int FromBcm(int pin)
         {
             return pin switch
             {

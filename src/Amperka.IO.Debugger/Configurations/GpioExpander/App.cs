@@ -2,7 +2,7 @@
 using System.CommandLine;
 using Amperka.IO.Devices;
 using Amperka.IO.Extensions;
-using Amperka.IO.Devices.GpioExpander;
+using Amperka.IO.Devices.Settings;
 
 // ReSharper disable All
 
@@ -24,8 +24,8 @@ namespace Amperka.IO.Debugger.Configurations
             Option<int> adcSpeedOption = new Option<int>("--adc-speed", () => 7);
             Option<int> writePinOption = new Option<int>("--write-pin", () => 1);
             Option<bool> useReadonlyOption = new Option<bool>("--use-readonly", () => false);
-            Option<int> deviceAddressOption = new Option<int>("--device-address", () => 42);
-            Option<int> newDeviceAddressOption = new Option<int>("--new-device-address", () => 42);
+            Option<int> deviceAddressOption = new Option<int>("--device-address", () => GpioExpander.DefaultAddress);
+            Option<int> newDeviceAddressOption = new Option<int>("--new-device-address", () => GpioExpander.DefaultAddress);
 
             #endregion
 
@@ -152,7 +152,7 @@ namespace Amperka.IO.Debugger.Configurations
 
         private static async Task PortHandler(int busId, int deviceAddress, int delay)
         {
-            await using (IGpioExpander expander = await AmperkaDevices.CreateGpioExpanderAsync(new I2cConnectionSettings(busId, deviceAddress)))
+            await using (GpioExpander expander = new GpioExpander(I2cDevice.Create(new I2cConnectionSettings(busId, deviceAddress))))
             {
                 Console.WriteLine("Checking the port signal.");
 
@@ -181,7 +181,7 @@ namespace Amperka.IO.Debugger.Configurations
 
         private static async Task DigitalHandler(int busId, int deviceAddress, int delay, int writePin, int readPin)
         {
-            await using (IGpioExpander expander = await AmperkaDevices.CreateGpioExpanderAsync(new I2cConnectionSettings(busId, deviceAddress)))
+            await using (GpioExpander expander = new GpioExpander(I2cDevice.Create(new I2cConnectionSettings(busId, deviceAddress))))
             {
                 Console.WriteLine("Checking the digital signal.");
 
@@ -203,7 +203,7 @@ namespace Amperka.IO.Debugger.Configurations
 
         private static async Task AnalogHandler(int busId, int deviceAddress, int delay, int writePin, int readPin, bool useReadonly)
         {
-            await using (IGpioExpander expander = await AmperkaDevices.CreateGpioExpanderAsync(new I2cConnectionSettings(busId, deviceAddress)))
+            await using (GpioExpander expander = new GpioExpander(I2cDevice.Create(new I2cConnectionSettings(busId, deviceAddress))))
             {
                 Console.WriteLine("Checking the analog signal.");
 
@@ -236,7 +236,7 @@ namespace Amperka.IO.Debugger.Configurations
 
         private static async Task PwmRandomHandler(int busId, int deviceAddress, int delay, int writePin, int freq)
         {
-            await using (IGpioExpander expander = await AmperkaDevices.CreateGpioExpanderAsync(new I2cConnectionSettings(busId, deviceAddress)))
+            await using (GpioExpander expander = new GpioExpander(I2cDevice.Create(new I2cConnectionSettings(busId, deviceAddress))))
             {
                 Console.WriteLine("Checking the PWM signal ({0}).", freq);
 
@@ -257,7 +257,7 @@ namespace Amperka.IO.Debugger.Configurations
 
         private static async Task PwmHandler(int busId, int deviceAddress, int delay, int writePin, int freq, int pwm)
         {
-            await using (IGpioExpander expander = await AmperkaDevices.CreateGpioExpanderAsync(new I2cConnectionSettings(busId, deviceAddress)))
+            await using (GpioExpander expander = new GpioExpander(I2cDevice.Create(new I2cConnectionSettings(busId, deviceAddress))))
             {
                 Console.WriteLine("Checking the PWM signal ({0} | {1}).", freq, pwm);
 
@@ -273,7 +273,7 @@ namespace Amperka.IO.Debugger.Configurations
 
         private static async Task AdcHandler(int busId, int deviceAddress, int adcSpeed)
         {
-            await using (IGpioExpander expander = await AmperkaDevices.CreateGpioExpanderAsync(new I2cConnectionSettings(busId, deviceAddress)))
+            await using (GpioExpander expander = new GpioExpander(I2cDevice.Create(new I2cConnectionSettings(busId, deviceAddress))))
             {
                 Console.WriteLine("Checking the ADC speed ({0}).", adcSpeed);
 
@@ -285,7 +285,7 @@ namespace Amperka.IO.Debugger.Configurations
         {
             Console.WriteLine("Checking the chip change address ({0} => {1}).", deviceAddress, newDeviceAddress);
 
-            await using (IGpioExpander expander = await AmperkaDevices.CreateGpioExpanderAsync(new I2cConnectionSettings(busId, deviceAddress)))
+            await using (GpioExpander expander = new GpioExpander(I2cDevice.Create(new I2cConnectionSettings(busId, deviceAddress))))
             {
                 await expander.ChangeAddressAsync(newDeviceAddress);
             }
@@ -295,7 +295,7 @@ namespace Amperka.IO.Debugger.Configurations
         {
             Console.WriteLine("Checking the chip save address ({0}).", deviceAddress);
 
-            await using (IGpioExpander expander = await AmperkaDevices.CreateGpioExpanderAsync(new I2cConnectionSettings(busId, deviceAddress)))
+            await using (GpioExpander expander = new GpioExpander(I2cDevice.Create(new I2cConnectionSettings(busId, deviceAddress))))
             {
                 await expander.SaveAddressAsync();
             }
@@ -305,7 +305,7 @@ namespace Amperka.IO.Debugger.Configurations
         {
             Console.WriteLine("Checking the chip reset ({0}).", deviceAddress);
 
-            await using (IGpioExpander expander = await AmperkaDevices.CreateGpioExpanderAsync(new I2cConnectionSettings(busId, deviceAddress)))
+            await using (GpioExpander expander = new GpioExpander(I2cDevice.Create(new I2cConnectionSettings(busId, deviceAddress))))
             {
                 await expander.ResetAsync();
             }

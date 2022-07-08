@@ -69,13 +69,13 @@ namespace Amperka.IO.Debugger.Configurations
         {
             if (useBcm)
             {
-                Console.WriteLine("WiringPi read pin: {0}. BCM read pin: {1}", AmperkaDevices.BcmToWiringPi(readPin), readPin);
-                Console.WriteLine("WiringPi write pin: {0}. BCM write pin: {1}", AmperkaDevices.BcmToWiringPi(writePin), writePin);
+                Console.WriteLine("WiringPi read pin: {0}. BCM read pin: {1}", WiringPi.FromBcm(readPin), readPin);
+                Console.WriteLine("WiringPi write pin: {0}. BCM write pin: {1}", WiringPi.FromBcm(writePin), writePin);
             }
             else
             {
-                Console.WriteLine("BCM read pin: {0}. WiringPi read pin: {1}", AmperkaDevices.WiringPiToBcm(readPin), readPin);
-                Console.WriteLine("BCM write pin: {0}. WiringPi write pin: {1}", AmperkaDevices.WiringPiToBcm(writePin), writePin);
+                Console.WriteLine("BCM read pin: {0}. WiringPi read pin: {1}", WiringPi.ToBcm(readPin), readPin);
+                Console.WriteLine("BCM write pin: {0}. WiringPi write pin: {1}", WiringPi.ToBcm(writePin), writePin);
             }
 
             return Task.CompletedTask;
@@ -83,8 +83,8 @@ namespace Amperka.IO.Debugger.Configurations
 
         private static async Task SyncButtonClickHandler(int readPin, int writePin, int delay, bool useBcm)
         {
-            int bcmReadPin = useBcm ? readPin : AmperkaDevices.WiringPiToBcm(readPin);
-            int bcmWritePin = useBcm ? writePin : AmperkaDevices.WiringPiToBcm(writePin);
+            int bcmReadPin = useBcm ? readPin : WiringPi.FromBcm(readPin);
+            int bcmWritePin = useBcm ? writePin : WiringPi.FromBcm(writePin);
 
             using (GpioController controller = new GpioController())
             {
@@ -106,8 +106,8 @@ namespace Amperka.IO.Debugger.Configurations
 
         private static async Task AsyncButtonClickHandler(int readPin, int writePin, int delay, bool useBcm)
         {
-            int bcmReadPin = useBcm ? readPin : AmperkaDevices.WiringPiToBcm(readPin);
-            int bcmWritePin = useBcm ? writePin : AmperkaDevices.WiringPiToBcm(writePin);
+            int bcmReadPin = useBcm ? readPin : WiringPi.FromBcm(readPin);
+            int bcmWritePin = useBcm ? writePin : WiringPi.FromBcm(writePin);
 
             using (GpioController controller = new GpioController())
             {
