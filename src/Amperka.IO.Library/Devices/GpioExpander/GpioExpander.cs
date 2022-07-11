@@ -435,7 +435,7 @@ namespace Amperka.IO.Devices
 
             Write(Stm32Command.ChangeI2CAddress, newAddress, true);
 
-            Shutdown(true);
+            Shutdown();
         }
 
         /// <summary>
@@ -465,7 +465,7 @@ namespace Amperka.IO.Devices
 
             Write(Stm32Command.SaveI2CAddress, default, true);
 
-            Shutdown(true);
+            Shutdown();
         }
 
         /// <summary>
@@ -493,7 +493,7 @@ namespace Amperka.IO.Devices
 
             Write(Stm32Command.Reset, default, true);
 
-            Shutdown(true);
+            Shutdown();
         }
 
         /// <summary>
@@ -566,29 +566,28 @@ namespace Amperka.IO.Devices
 
         #region IAsyncDisposable and IDisposable
 
-        private void Shutdown(bool disposing)
-        {
-            Write(Stm32Command.DigitalWriteHigh, 0, true);
-            Write(Stm32Command.DigitalWriteLow, -1, true);
-
-            if (disposing)
-            {
-                _device.Dispose();
-            }
-
-            _device = default;
-
-            _disposed = true;
-        }
-
-        private void Dispose(bool disposing)
+        private void Shutdown()
         {
             if (_disposed)
             {
                 return;
             }
 
-            Shutdown(disposing);
+            Write(Stm32Command.DigitalWriteHigh, 0, true);
+            Write(Stm32Command.DigitalWriteLow, -1, true);
+
+            _device.Dispose();
+            _device = null;
+
+            _disposed = true;
+        }
+
+        /// <inheritdoc />
+        public void Dispose()
+        {
+            Shutdown();
+
+            GC.SuppressFinalize(this);
         }
 
         /// <inheritdoc />
@@ -600,16 +599,9 @@ namespace Amperka.IO.Devices
         }
 
         /// <inheritdoc />
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        /// <inheritdoc />
         ~GpioExpander()
         {
-            Dispose(false);
+            Shutdown();
         }
 
         #endregion

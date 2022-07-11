@@ -99,28 +99,27 @@ namespace Amperka.IO.Devices
 
         #region IAsyncDisposable and IDisposable
 
-        private void Shutdown(bool disposing)
-        {
-            Write(0, true);
-
-            if (disposing)
-            {
-                _device.Dispose();
-            }
-
-            _device = default;
-
-            _disposed = true;
-        }
-
-        private void Dispose(bool disposing)
+        private void Shutdown()
         {
             if (_disposed)
             {
                 return;
             }
 
-            Shutdown(disposing);
+            Write(0, true);
+
+            _device.Dispose();
+            _device = null;
+
+            _disposed = true;
+        }
+
+        /// <inheritdoc />
+        public void Dispose()
+        {
+            Shutdown();
+
+            GC.SuppressFinalize(this);
         }
 
         /// <inheritdoc />
@@ -132,16 +131,9 @@ namespace Amperka.IO.Devices
         }
 
         /// <inheritdoc />
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        /// <inheritdoc />
         ~I2CHub()
         {
-            Dispose(false);
+            Shutdown();
         }
 
         #endregion

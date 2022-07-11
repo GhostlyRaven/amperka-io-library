@@ -257,10 +257,10 @@
             <exception cref="T:System.OperationCanceledException">The operation was canceled.</exception>
             <exception cref="T:System.ObjectDisposedException">The device is closed.</exception>
         </member>
-        <member name="M:Amperka.IO.Devices.GpioExpander.DisposeAsync">
+        <member name="M:Amperka.IO.Devices.GpioExpander.Dispose">
             <inheritdoc />
         </member>
-        <member name="M:Amperka.IO.Devices.GpioExpander.Dispose">
+        <member name="M:Amperka.IO.Devices.GpioExpander.DisposeAsync">
             <inheritdoc />
         </member>
         <member name="M:Amperka.IO.Devices.GpioExpander.Finalize">
@@ -343,10 +343,10 @@
             <exception cref="T:System.OperationCanceledException">The operation was canceled.</exception>
             <exception cref="T:System.ObjectDisposedException">The device is closed.</exception>
         </member>
-        <member name="M:Amperka.IO.Devices.I2CHub.DisposeAsync">
+        <member name="M:Amperka.IO.Devices.I2CHub.Dispose">
             <inheritdoc />
         </member>
-        <member name="M:Amperka.IO.Devices.I2CHub.Dispose">
+        <member name="M:Amperka.IO.Devices.I2CHub.DisposeAsync">
             <inheritdoc />
         </member>
         <member name="M:Amperka.IO.Devices.I2CHub.Finalize">
@@ -372,6 +372,137 @@
             <param name="pin">Bcm pin number on the device.</param>
             <returns>Wiring Pi pin number on the device.</returns>
             <exception cref="T:System.ArgumentOutOfRangeException">Invalid pin number value on the device.</exception>
+        </member>
+        <member name="T:Amperka.IO.Devices.XFet">
+            <summary>
+            A class for working with P-FET and N-FET.
+            </summary>
+        </member>
+        <member name="M:Amperka.IO.Devices.XFet.#ctor(System.Device.Spi.SpiDevice,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Amperka.IO.Devices.XFet"/> class.
+            </summary>
+            <param name="device">Instance of SPI device.</param>
+            <param name="count">The count of devices connected in a chain.</param>
+            <exception cref="T:System.ArgumentNullException">The SPI device object can't be a null reference.</exception>
+        </member>
+        <member name="P:Amperka.IO.Devices.XFet.Count">
+            <summary>
+            The count of devices connected in a chain.
+            </summary>
+        </member>
+        <member name="M:Amperka.IO.Devices.XFet.DigitalWrite(System.Boolean)">
+            <summary>
+            Turns all contacts into a high or low signal level. Designed to work with a single connected device.
+            </summary>
+            <param name="value">High or low signal level.</param>
+            <exception cref="T:Amperka.IO.Exceptions.AmperkaDeviceException">There was a malfunction of the device.</exception>
+            <exception cref="T:System.ObjectDisposedException">The device is closed.</exception>
+        </member>
+        <member name="M:Amperka.IO.Devices.XFet.DigitalWriteAsync(System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            Async turns all contacts into a high or low signal level. Designed to work with a single connected device.
+            </summary>
+            <param name="value">High or low signal level.</param>
+            <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
+            <exception cref="T:Amperka.IO.Exceptions.AmperkaDeviceException">There was a malfunction of the device.</exception>
+            <exception cref="T:System.OperationCanceledException">The operation was canceled.</exception>
+            <exception cref="T:System.ObjectDisposedException">The device is closed.</exception>
+        </member>
+        <member name="M:Amperka.IO.Devices.XFet.DigitalWrite(System.Int32,System.Boolean)">
+            <summary>
+            Turns the selected contacts into a high or low signal level. Designed to work with a single connected device.
+            </summary>
+            <param name="pin">Pin number on the device.</param>
+            <param name="value">High or low signal level.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Invalid pin number value on the device.</exception>
+            <exception cref="T:Amperka.IO.Exceptions.AmperkaDeviceException">There was a malfunction of the device.</exception>
+            <exception cref="T:System.ObjectDisposedException">The device is closed.</exception>
+        </member>
+        <member name="M:Amperka.IO.Devices.XFet.DigitalWriteAsync(System.Int32,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            Async turns the selected contacts into a high or low signal level. Designed to work with a single connected device.
+            </summary>
+            <param name="pin">Pin number on the device.</param>
+            <param name="value">High or low signal level.</param>
+            <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Invalid pin number value on the device.</exception>
+            <exception cref="T:Amperka.IO.Exceptions.AmperkaDeviceException">There was a malfunction of the device.</exception>
+            <exception cref="T:System.OperationCanceledException">The operation was canceled.</exception>
+            <exception cref="T:System.ObjectDisposedException">The device is closed.</exception>
+        </member>
+        <member name="M:Amperka.IO.Devices.XFet.DigitalWriteMany(System.Boolean)">
+            <summary>
+            Turns all contacts into a high or low signal level. Designed to work with a multitude of connected devices.
+            </summary>
+            <param name="value">High or low signal level.</param>
+            <exception cref="T:Amperka.IO.Exceptions.AmperkaDeviceException">There was a malfunction of the device.</exception>
+            <exception cref="T:System.ObjectDisposedException">The device is closed.</exception>
+        </member>
+        <member name="M:Amperka.IO.Devices.XFet.DigitalWriteManyAsync(System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            Async turns all contacts into a high or low signal level. Designed to work with a multitude of connected devices.
+            </summary>
+            <param name="value">High or low signal level.</param>
+            <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
+            <exception cref="T:Amperka.IO.Exceptions.AmperkaDeviceException">There was a malfunction of the device.</exception>
+            <exception cref="T:System.OperationCanceledException">The operation was canceled.</exception>
+            <exception cref="T:System.ObjectDisposedException">The device is closed.</exception>
+        </member>
+        <member name="M:Amperka.IO.Devices.XFet.DigitalWriteMany(System.Int32,System.Boolean)">
+            <summary>
+            Turns all contacts into a high or low signal level. Designed to work with a specific connected device.
+            </summary>
+            <param name="device">Device number on the chain.</param>
+            <param name="value">High or low signal level.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Invalid device number value on the chain.</exception>
+            <exception cref="T:Amperka.IO.Exceptions.AmperkaDeviceException">There was a malfunction of the device.</exception>
+            <exception cref="T:System.ObjectDisposedException">The device is closed.</exception>
+        </member>
+        <member name="M:Amperka.IO.Devices.XFet.DigitalWriteManyAsync(System.Int32,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            Async turns all contacts into a high or low signal level. Designed to work with a specific connected device.
+            </summary>
+            <param name="device">Device number on the chain.</param>
+            <param name="value">High or low signal level.</param>
+            <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Invalid device number value on the chain.</exception>
+            <exception cref="T:Amperka.IO.Exceptions.AmperkaDeviceException">There was a malfunction of the device.</exception>
+            <exception cref="T:System.OperationCanceledException">The operation was canceled.</exception>
+            <exception cref="T:System.ObjectDisposedException">The device is closed.</exception>
+        </member>
+        <member name="M:Amperka.IO.Devices.XFet.DigitalWriteMany(System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Turns the selected contacts into a high or low signal level. Designed to work with a specific connected device.
+            </summary>
+            <param name="device">Device number on the chain.</param>
+            <param name="pin">Pin number on the device.</param>
+            <param name="value">High or low signal level.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Invalid device number value on the chain or invalid pin number value on the device.</exception>
+            <exception cref="T:Amperka.IO.Exceptions.AmperkaDeviceException">There was a malfunction of the device.</exception>
+            <exception cref="T:System.ObjectDisposedException">The device is closed.</exception>
+        </member>
+        <member name="M:Amperka.IO.Devices.XFet.DigitalWriteManyAsync(System.Int32,System.Int32,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            Async turns the selected contacts into a high or low signal level. Designed to work with a specific connected device.
+            </summary>
+            <param name="device">Device number on the chain.</param>
+            <param name="pin">Pin number on the device.</param>
+            <param name="value">High or low signal level.</param>
+            <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Invalid device number value on the chain or invalid pin number value on the device.</exception>
+            <exception cref="T:Amperka.IO.Exceptions.AmperkaDeviceException">There was a malfunction of the device.</exception>
+            <exception cref="T:System.OperationCanceledException">The operation was canceled.</exception>
+            <exception cref="T:System.ObjectDisposedException">The device is closed.</exception>
+        </member>
+        <member name="M:Amperka.IO.Devices.XFet.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:Amperka.IO.Devices.XFet.DisposeAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:Amperka.IO.Devices.XFet.Finalize">
+            <inheritdoc />
         </member>
         <member name="T:Amperka.IO.Exceptions.AmperkaDeviceException">
             <summary>
