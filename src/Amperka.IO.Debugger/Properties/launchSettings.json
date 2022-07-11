@@ -4,21 +4,101 @@
       "commandName": "Project",
       "commandLineArgs": "--help"
     },
-    "Amperka.IO.Debugger.GpioController": {
+    "Amperka.IO.Debugger.GpioController.Help": {
       "commandName": "Project",
       "commandLineArgs": "gpio-controller --help"
     },
-    "Amperka.IO.Debugger.GpioExpander": {
+    "Amperka.IO.Debugger.GpioController.ConvertPins": {
+      "commandName": "Project",
+      "commandLineArgs": "gpio-controller convert-pins --help"
+    },
+    "Amperka.IO.Debugger.GpioController.SyncButtonClick": {
+      "commandName": "Project",
+      "commandLineArgs": "gpio-controller sync-button-click --help"
+    },
+    "Amperka.IO.Debugger.GpioController.AsyncButtonClick": {
+      "commandName": "Project",
+      "commandLineArgs": "gpio-controller async-button-click --help"
+    },
+    "Amperka.IO.Debugger.GpioExpander.Help": {
       "commandName": "Project",
       "commandLineArgs": "gpio-expander --help"
     },
-    "Amperka.IO.Debugger.I2CHub": {
+    "Amperka.IO.Debugger.GpioExpander.Port": {
+      "commandName": "Project",
+      "commandLineArgs": "gpio-expander port --help"
+    },
+    "Amperka.IO.Debugger.GpioExpander.Digital": {
+      "commandName": "Project",
+      "commandLineArgs": "gpio-expander digital --help"
+    },
+    "Amperka.IO.Debugger.GpioExpander.Analog": {
+      "commandName": "Project",
+      "commandLineArgs": "gpio-expander analog --help"
+    },
+    "Amperka.IO.Debugger.GpioExpander.Pwm": {
+      "commandName": "Project",
+      "commandLineArgs": "gpio-expander pwm --help"
+    },
+    "Amperka.IO.Debugger.GpioExpander.PwmRandom": {
+      "commandName": "Project",
+      "commandLineArgs": "gpio-expander pwm-random --help"
+    },
+    "Amperka.IO.Debugger.GpioExpander.Adc": {
+      "commandName": "Project",
+      "commandLineArgs": "gpio-expander adc --help"
+    },
+    "Amperka.IO.Debugger.GpioExpander.ChangeChipAddress": {
+      "commandName": "Project",
+      "commandLineArgs": "gpio-expander change-chip-address --help"
+    },
+    "Amperka.IO.Debugger.GpioExpander.SaveChipAddress": {
+      "commandName": "Project",
+      "commandLineArgs": "gpio-expander save-chip-address --help"
+    },
+    "Amperka.IO.Debugger.GpioExpander.ResetChip": {
+      "commandName": "Project",
+      "commandLineArgs": "gpio-expander reset-chip --help"
+    },
+    "Amperka.IO.Debugger.I2CHub.Help": {
       "commandName": "Project",
       "commandLineArgs": "i2c-hub --help"
     },
-    "Amperka.IO.Debugger.XFet": {
+    "Amperka.IO.Debugger.I2CHub.SetChannel": {
+      "commandName": "Project",
+      "commandLineArgs": "i2c-hub set-channel --help"
+    },
+    "Amperka.IO.Debugger.I2CHub.ForEach": {
+      "commandName": "Project",
+      "commandLineArgs": "i2c-hub for-each --help"
+    },
+    "Amperka.IO.Debugger.I2CHub.ForEachAsync": {
+      "commandName": "Project",
+      "commandLineArgs": "i2c-hub for-each-async --help"
+    },
+    "Amperka.IO.Debugger.XFet.Help": {
       "commandName": "Project",
       "commandLineArgs": "x-fet --help"
+    },
+    "Amperka.IO.Debugger.XFet.DigitalWritePins": {
+      "commandName": "Project",
+      "commandLineArgs": "x-fet digital-write-pins --help"
+    },
+    "Amperka.IO.Debugger.XFet.DigitalWriteAllPins": {
+      "commandName": "Project",
+      "commandLineArgs": "x-fet digital-write-all-pins --help"
+    },
+    "Amperka.IO.Debugger.XFet.DigitalWriteManyPins": {
+      "commandName": "Project",
+      "commandLineArgs": "x-fet digital-write-many-pins --help"
+    },
+    "Amperka.IO.Debugger.XFet.DigitalWriteManyAllPins": {
+      "commandName": "Project",
+      "commandLineArgs": "x-fet digital-write-many-all-pins --help"
+    },
+    "Amperka.IO.Debugger.XFet.DigitalWriteManyAllPinsAndDevices": {
+      "commandName": "Project",
+      "commandLineArgs": "x-fet digital-write-many-all-pins-and-devices --help"
     }
   }
 }

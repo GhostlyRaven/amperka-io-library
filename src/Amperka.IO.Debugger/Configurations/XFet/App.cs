@@ -23,7 +23,7 @@ namespace Amperka.IO.Debugger.Configurations
 
             #region Digital write pins command
 
-            Command digitalWritePinsCommand = new Command("--digital-write-pins", "Checking the digital write pins.");
+            Command digitalWritePinsCommand = new Command("digital-write-pins", "Checking the digital write pins.");
 
             digitalWritePinsCommand.SetHandler(DigitalWritePins, busIdOption, chipSelectLineOption, countOption, delayOption);
 
@@ -31,7 +31,7 @@ namespace Amperka.IO.Debugger.Configurations
 
             #region Digital write all pins command
 
-            Command digitalWriteAllPinsCommand = new Command("--digital-write-all-pins", "Checking the digital write all pins.");
+            Command digitalWriteAllPinsCommand = new Command("digital-write-all-pins", "Checking the digital write all pins.");
 
             digitalWriteAllPinsCommand.SetHandler(DigitalWriteAllPins, busIdOption, chipSelectLineOption, countOption, delayOption);
 
@@ -39,7 +39,7 @@ namespace Amperka.IO.Debugger.Configurations
 
             #region Digital write many pins command
 
-            Command digitalWriteManyPinsCommand = new Command("--digital-write-many-pins", "Checking the digital write pins for devices.");
+            Command digitalWriteManyPinsCommand = new Command("digital-write-many-pins", "Checking the digital write pins for devices.");
 
             digitalWriteManyPinsCommand.SetHandler(DigitalWriteManyPins, busIdOption, chipSelectLineOption, countOption, delayOption);
 
@@ -47,7 +47,7 @@ namespace Amperka.IO.Debugger.Configurations
 
             #region Digital write many all pins command
 
-            Command digitalWriteManyAllPinsCommand = new Command("--digital-write-many-all-pins", "Checking the digital write all pins for devices.");
+            Command digitalWriteManyAllPinsCommand = new Command("digital-write-many-all-pins", "Checking the digital write all pins for devices.");
 
             digitalWriteManyAllPinsCommand.SetHandler(DigitalWriteManyAllPins, busIdOption, chipSelectLineOption, countOption, delayOption);
 
@@ -55,7 +55,7 @@ namespace Amperka.IO.Debugger.Configurations
 
             #region Digital write many all pins and devices command
 
-            Command digitalWriteManyAllPinsAndDevicesCommand = new Command("--digital-write-many-all-pins-and-devices", "Checking the digital write all pins for all devices.");
+            Command digitalWriteManyAllPinsAndDevicesCommand = new Command("digital-write-many-all-pins-and-devices", "Checking the digital write all pins for all devices.");
 
             digitalWriteManyAllPinsAndDevicesCommand.SetHandler(DigitalWriteManyAllPinsAndDevices, busIdOption, chipSelectLineOption, countOption, delayOption);
 
