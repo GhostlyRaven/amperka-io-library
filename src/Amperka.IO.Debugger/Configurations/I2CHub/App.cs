@@ -11,7 +11,7 @@ namespace Amperka.IO.Debugger.Configurations
     {
         private static void ConfigureI2CHubCommand(Command root)
         {
-            Command i2cHub = new Command("i2c-hub", "Checking the I2C Hub functions.");
+            Command i2cHub = new Command("i2c-hub", "Checking the I2C hub functions.");
 
             #region Options
 

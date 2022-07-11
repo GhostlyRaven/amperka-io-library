@@ -2,14 +2,62 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Launch Amperka.IO.Debugger",
+            "name": "Launch Amperka.IO.Debugger.Help",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
             "program": "${workspaceFolder}/src/Amperka.IO.Debugger/bin/Debug/net6.0/Amperka.IO.Debugger.dll",
             "launchSettingsFilePath": "${workspaceFolder}/src/Amperka.IO.Debugger/Properties/launchSettings.json",
             "cwd": "${workspaceFolder}/src/Amperka.IO.Debugger",
-            "launchSettingsProfile": "Amperka.IO.Debugger",
+            "launchSettingsProfile": "Amperka.IO.Debugger.Help",
+            "console": "integratedTerminal",
+            "stopAtEntry": false
+        },
+        {
+            "name": "Launch Amperka.IO.Debugger.GpioController",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/src/Amperka.IO.Debugger/bin/Debug/net6.0/Amperka.IO.Debugger.dll",
+            "launchSettingsFilePath": "${workspaceFolder}/src/Amperka.IO.Debugger/Properties/launchSettings.json",
+            "cwd": "${workspaceFolder}/src/Amperka.IO.Debugger",
+            "launchSettingsProfile": "Amperka.IO.Debugger.GpioController",
+            "console": "integratedTerminal",
+            "stopAtEntry": false
+        },
+        {
+            "name": "Launch Amperka.IO.Debugger.GpioExpander",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/src/Amperka.IO.Debugger/bin/Debug/net6.0/Amperka.IO.Debugger.dll",
+            "launchSettingsFilePath": "${workspaceFolder}/src/Amperka.IO.Debugger/Properties/launchSettings.json",
+            "cwd": "${workspaceFolder}/src/Amperka.IO.Debugger",
+            "launchSettingsProfile": "Amperka.IO.Debugger.GpioExpander",
+            "console": "integratedTerminal",
+            "stopAtEntry": false
+        },
+        {
+            "name": "Launch Amperka.IO.Debugger.I2CHub",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/src/Amperka.IO.Debugger/bin/Debug/net6.0/Amperka.IO.Debugger.dll",
+            "launchSettingsFilePath": "${workspaceFolder}/src/Amperka.IO.Debugger/Properties/launchSettings.json",
+            "cwd": "${workspaceFolder}/src/Amperka.IO.Debugger",
+            "launchSettingsProfile": "Amperka.IO.Debugger.I2CHub",
+            "console": "integratedTerminal",
+            "stopAtEntry": false
+        },
+        {
+            "name": "Launch Amperka.IO.Debugger.XFet",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/src/Amperka.IO.Debugger/bin/Debug/net6.0/Amperka.IO.Debugger.dll",
+            "launchSettingsFilePath": "${workspaceFolder}/src/Amperka.IO.Debugger/Properties/launchSettings.json",
+            "cwd": "${workspaceFolder}/src/Amperka.IO.Debugger",
+            "launchSettingsProfile": "Amperka.IO.Debugger.XFet",
             "console": "integratedTerminal",
             "stopAtEntry": false
         }

@@ -13,6 +13,7 @@ namespace Amperka.IO.Debugger.Configurations
             ConfigureGpioControllerCommand(root);
             ConfigureGpioExpanderCommand(root);
             ConfigureI2CHubCommand(root);
+            ConfigureXFetCommand(root);
 
             root.SetHandler(DefaultHandler);
 

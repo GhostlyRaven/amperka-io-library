@@ -1,8 +1,24 @@
 {
   "profiles": {
-    "Amperka.IO.Debugger": {
+    "Amperka.IO.Debugger.Help": {
       "commandName": "Project",
       "commandLineArgs": "--help"
+    },
+    "Amperka.IO.Debugger.GpioController": {
+      "commandName": "Project",
+      "commandLineArgs": "gpio-controller --help"
+    },
+    "Amperka.IO.Debugger.GpioExpander": {
+      "commandName": "Project",
+      "commandLineArgs": "gpio-expander --help"
+    },
+    "Amperka.IO.Debugger.I2CHub": {
+      "commandName": "Project",
+      "commandLineArgs": "i2c-hub --help"
+    },
+    "Amperka.IO.Debugger.XFet": {
+      "commandName": "Project",
+      "commandLineArgs": "x-fet --help"
     }
   }
 }
