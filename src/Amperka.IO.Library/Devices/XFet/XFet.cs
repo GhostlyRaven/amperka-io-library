@@ -262,7 +262,7 @@ namespace Amperka.IO.Devices
 
                     for (int index = 0; index < _valuesCount; index++)
                     {
-                        Unsafe.As<byte, int>(ref Unsafe.Add(ref MemoryMarshal.GetReference(writeBuffer), index)) = valuesBuffer[index];
+                        Unsafe.As<byte, int>(ref Unsafe.Add(ref MemoryMarshal.GetReference(writeBuffer), index)) = valuesBuffer[_valuesCount - index - 1];
                     }
                 }
 

@@ -24,8 +24,8 @@ namespace Amperka.IO.Debugger.Configurations
             Option<int> adcSpeedOption = new Option<int>("--adc-speed", () => 7);
             Option<int> writePinOption = new Option<int>("--write-pin", () => 1);
             Option<bool> useReadonlyOption = new Option<bool>("--use-readonly", () => false);
+            Option<int> newDeviceAddressOption = new Option<int>("--new-device-address", () => 40);
             Option<int> deviceAddressOption = new Option<int>("--device-address", () => GpioExpander.DefaultAddress);
-            Option<int> newDeviceAddressOption = new Option<int>("--new-device-address", () => GpioExpander.DefaultAddress);
 
             #endregion
 
