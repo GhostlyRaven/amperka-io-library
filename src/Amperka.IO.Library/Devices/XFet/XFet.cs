@@ -22,6 +22,11 @@ namespace Amperka.IO.Devices
         private readonly int _valuesCount;
 
         /// <summary>
+        /// The count of pins on the device.
+        /// </summary>
+        public const int PinCount = 8;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="XFet"/> class.
         /// </summary>
         /// <param name="device">Instance of SPI device.</param>
@@ -39,14 +44,183 @@ namespace Amperka.IO.Devices
         /// <summary>
         /// The count of devices connected in a chain.
         /// </summary>
-        public int Count => _valuesCount;
+        public int DeviceCount => _valuesCount;
 
         #endregion
 
-        #region Digital functions
+        #region Digital read functions
 
         /// <summary>
-        /// Turns all contacts into a high or low signal level. Designed to work with a single connected device.
+        /// Reads the signal level from all pin. Designed to work with a single connected device.
+        /// </summary>
+        /// <returns>High or low signal level.</returns>
+        /// <exception cref="ObjectDisposedException">The device is closed.</exception>
+        public bool DigitalRead()
+        {
+            return DigitalReadMany(0);
+        }
+
+        /// <summary>
+        /// Async reads the signal level from all pin. Designed to work with a single connected device.
+        /// </summary>
+        /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
+        /// <returns>High or low signal level.</returns>
+        /// <exception cref="OperationCanceledException">The operation was canceled.</exception>
+        /// <exception cref="ObjectDisposedException">The device is closed.</exception>
+        public ValueTask<bool> DigitalReadAsync(CancellationToken cancellationToken = default)
+        {
+            return DigitalReadManyAsync(0, cancellationToken);
+        }
+
+        /// <summary>
+        /// Reads the signal level from selected pin. Designed to work with a single connected device.
+        /// </summary>
+        /// <param name="pin">Pin number on the device.</param>
+        /// <returns>High or low signal level.</returns>
+        /// <exception cref="ArgumentOutOfRangeException">Invalid pin number value on the device.</exception>
+        /// <exception cref="ObjectDisposedException">The device is closed.</exception>
+        public bool DigitalRead(int pin)
+        {
+            return DigitalReadMany(0, pin);
+        }
+
+        /// <summary>
+        /// Async reads the signal level from selected pin. Designed to work with a single connected device.
+        /// </summary>
+        /// <param name="pin">Pin number on the device.</param>
+        /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
+        /// <returns>High or low signal level.</returns>
+        /// <exception cref="ArgumentOutOfRangeException">Invalid pin number value on the device.</exception>
+        /// <exception cref="OperationCanceledException">The operation was canceled.</exception>
+        /// <exception cref="ObjectDisposedException">The device is closed.</exception>
+        public ValueTask<bool> DigitalReadAsync(int pin, CancellationToken cancellationToken = default)
+        {
+            return DigitalReadManyAsync(0, pin, cancellationToken);
+        }
+
+        /// <summary>
+        /// Reads the signal level from all pin. Designed to work with a multitude of connected devices.
+        /// </summary>
+        /// <returns>High or low signal level.</returns>
+        /// <exception cref="ObjectDisposedException">The device is closed.</exception>
+        public bool DigitalReadMany()
+        {
+            ThrowHelper.ThrowObjectDisposedException(_disposed, nameof(XFet));
+
+            Span<int> valuesBuffer = _values.Span;
+
+            for (int index = 0; index < _valuesCount; index++)
+            {
+                if (valuesBuffer[index] is not 255)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Async reads the signal level from all pin. Designed to work with a multitude of connected devices.
+        /// </summary>
+        /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
+        /// <returns>High or low signal level.</returns>
+        /// <exception cref="OperationCanceledException">The operation was canceled.</exception>
+        /// <exception cref="ObjectDisposedException">The device is closed.</exception>
+        public ValueTask<bool> DigitalReadManyAsync(CancellationToken cancellationToken = default)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+
+            return ValueTask.FromResult(DigitalReadMany());
+        }
+
+        /// <summary>
+        /// Reads the signal level from all pin. Designed to work with a specific connected device.
+        /// </summary>
+        /// <param name="device">Device number on the chain.</param>
+        /// <returns>High or low signal level.</returns>
+        /// <exception cref="ArgumentOutOfRangeException">Invalid device number value on the chain.</exception>
+        /// <exception cref="ObjectDisposedException">The device is closed.</exception>
+        public bool DigitalReadMany(int device)
+        {
+            if (device < 0 || device > _valuesCount)
+            {
+                ThrowHelper.ThrowArgumentOutOfRangeException(nameof(device));
+            }
+
+            ThrowHelper.ThrowObjectDisposedException(_disposed, nameof(XFet));
+
+            Span<int> valuesBuffer = _values.Span;
+
+            return valuesBuffer[device] is 255;
+        }
+
+        /// <summary>
+        /// Async reads the signal level from all pin. Designed to work with a specific connected device.
+        /// </summary>
+        /// <param name="device">Device number on the chain.</param>
+        /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
+        /// <returns>High or low signal level.</returns>
+        /// <exception cref="ArgumentOutOfRangeException">Invalid device number value on the chain.</exception>
+        /// <exception cref="OperationCanceledException">The operation was canceled.</exception>
+        /// <exception cref="ObjectDisposedException">The device is closed.</exception>
+        public ValueTask<bool> DigitalReadManyAsync(int device, CancellationToken cancellationToken = default)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+
+            return ValueTask.FromResult(DigitalReadMany(device));
+        }
+
+        /// <summary>
+        /// Reads the signal level from selected pin. Designed to work with a specific connected device.
+        /// </summary>
+        /// <param name="device">Device number on the chain.</param>
+        /// <param name="pin">Pin number on the device.</param>
+        /// <returns>High or low signal level.</returns>
+        /// <exception cref="ArgumentOutOfRangeException">Invalid device number value on the chain or invalid pin number value on the device.</exception>
+        /// <exception cref="ObjectDisposedException">The device is closed.</exception>
+        public bool DigitalReadMany(int device, int pin)
+        {
+            if (pin is < 0 or > 7)
+            {
+                ThrowHelper.ThrowArgumentOutOfRangeException(nameof(pin));
+            }
+
+            if (device < 0 || device > _valuesCount)
+            {
+                ThrowHelper.ThrowArgumentOutOfRangeException(nameof(device));
+            }
+
+            ThrowHelper.ThrowObjectDisposedException(_disposed, nameof(XFet));
+
+            Span<int> valuesBuffer = _values.Span;
+
+            return (valuesBuffer[device] & 1 << pin) > 0U;
+        }
+
+        /// <summary>
+        /// Async reads the signal level from selected pin. Designed to work with a specific connected device.
+        /// </summary>
+        /// <param name="device">Device number on the chain.</param>
+        /// <param name="pin">Pin number on the device.</param>
+        /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
+        /// <returns>High or low signal level.</returns>
+        /// <exception cref="ArgumentOutOfRangeException">Invalid device number value on the chain or invalid pin number value on the device.</exception>
+        /// <exception cref="OperationCanceledException">The operation was canceled.</exception>
+        /// <exception cref="ObjectDisposedException">The device is closed.</exception>
+        public ValueTask<bool> DigitalReadManyAsync(int device, int pin, CancellationToken cancellationToken = default)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+
+            return ValueTask.FromResult(DigitalReadMany(device, pin));
+        }
+
+        #endregion
+
+        #region Digital write functions
+
+        /// <summary>
+        /// Turns all pin into a high or low signal level. Designed to work with a single connected device.
         /// </summary>
         /// <param name="value">High or low signal level.</param>
         /// <exception cref="AmperkaDeviceException">There was a malfunction of the device.</exception>
@@ -57,7 +231,7 @@ namespace Amperka.IO.Devices
         }
 
         /// <summary>
-        /// Async turns all contacts into a high or low signal level. Designed to work with a single connected device.
+        /// Async turns all pin into a high or low signal level. Designed to work with a single connected device.
         /// </summary>
         /// <param name="value">High or low signal level.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
@@ -70,7 +244,7 @@ namespace Amperka.IO.Devices
         }
 
         /// <summary>
-        /// Turns the selected contacts into a high or low signal level. Designed to work with a single connected device.
+        /// Turns the selected pin into a high or low signal level. Designed to work with a single connected device.
         /// </summary>
         /// <param name="pin">Pin number on the device.</param>
         /// <param name="value">High or low signal level.</param>
@@ -83,7 +257,7 @@ namespace Amperka.IO.Devices
         }
 
         /// <summary>
-        /// Async turns the selected contacts into a high or low signal level. Designed to work with a single connected device.
+        /// Async turns the selected pin into a high or low signal level. Designed to work with a single connected device.
         /// </summary>
         /// <param name="pin">Pin number on the device.</param>
         /// <param name="value">High or low signal level.</param>
@@ -98,7 +272,7 @@ namespace Amperka.IO.Devices
         }
 
         /// <summary>
-        /// Turns all contacts into a high or low signal level. Designed to work with a multitude of connected devices.
+        /// Turns all pin into a high or low signal level. Designed to work with a multitude of connected devices.
         /// </summary>
         /// <param name="value">High or low signal level.</param>
         /// <exception cref="AmperkaDeviceException">There was a malfunction of the device.</exception>
@@ -122,7 +296,7 @@ namespace Amperka.IO.Devices
         }
 
         /// <summary>
-        /// Async turns all contacts into a high or low signal level. Designed to work with a multitude of connected devices.
+        /// Async turns all pin into a high or low signal level. Designed to work with a multitude of connected devices.
         /// </summary>
         /// <param name="value">High or low signal level.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
@@ -139,7 +313,7 @@ namespace Amperka.IO.Devices
         }
 
         /// <summary>
-        /// Turns all contacts into a high or low signal level. Designed to work with a specific connected device.
+        /// Turns all pin into a high or low signal level. Designed to work with a specific connected device.
         /// </summary>
         /// <param name="device">Device number on the chain.</param>
         /// <param name="value">High or low signal level.</param>
@@ -170,7 +344,7 @@ namespace Amperka.IO.Devices
         }
 
         /// <summary>
-        /// Async turns all contacts into a high or low signal level. Designed to work with a specific connected device.
+        /// Async turns all pin into a high or low signal level. Designed to work with a specific connected device.
         /// </summary>
         /// <param name="device">Device number on the chain.</param>
         /// <param name="value">High or low signal level.</param>
@@ -189,7 +363,7 @@ namespace Amperka.IO.Devices
         }
 
         /// <summary>
-        /// Turns the selected contacts into a high or low signal level. Designed to work with a specific connected device.
+        /// Turns the selected pin into a high or low signal level. Designed to work with a specific connected device.
         /// </summary>
         /// <param name="device">Device number on the chain.</param>
         /// <param name="pin">Pin number on the device.</param>
@@ -226,7 +400,7 @@ namespace Amperka.IO.Devices
         }
 
         /// <summary>
-        /// Async turns the selected contacts into a high or low signal level. Designed to work with a specific connected device.
+        /// Async turns the selected pin into a high or low signal level. Designed to work with a specific connected device.
         /// </summary>
         /// <param name="device">Device number on the chain.</param>
         /// <param name="pin">Pin number on the device.</param>

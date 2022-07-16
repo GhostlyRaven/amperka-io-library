@@ -69,13 +69,13 @@ namespace Amperka.IO.Debugger.Configurations
         {
             if (useBcm)
             {
-                Console.WriteLine("WiringPi read pin: {0}. BCM read pin: {1}", WiringPi.FromBcm(readPin), readPin);
-                Console.WriteLine("WiringPi write pin: {0}. BCM write pin: {1}", WiringPi.FromBcm(writePin), writePin);
+                Console.WriteLine("WiringPi read pin: {0}. BCM read pin: {1}.", WiringPi.FromBcm(readPin), readPin);
+                Console.WriteLine("WiringPi write pin: {0}. BCM write pin: {1}.", WiringPi.FromBcm(writePin), writePin);
             }
             else
             {
-                Console.WriteLine("BCM read pin: {0}. WiringPi read pin: {1}", WiringPi.ToBcm(readPin), readPin);
-                Console.WriteLine("BCM write pin: {0}. WiringPi write pin: {1}", WiringPi.ToBcm(writePin), writePin);
+                Console.WriteLine("BCM read pin: {0}. WiringPi read pin: {1}.", WiringPi.ToBcm(readPin), readPin);
+                Console.WriteLine("BCM write pin: {0}. WiringPi write pin: {1}.", WiringPi.ToBcm(writePin), writePin);
             }
 
             return Task.CompletedTask;

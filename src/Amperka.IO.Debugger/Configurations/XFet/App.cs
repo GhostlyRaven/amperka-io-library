@@ -83,48 +83,20 @@ namespace Amperka.IO.Debugger.Configurations
             {
                 while (Exit())
                 {
-                    await fet.DigitalWriteAsync(0, true);
+                    for (int pin = 0; pin < XFet.PinCount; pin++)
+                    {
+                        await fet.DigitalWriteAsync(pin, true);
 
-                    await Task.Delay(delay);
+                        Console.WriteLine("Pin signal level ({0}): {1}", pin, await fet.DigitalReadAsync(pin));
 
-                    await fet.DigitalWriteAsync(0, false);
-                    await fet.DigitalWriteAsync(1, true);
+                        await Task.Delay(delay);
 
-                    await Task.Delay(delay);
+                        await fet.DigitalWriteAsync(pin, false);
 
-                    await fet.DigitalWriteAsync(1, false);
-                    await fet.DigitalWriteAsync(2, true);
+                        Console.WriteLine("Pin signal level ({0}): {1}", pin, await fet.DigitalReadAsync(pin));
 
-                    await Task.Delay(delay);
-
-                    await fet.DigitalWriteAsync(2, false);
-                    await fet.DigitalWriteAsync(3, true);
-
-                    await Task.Delay(delay);
-
-                    await fet.DigitalWriteAsync(3, false);
-                    await fet.DigitalWriteAsync(4, true);
-
-                    await Task.Delay(delay);
-
-                    await fet.DigitalWriteAsync(4, false);
-                    await fet.DigitalWriteAsync(5, true);
-
-                    await Task.Delay(delay);
-
-                    await fet.DigitalWriteAsync(5, false);
-                    await fet.DigitalWriteAsync(6, true);
-
-                    await Task.Delay(delay);
-
-                    await fet.DigitalWriteAsync(6, false);
-                    await fet.DigitalWriteAsync(7, true);
-
-                    await Task.Delay(delay);
-
-                    await fet.DigitalWriteAsync(7, false);
-
-                    await Task.Delay(delay);
+                        await Task.Delay(delay);
+                    }
                 }
             }
         }
@@ -137,9 +109,13 @@ namespace Amperka.IO.Debugger.Configurations
                 {
                     await fet.DigitalWriteAsync(true);
 
+                    Console.WriteLine("Pin signal level: {0}", await fet.DigitalReadAsync());
+
                     await Task.Delay(delay);
 
                     await fet.DigitalWriteAsync(false);
+
+                    Console.WriteLine("Pin signal level: {0}", await fet.DigitalReadAsync());
 
                     await Task.Delay(delay);
                 }
@@ -152,50 +128,22 @@ namespace Amperka.IO.Debugger.Configurations
             {
                 while (Exit())
                 {
-                    for (int index = 0; index < count; index++)
+                    for (int device = 0; device < fet.DeviceCount; device++)
                     {
-                        await fet.DigitalWriteManyAsync(index, 0, true);
+                        for (int pin = 0; pin < XFet.PinCount; pin++)
+                        {
+                            await fet.DigitalWriteManyAsync(device, pin, true);
 
-                        await Task.Delay(delay);
+                            Console.WriteLine("Pin signal level ({0} | {1}): {2}", device, pin, await fet.DigitalReadManyAsync(device, pin));
 
-                        await fet.DigitalWriteManyAsync(index, 0, false);
-                        await fet.DigitalWriteManyAsync(index, 1, true);
+                            await Task.Delay(delay);
 
-                        await Task.Delay(delay);
+                            await fet.DigitalWriteManyAsync(device, pin, false);
 
-                        await fet.DigitalWriteManyAsync(index, 1, false);
-                        await fet.DigitalWriteManyAsync(index, 2, true);
+                            Console.WriteLine("Pin signal level ({0} | {1}): {2}", device, pin, await fet.DigitalReadManyAsync(device, pin));
 
-                        await Task.Delay(delay);
-
-                        await fet.DigitalWriteManyAsync(index, 2, false);
-                        await fet.DigitalWriteManyAsync(index, 3, true);
-
-                        await Task.Delay(delay);
-
-                        await fet.DigitalWriteManyAsync(index, 3, false);
-                        await fet.DigitalWriteManyAsync(index, 4, true);
-
-                        await Task.Delay(delay);
-
-                        await fet.DigitalWriteManyAsync(index, 4, false);
-                        await fet.DigitalWriteManyAsync(index, 5, true);
-
-                        await Task.Delay(delay);
-
-                        await fet.DigitalWriteManyAsync(index, 5, false);
-                        await fet.DigitalWriteManyAsync(index, 6, true);
-
-                        await Task.Delay(delay);
-
-                        await fet.DigitalWriteManyAsync(index, 6, false);
-                        await fet.DigitalWriteManyAsync(index, 7, true);
-
-                        await Task.Delay(delay);
-
-                        await fet.DigitalWriteManyAsync(index, 7, false);
-
-                        await Task.Delay(delay);
+                            await Task.Delay(delay);
+                        }
                     }
                 }
             }
@@ -207,13 +155,17 @@ namespace Amperka.IO.Debugger.Configurations
             {
                 while (Exit())
                 {
-                    for (int index = 0; index < count; index++)
+                    for (int device = 0; device < fet.DeviceCount; device++)
                     {
-                        await fet.DigitalWriteManyAsync(index, true);
+                        await fet.DigitalWriteManyAsync(device, true);
+
+                        Console.WriteLine("Pin signal level ({0}): {1}", device, await fet.DigitalReadManyAsync(device));
 
                         await Task.Delay(delay);
 
-                        await fet.DigitalWriteManyAsync(index, false);
+                        await fet.DigitalWriteManyAsync(device, false);
+
+                        Console.WriteLine("Pin signal level ({0}): {1}", device, await fet.DigitalReadManyAsync(device));
 
                         await Task.Delay(delay);
                     }
@@ -229,9 +181,13 @@ namespace Amperka.IO.Debugger.Configurations
                 {
                     await fet.DigitalWriteManyAsync(true);
 
+                    Console.WriteLine("Pin signal level: {0}", await fet.DigitalReadManyAsync());
+
                     await Task.Delay(delay);
 
                     await fet.DigitalWriteManyAsync(false);
+
+                    Console.WriteLine("Pin signal level: {0}", await fet.DigitalReadManyAsync());
 
                     await Task.Delay(delay);
                 }
