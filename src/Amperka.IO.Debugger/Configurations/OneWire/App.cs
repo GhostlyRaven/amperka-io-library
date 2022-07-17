@@ -46,11 +46,11 @@ namespace Amperka.IO.Debugger.Configurations
 
             while (Exit())
             {
-                for (int index = 0; index < thermometers.Length; index++)
+                foreach (OneWireThermometerDevice thermometer in thermometers)
                 {
-                    Temperature result = (await thermometers[index].ReadTemperatureAsync()).ToUnit(unit);
+                    Temperature result = (await thermometer.ReadTemperatureAsync()).ToUnit(unit);
 
-                    Console.WriteLine("Result {0}: {1} {2}", index, result.Value, unit);
+                    Console.WriteLine("Result ({0} | {1}): {2} {3}", thermometer.BusId, thermometer.DeviceId, result.Value, unit);
                 }
 
                 await Task.Delay(delay);
