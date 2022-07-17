@@ -83,8 +83,8 @@ namespace Amperka.IO.Debugger.Configurations
 
         private static async Task SyncButtonClickHandler(int readPin, int writePin, int delay, bool useBcm)
         {
-            int bcmReadPin = useBcm ? readPin : WiringPi.FromBcm(readPin);
-            int bcmWritePin = useBcm ? writePin : WiringPi.FromBcm(writePin);
+            int bcmReadPin = useBcm ? readPin : WiringPi.ToBcm(readPin);
+            int bcmWritePin = useBcm ? writePin : WiringPi.ToBcm(writePin);
 
             using (GpioController controller = new GpioController())
             {
@@ -106,8 +106,8 @@ namespace Amperka.IO.Debugger.Configurations
 
         private static async Task AsyncButtonClickHandler(int readPin, int writePin, int delay, bool useBcm)
         {
-            int bcmReadPin = useBcm ? readPin : WiringPi.FromBcm(readPin);
-            int bcmWritePin = useBcm ? writePin : WiringPi.FromBcm(writePin);
+            int bcmReadPin = useBcm ? readPin : WiringPi.ToBcm(readPin);
+            int bcmWritePin = useBcm ? writePin : WiringPi.ToBcm(writePin);
 
             using (GpioController controller = new GpioController())
             {

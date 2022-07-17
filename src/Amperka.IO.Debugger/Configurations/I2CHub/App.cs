@@ -99,16 +99,16 @@ namespace Amperka.IO.Debugger.Configurations
                 {
                     if (useAsyncMethod)
                     {
-                        hub.ForEach(async (index) =>
+                        hub.ForEach(async (index, cancellationToken) =>
                         {
                             Console.WriteLine("Channel {0} delay started with async method.", index);
 
-                            await Task.Delay(delay);
+                            await Task.Delay(delay, cancellationToken);
                         });
                     }
                     else
                     {
-                        hub.ForEach((index) =>
+                        hub.ForEach(index =>
                         {
                             Console.WriteLine("Channel {0} delay started with method.", index);
 
@@ -120,11 +120,11 @@ namespace Amperka.IO.Debugger.Configurations
                 {
                     if (useAsyncMethod)
                     {
-                        hub.ForEach(async () =>
+                        hub.ForEach(async cancellationToken =>
                         {
                             Console.WriteLine("Channel delay started with async method.");
 
-                            await Task.Delay(delay);
+                            await Task.Delay(delay, cancellationToken);
                         });
                     }
                     else
@@ -157,7 +157,7 @@ namespace Amperka.IO.Debugger.Configurations
                     }
                     else
                     {
-                        await hub.ForEachAsync((index) =>
+                        await hub.ForEachAsync(index =>
                         {
                             Console.WriteLine("Async channel {0} delay started with method.", index);
 
@@ -169,7 +169,7 @@ namespace Amperka.IO.Debugger.Configurations
                 {
                     if (useAsyncMethod)
                     {
-                        await hub.ForEachAsync(async (cancellationToken) =>
+                        await hub.ForEachAsync(async cancellationToken =>
                         {
                             Console.WriteLine("Async channel delay started with async method.");
 
