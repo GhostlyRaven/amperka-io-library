@@ -99,6 +99,22 @@
     "Amperka.IO.Debugger.XFet.DigitalWriteManyAllPinsAndDevices": {
       "commandName": "Project",
       "commandLineArgs": "x-fet digital-write-many-all-pins-and-devices --count 2 --delay 5000"
+    },
+    "Amperka.IO.Debugger.RotaryEncoder": {
+      "commandName": "Project",
+      "commandLineArgs": "rotary-encoder --help"
+    },
+    "Amperka.IO.Debugger.RotaryEncoder.ListenEvent": {
+      "commandName": "Project",
+      "commandLineArgs": "rotary-encoder listen-event"
+    },
+    "Amperka.IO.Debugger.OneWire": {
+      "commandName": "Project",
+      "commandLineArgs": "one-wire --help"
+    },
+    "Amperka.IO.Debugger.OneWire.Thermometer": {
+      "commandName": "Project",
+      "commandLineArgs": "one-wire thermometer --delay 5000"
     }
   }
 }

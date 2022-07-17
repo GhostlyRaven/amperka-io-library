@@ -300,6 +300,54 @@
             "launchSettingsProfile": "Amperka.IO.Debugger.XFet.DigitalWriteManyAllPinsAndDevices",
             "console": "integratedTerminal",
             "stopAtEntry": false
+        },
+        {
+            "name": "Launch Amperka.IO.Debugger.RotaryEncoder",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/src/Amperka.IO.Debugger/bin/Debug/net6.0/Amperka.IO.Debugger.dll",
+            "launchSettingsFilePath": "${workspaceFolder}/src/Amperka.IO.Debugger/Properties/launchSettings.json",
+            "cwd": "${workspaceFolder}/src/Amperka.IO.Debugger",
+            "launchSettingsProfile": "Amperka.IO.Debugger.RotaryEncoder",
+            "console": "integratedTerminal",
+            "stopAtEntry": false
+        },
+        {
+            "name": "Launch Amperka.IO.Debugger.RotaryEncoder.ListenEvent",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/src/Amperka.IO.Debugger/bin/Debug/net6.0/Amperka.IO.Debugger.dll",
+            "launchSettingsFilePath": "${workspaceFolder}/src/Amperka.IO.Debugger/Properties/launchSettings.json",
+            "cwd": "${workspaceFolder}/src/Amperka.IO.Debugger",
+            "launchSettingsProfile": "Amperka.IO.Debugger.RotaryEncoder.ListenEvent",
+            "console": "integratedTerminal",
+            "stopAtEntry": false
+        },
+        {
+            "name": "Launch Amperka.IO.Debugger.OneWire",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/src/Amperka.IO.Debugger/bin/Debug/net6.0/Amperka.IO.Debugger.dll",
+            "launchSettingsFilePath": "${workspaceFolder}/src/Amperka.IO.Debugger/Properties/launchSettings.json",
+            "cwd": "${workspaceFolder}/src/Amperka.IO.Debugger",
+            "launchSettingsProfile": "Amperka.IO.Debugger.OneWire",
+            "console": "integratedTerminal",
+            "stopAtEntry": false
+        },
+        {
+            "name": "Launch Amperka.IO.Debugger.OneWire.Thermometer",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/src/Amperka.IO.Debugger/bin/Debug/net6.0/Amperka.IO.Debugger.dll",
+            "launchSettingsFilePath": "${workspaceFolder}/src/Amperka.IO.Debugger/Properties/launchSettings.json",
+            "cwd": "${workspaceFolder}/src/Amperka.IO.Debugger",
+            "launchSettingsProfile": "Amperka.IO.Debugger.OneWire.Thermometer",
+            "console": "integratedTerminal",
+            "stopAtEntry": false
         }
     ]
 }
