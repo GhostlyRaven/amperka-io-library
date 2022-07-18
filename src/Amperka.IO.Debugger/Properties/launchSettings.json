@@ -100,7 +100,7 @@
       "commandName": "Project",
       "commandLineArgs": "x-fet digital-write-many-all-pins-and-devices --count 2 --delay 5000"
     },
-    "Amperka.IO.Debugger.RotaryEncoder": {
+    "Amperka.IO.Debugger.RotaryEncoder.Help": {
       "commandName": "Project",
       "commandLineArgs": "rotary-encoder --help"
     },
@@ -108,13 +108,29 @@
       "commandName": "Project",
       "commandLineArgs": "rotary-encoder listen-event"
     },
-    "Amperka.IO.Debugger.OneWire": {
+    "Amperka.IO.Debugger.OneWire.Help": {
       "commandName": "Project",
       "commandLineArgs": "one-wire --help"
     },
     "Amperka.IO.Debugger.OneWire.Thermometer": {
       "commandName": "Project",
       "commandLineArgs": "one-wire thermometer --delay 5000"
+    },
+    "Amperka.IO.Debugger.LPS25H.Help": {
+      "commandName": "Project",
+      "commandLineArgs": "lps25h --help"
+    },
+    "Amperka.IO.Debugger.LPS25H.GetData": {
+      "commandName": "Project",
+      "commandLineArgs": "lps25h get-data --delay 5000"
+    },
+    "Amperka.IO.Debugger.SHT3X.Help": {
+      "commandName": "Project",
+      "commandLineArgs": "sht3x --help"
+    },
+    "Amperka.IO.Debugger.SHT3X.GetData": {
+      "commandName": "Project",
+      "commandLineArgs": "sht3x get-data --delay 5000"
     }
   }
 }

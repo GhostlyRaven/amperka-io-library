@@ -15,6 +15,8 @@ namespace Amperka.IO.Debugger.Configurations
             ConfigureGpioExpanderCommand(root);
             ConfigureOneWireCommand(root);
             ConfigureI2CHubCommand(root);
+            ConfigureLPS25HCommand(root);
+            ConfigureSHT3XCommand(root);
             ConfigureXFetCommand(root);
 
             root.SetHandler(DefaultHandler);

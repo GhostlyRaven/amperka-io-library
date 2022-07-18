@@ -302,14 +302,14 @@
             "stopAtEntry": false
         },
         {
-            "name": "Launch Amperka.IO.Debugger.RotaryEncoder",
+            "name": "Launch Amperka.IO.Debugger.RotaryEncoder.Help",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
             "program": "${workspaceFolder}/src/Amperka.IO.Debugger/bin/Debug/net6.0/Amperka.IO.Debugger.dll",
             "launchSettingsFilePath": "${workspaceFolder}/src/Amperka.IO.Debugger/Properties/launchSettings.json",
             "cwd": "${workspaceFolder}/src/Amperka.IO.Debugger",
-            "launchSettingsProfile": "Amperka.IO.Debugger.RotaryEncoder",
+            "launchSettingsProfile": "Amperka.IO.Debugger.RotaryEncoder.Help",
             "console": "integratedTerminal",
             "stopAtEntry": false
         },
@@ -326,14 +326,14 @@
             "stopAtEntry": false
         },
         {
-            "name": "Launch Amperka.IO.Debugger.OneWire",
+            "name": "Launch Amperka.IO.Debugger.OneWire.Help",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
             "program": "${workspaceFolder}/src/Amperka.IO.Debugger/bin/Debug/net6.0/Amperka.IO.Debugger.dll",
             "launchSettingsFilePath": "${workspaceFolder}/src/Amperka.IO.Debugger/Properties/launchSettings.json",
             "cwd": "${workspaceFolder}/src/Amperka.IO.Debugger",
-            "launchSettingsProfile": "Amperka.IO.Debugger.OneWire",
+            "launchSettingsProfile": "Amperka.IO.Debugger.OneWire.Help",
             "console": "integratedTerminal",
             "stopAtEntry": false
         },
@@ -346,6 +346,54 @@
             "launchSettingsFilePath": "${workspaceFolder}/src/Amperka.IO.Debugger/Properties/launchSettings.json",
             "cwd": "${workspaceFolder}/src/Amperka.IO.Debugger",
             "launchSettingsProfile": "Amperka.IO.Debugger.OneWire.Thermometer",
+            "console": "integratedTerminal",
+            "stopAtEntry": false
+        },
+        {
+            "name": "Launch Amperka.IO.Debugger.LPS25H.Help",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/src/Amperka.IO.Debugger/bin/Debug/net6.0/Amperka.IO.Debugger.dll",
+            "launchSettingsFilePath": "${workspaceFolder}/src/Amperka.IO.Debugger/Properties/launchSettings.json",
+            "cwd": "${workspaceFolder}/src/Amperka.IO.Debugger",
+            "launchSettingsProfile": "Amperka.IO.Debugger.LPS25H.Help",
+            "console": "integratedTerminal",
+            "stopAtEntry": false
+        },
+        {
+            "name": "Launch Amperka.IO.Debugger.LPS25H.GetData",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/src/Amperka.IO.Debugger/bin/Debug/net6.0/Amperka.IO.Debugger.dll",
+            "launchSettingsFilePath": "${workspaceFolder}/src/Amperka.IO.Debugger/Properties/launchSettings.json",
+            "cwd": "${workspaceFolder}/src/Amperka.IO.Debugger",
+            "launchSettingsProfile": "Amperka.IO.Debugger.LPS25H.GetData",
+            "console": "integratedTerminal",
+            "stopAtEntry": false
+        },
+        {
+            "name": "Launch Amperka.IO.Debugger.SHT3X.Help",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/src/Amperka.IO.Debugger/bin/Debug/net6.0/Amperka.IO.Debugger.dll",
+            "launchSettingsFilePath": "${workspaceFolder}/src/Amperka.IO.Debugger/Properties/launchSettings.json",
+            "cwd": "${workspaceFolder}/src/Amperka.IO.Debugger",
+            "launchSettingsProfile": "Amperka.IO.Debugger.SHT3X.Help",
+            "console": "integratedTerminal",
+            "stopAtEntry": false
+        },
+        {
+            "name": "Launch Amperka.IO.Debugger.SHT3X.GetData",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/src/Amperka.IO.Debugger/bin/Debug/net6.0/Amperka.IO.Debugger.dll",
+            "launchSettingsFilePath": "${workspaceFolder}/src/Amperka.IO.Debugger/Properties/launchSettings.json",
+            "cwd": "${workspaceFolder}/src/Amperka.IO.Debugger",
+            "launchSettingsProfile": "Amperka.IO.Debugger.SHT3X.GetData",
             "console": "integratedTerminal",
             "stopAtEntry": false
         }

@@ -1,6 +1,6 @@
 # <img src="/images/amperka-logo-32.png"></img> **Amperka.IO.Library**
 
-**Implementation of the library for devices from Amperka on the dotnet platform.**
+**Implementation of the library for devices from Amperka on the dotnet platform and Raspberry Pi.**
 
 **Target framework – .NET 6.**
 
@@ -42,6 +42,13 @@ The list contains the devices expected in the future in the library:
 - [x] [GPIO Expander;](https://github.com/amperka/I2CioExpander)
 - [x] [P-FET/N-FET;](https://github.com/amperka/AmperkaFet)
 - [x] [I2C Hub.](https://github.com/amperka/TroykaI2CHub)
+
+# Additional devices
+The list contains the devices available in the debugging application:
+- [x] [SHT3X;](https://github.com/dotnet/iot/tree/main/src/devices/Sht3x)
+- [x] [LPS25H;](https://github.com/dotnet/iot/tree/main/src/devices/Lps25h)
+- [x] [Rotary encoder;](https://github.com/dotnet/iot/tree/main/src/devices/RotaryEncoder)
+- [x] [OneWire thermometer.](https://github.com/dotnet/iot/tree/main/src/devices/OneWire)
 
 # Additional information
 
