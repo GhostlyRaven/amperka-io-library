@@ -15,10 +15,10 @@ List of links to resource materials:
 # Checking the calculations of the counter period and the restored frequency for STM32
 
 Formulas:
-1. $$ Freq = \frac {TimeClock}{Prescaler * CounterPeriod} $$
-2. $$ Prescaler = \frac {TimeClock}{Freq * CounterPeriod} $$
-3. $$ CounterPeriod = \frac {TimeClock}{Prescaler * Freq} $$
-4. $$ CounterPeriod = \frac {48.000.000}{24 * Freq} $$
+1. $$Freq = \frac {TimeClock}{Prescaler * CounterPeriod}$$
+2. $$Prescaler = \frac {TimeClock}{Freq * CounterPeriod}$$
+3. $$CounterPeriod = \frac {TimeClock}{Prescaler * Freq}$$
+4. $$CounterPeriod = \frac {48.000.000}{24 * Freq}$$
 
 Where **TimeClock** - frequency of the device timer operation, **Prescaler** - prescaler for **TimeClock**, **CounterPeriod (ARR-register)** - counter overflow value, **Freq** - generated frequency.
 
