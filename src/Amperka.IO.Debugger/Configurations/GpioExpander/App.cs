@@ -211,7 +211,7 @@ namespace Amperka.IO.Debugger.Configurations
                 {
                     while (Exit())
                     {
-                        double result = await expander.AnalogReadAsync(readPin) / 4095.0;
+                        double result = await expander.AnalogReadAsync(readPin) / GpioExpander.AdcBitrate;
 
                         Console.WriteLine("Result: {0}", result);
 

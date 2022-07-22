@@ -25,6 +25,11 @@ namespace Amperka.IO.Devices
         public const int DefaultAddress = 42;
 
         /// <summary>
+        /// Device ADC bitrate.
+        /// </summary>
+        public const double AdcBitrate = 4095.0;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="GpioExpander"/> class.
         /// </summary>
         /// <param name="device">Instance of I2C device.</param>
@@ -341,13 +346,13 @@ namespace Amperka.IO.Devices
         /// <summary>
         /// Sets the frequency of the ADC operation.
         /// </summary>
-        /// <param name="freq">The frequency of the ADC is from 100 Hz to 64 kHz.</param>
+        /// <param name="freq">The frequency of the ADC is from 32 Hz to 64 kHz.</param>
         /// <exception cref="ArgumentOutOfRangeException">Invalid value of the ADC frequency.</exception>
         /// <exception cref="AmperkaDeviceException">There was a malfunction of the device.</exception>
         /// <exception cref="ObjectDisposedException">The device is closed.</exception>
         public void PwmFreq(int freq)
         {
-            if (freq is < 100 or > 64000)
+            if (freq is < 32 or > 64000)
             {
                 ThrowHelper.ThrowArgumentOutOfRangeException(nameof(freq));
             }
