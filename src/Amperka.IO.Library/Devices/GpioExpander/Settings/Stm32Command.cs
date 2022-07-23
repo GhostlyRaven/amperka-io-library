@@ -4,6 +4,7 @@ namespace Amperka.IO.Devices.Settings
 {
     internal enum Stm32Command
     {
+        UID = 0,
         Reset = 1,
         ChangeI2CAddress = 2,
         SaveI2CAddress = 3,

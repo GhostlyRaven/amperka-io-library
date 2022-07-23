@@ -14,6 +14,11 @@
             Default device address.
             </summary>
         </member>
+        <member name="F:Amperka.IO.Devices.GpioExpander.AdcBitrate">
+            <summary>
+            Device ADC bitrate.
+            </summary>
+        </member>
         <member name="M:Amperka.IO.Devices.GpioExpander.#ctor(System.Device.I2c.I2cDevice)">
             <summary>
             Initializes a new instance of the <see cref="T:Amperka.IO.Devices.GpioExpander"/> class.
@@ -175,7 +180,7 @@
             <summary>
             Sets the frequency of the ADC operation.
             </summary>
-            <param name="freq">The frequency of the ADC is from 100 Hz to 64 kHz.</param>
+            <param name="freq">The frequency of the ADC is from 32 Hz to 64 kHz.</param>
             <exception cref="T:System.ArgumentOutOfRangeException">Invalid value of the ADC frequency.</exception>
             <exception cref="T:Amperka.IO.Exceptions.AmperkaDeviceException">There was a malfunction of the device.</exception>
             <exception cref="T:System.ObjectDisposedException">The device is closed.</exception>
@@ -187,6 +192,24 @@
             <param name="freq">The frequency of the ADC is from 100 Hz to 64 kHz.</param>
             <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
             <exception cref="T:System.ArgumentOutOfRangeException">Invalid value of the ADC frequency.</exception>
+            <exception cref="T:Amperka.IO.Exceptions.AmperkaDeviceException">There was a malfunction of the device.</exception>
+            <exception cref="T:System.OperationCanceledException">The operation was canceled.</exception>
+            <exception cref="T:System.ObjectDisposedException">The device is closed.</exception>
+        </member>
+        <member name="M:Amperka.IO.Devices.GpioExpander.GetDeviceId">
+            <summary>
+            Get the value of the device id.
+            </summary>
+            <returns>The value of the device id.</returns>
+            <exception cref="T:Amperka.IO.Exceptions.AmperkaDeviceException">There was a malfunction of the device.</exception>
+            <exception cref="T:System.ObjectDisposedException">The device is closed.</exception>
+        </member>
+        <member name="M:Amperka.IO.Devices.GpioExpander.GetDeviceIdAsync(System.Threading.CancellationToken)">
+            <summary>
+            Async get the value of the device id.
+            </summary>
+            <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
+            <returns>The value of the device id.</returns>
             <exception cref="T:Amperka.IO.Exceptions.AmperkaDeviceException">There was a malfunction of the device.</exception>
             <exception cref="T:System.OperationCanceledException">The operation was canceled.</exception>
             <exception cref="T:System.ObjectDisposedException">The device is closed.</exception>

@@ -26,19 +26,19 @@ namespace Amperka.IO.Debugger.Configurations
 
             #region Set channel
 
-            Command setChannel = new Command("set-channel", "Checking the set channel.")
+            Command setChannelCommand = new Command("set-channel", "Checking the set channel.")
             {
                 channelOption,
                 delayOption
             };
 
-            setChannel.SetHandler(SetChannelHandler, busIdOption, deviceAddressOption, channelOption, delayOption);
+            setChannelCommand.SetHandler(SetChannelHandler, busIdOption, deviceAddressOption, channelOption, delayOption);
 
             #endregion
 
             #region For Each
 
-            Command forEach = new Command("for-each", "Checking the for each set channel.")
+            Command forEachCommand = new Command("for-each", "Checking the for each set channel.")
             {
                 delayOption,
                 channelOption,
@@ -46,13 +46,13 @@ namespace Amperka.IO.Debugger.Configurations
                 useAsyncMethodOption,
             };
 
-            forEach.SetHandler(ForEachHandler, busIdOption, deviceAddressOption, delayOption, useIndexOption, useAsyncMethodOption);
+            forEachCommand.SetHandler(ForEachHandler, busIdOption, deviceAddressOption, delayOption, useIndexOption, useAsyncMethodOption);
 
             #endregion
 
             #region For Each Async
 
-            Command forEachAsync = new Command("for-each-async", "Checking the for each set channel.")
+            Command forEachAsyncCommand = new Command("for-each-async", "Checking the for each set channel.")
             {
                 delayOption,
                 channelOption,
@@ -60,16 +60,16 @@ namespace Amperka.IO.Debugger.Configurations
                 useAsyncMethodOption,
             };
 
-            forEachAsync.SetHandler(ForEachAsyncHandler, busIdOption, deviceAddressOption, delayOption, useIndexOption, useAsyncMethodOption);
+            forEachAsyncCommand.SetHandler(ForEachAsyncHandler, busIdOption, deviceAddressOption, delayOption, useIndexOption, useAsyncMethodOption);
 
             #endregion
 
             i2cHub.AddGlobalOption(busIdOption);
             i2cHub.AddGlobalOption(deviceAddressOption);
 
-            i2cHub.AddCommand(forEach);
-            i2cHub.AddCommand(setChannel);
-            i2cHub.AddCommand(forEachAsync);
+            i2cHub.AddCommand(forEachCommand);
+            i2cHub.AddCommand(setChannelCommand);
+            i2cHub.AddCommand(forEachAsyncCommand);
 
             root.AddCommand(i2cHub);
         }

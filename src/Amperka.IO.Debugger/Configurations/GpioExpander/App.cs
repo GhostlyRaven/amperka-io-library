@@ -31,31 +31,31 @@ namespace Amperka.IO.Debugger.Configurations
 
             #region Port command
 
-            Command port = new Command("port", "Checking the port signal.")
+            Command portCommand = new Command("port", "Checking the port signal.")
             {
                 delayOption
             };
 
-            port.SetHandler(PortHandler, busIdOption, deviceAddressOption, delayOption);
+            portCommand.SetHandler(PortHandler, busIdOption, deviceAddressOption, delayOption);
 
             #endregion
 
             #region Digital command
 
-            Command digital = new Command("digital", "Checking the digital signal.")
+            Command digitalCommand = new Command("digital", "Checking the digital signal.")
             {
                 delayOption,
                 readPinOption,
                 writePinOption
             };
 
-            digital.SetHandler(DigitalHandler, busIdOption, deviceAddressOption, delayOption, writePinOption, readPinOption);
+            digitalCommand.SetHandler(DigitalHandler, busIdOption, deviceAddressOption, delayOption, writePinOption, readPinOption);
 
             #endregion
 
             #region Analog command
 
-            Command anlog = new Command("analog", "Checking the analog signal.")
+            Command anlogCommand = new Command("analog", "Checking the analog signal.")
             {
                 delayOption,
                 readPinOption,
@@ -63,26 +63,26 @@ namespace Amperka.IO.Debugger.Configurations
                 useReadonlyOption
             };
 
-            anlog.SetHandler(AnalogHandler, busIdOption, deviceAddressOption, delayOption, writePinOption, readPinOption, useReadonlyOption);
+            anlogCommand.SetHandler(AnalogHandler, busIdOption, deviceAddressOption, delayOption, writePinOption, readPinOption, useReadonlyOption);
 
             #endregion
 
             #region Pwm random command
 
-            Command pwmRandom = new Command("pwm-random".ToLower(), "Checking the PWM signal.")
+            Command pwmRandomCommand = new Command("pwm-random".ToLower(), "Checking the PWM signal.")
             {
                 freqOption,
                 delayOption,
                 writePinOption
             };
 
-            pwmRandom.SetHandler(PwmRandomHandler, busIdOption, deviceAddressOption, delayOption, writePinOption, freqOption);
+            pwmRandomCommand.SetHandler(PwmRandomHandler, busIdOption, deviceAddressOption, delayOption, writePinOption, freqOption);
 
             #endregion
 
             #region Pwm command
 
-            Command pwm = new Command("pwm", "Checking the PWM signal.")
+            Command pwmCommand = new Command("pwm", "Checking the PWM signal.")
             {
                 pwmOption,
                 freqOption,
@@ -90,60 +90,68 @@ namespace Amperka.IO.Debugger.Configurations
                 writePinOption
             };
 
-            pwm.SetHandler(PwmHandler, busIdOption, deviceAddressOption, delayOption, writePinOption, freqOption, pwmOption);
+            pwmCommand.SetHandler(PwmHandler, busIdOption, deviceAddressOption, delayOption, writePinOption, freqOption, pwmOption);
 
             #endregion
 
             #region Adc command
 
-            Command adc = new Command("adc", "Checking the ADC speed.")
+            Command adcCommand = new Command("adc", "Checking the ADC speed.")
             {
                 adcSpeedOption
             };
 
-            adc.SetHandler(AdcHandler, busIdOption, deviceAddressOption, adcSpeedOption);
+            adcCommand.SetHandler(AdcHandler, busIdOption, deviceAddressOption, adcSpeedOption);
+
+            #endregion
+
+            #region Get device id command
+
+            Command getDeviceIdCommand = new Command("get-device-id", "Checking the get device id.");
+
+            getDeviceIdCommand.SetHandler(GetDeviceIdHandler, busIdOption, deviceAddressOption);
 
             #endregion
 
             #region Change address command
 
-            Command changeChipAddress = new Command("change-chip-address", "Checking the chip change address.")
+            Command changeChipAddressCommand = new Command("change-chip-address", "Checking the chip change address.")
             {
                 newDeviceAddressOption
             };
 
-            changeChipAddress.SetHandler(ChangeChipAddressHandler, busIdOption, deviceAddressOption, newDeviceAddressOption);
+            changeChipAddressCommand.SetHandler(ChangeChipAddressHandler, busIdOption, deviceAddressOption, newDeviceAddressOption);
 
             #endregion
 
             #region Save address command
 
-            Command saveChipAddress = new Command("save-chip-address", "Checking the chip save address.");
+            Command saveChipAddressCommand = new Command("save-chip-address", "Checking the chip save address.");
 
-            saveChipAddress.SetHandler(SaveAddressHandler, busIdOption, deviceAddressOption);
+            saveChipAddressCommand.SetHandler(SaveAddressHandler, busIdOption, deviceAddressOption);
 
             #endregion
 
             #region Reset chip command
 
-            Command resetChip = new Command("reset-chip", "Checking the chip reset.");
+            Command resetChipCommand = new Command("reset-chip", "Checking the chip reset.");
 
-            resetChip.SetHandler(ResetChipHandler, busIdOption, deviceAddressOption);
+            resetChipCommand.SetHandler(ResetChipHandler, busIdOption, deviceAddressOption);
 
             #endregion
 
             gpioExpander.AddGlobalOption(busIdOption);
             gpioExpander.AddGlobalOption(deviceAddressOption);
 
-            gpioExpander.AddCommand(adc);
-            gpioExpander.AddCommand(pwm);
-            gpioExpander.AddCommand(port);
-            gpioExpander.AddCommand(anlog);
-            gpioExpander.AddCommand(digital);
-            gpioExpander.AddCommand(pwmRandom);
-            gpioExpander.AddCommand(resetChip);
-            gpioExpander.AddCommand(saveChipAddress);
-            gpioExpander.AddCommand(changeChipAddress);
+            gpioExpander.AddCommand(adcCommand);
+            gpioExpander.AddCommand(pwmCommand);
+            gpioExpander.AddCommand(portCommand);
+            gpioExpander.AddCommand(anlogCommand);
+            gpioExpander.AddCommand(digitalCommand);
+            gpioExpander.AddCommand(pwmRandomCommand);
+            gpioExpander.AddCommand(resetChipCommand);
+            gpioExpander.AddCommand(saveChipAddressCommand);
+            gpioExpander.AddCommand(changeChipAddressCommand);
 
             root.AddCommand(gpioExpander);
         }
@@ -278,6 +286,17 @@ namespace Amperka.IO.Debugger.Configurations
                 Console.WriteLine("Checking the ADC speed ({0}).", adcSpeed);
 
                 await expander.AdcSpeedAsync(adcSpeed);
+            }
+        }
+
+        private static async Task GetDeviceIdHandler(int busId, int deviceAddress)
+        {
+            Console.WriteLine("Checking the get device id.");
+
+            await using (GpioExpander expander = new GpioExpander(I2cDevice.Create(new I2cConnectionSettings(busId, deviceAddress))))
+            {
+                Console.WriteLine("Device id: {0}.", await expander.GetDeviceIdAsync());
+                Console.WriteLine("Device id: {0}.", (await expander.GetDeviceIdAsync()).ToString("X"));
             }
         }
 

@@ -1,6 +1,7 @@
 ﻿using System.Device.I2c;
 using System.Diagnostics;
 using Amperka.IO.Exceptions;
+using System.Buffers.Binary;
 using Amperka.IO.Devices.Settings;
 using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
@@ -55,7 +56,7 @@ namespace Amperka.IO.Devices
 
             int data = Read(Stm32Command.DigitalRead, default);
 
-            return Reverse(data);
+            return Reverse(data, true);
         }
 
         /// <summary>
@@ -89,7 +90,7 @@ namespace Amperka.IO.Devices
 
             ThrowHelper.ThrowObjectDisposedException(_disposed, nameof(GpioExpander));
 
-            int data = Reverse(value);
+            int data = Reverse(value, true);
 
             Write(Stm32Command.DigitalWriteHigh, data, false);
 
@@ -169,7 +170,7 @@ namespace Amperka.IO.Devices
             ThrowHelper.ThrowObjectDisposedException(_disposed, nameof(GpioExpander));
 
             int data = Mask(pin);
-            data = Reverse(data);
+            data = Reverse(data, true);
 
             Stm32Command command = value
                 ? Stm32Command.DigitalWriteHigh
@@ -224,7 +225,7 @@ namespace Amperka.IO.Devices
             };
 
             int data = Mask(pin);
-            data = Reverse(data);
+            data = Reverse(data, true);
 
             Write(command, data, false);
         }
@@ -271,7 +272,7 @@ namespace Amperka.IO.Devices
 
             int data = Read(Stm32Command.AnalogRead, pin);
 
-            return Reverse(data);
+            return Reverse(data, true);
         }
 
         /// <summary>
@@ -359,7 +360,7 @@ namespace Amperka.IO.Devices
 
             ThrowHelper.ThrowObjectDisposedException(_disposed, nameof(GpioExpander));
 
-            int data = Reverse(freq);
+            int data = Reverse(freq, true);
 
             Write(Stm32Command.PwmFreq, data, false);
         }
@@ -385,6 +386,36 @@ namespace Amperka.IO.Devices
         #endregion
 
         #region Shield settings
+
+        /// <summary>
+        /// Get the value of the device id.
+        /// </summary>
+        /// <returns>The value of the device id.</returns>
+        /// <exception cref="AmperkaDeviceException">There was a malfunction of the device.</exception>
+        /// <exception cref="ObjectDisposedException">The device is closed.</exception>
+        public int GetDeviceId()
+        {
+            ThrowHelper.ThrowObjectDisposedException(_disposed, nameof(GpioExpander));
+
+            int data = Read(Stm32Command.UID, default);
+
+            return Reverse(data, false);
+        }
+
+        /// <summary>
+        /// Async get the value of the device id.
+        /// </summary>
+        /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
+        /// <returns>The value of the device id.</returns>
+        /// <exception cref="AmperkaDeviceException">There was a malfunction of the device.</exception>
+        /// <exception cref="OperationCanceledException">The operation was canceled.</exception>
+        /// <exception cref="ObjectDisposedException">The device is closed.</exception>
+        public ValueTask<int> GetDeviceIdAsync(CancellationToken cancellationToken = default)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+
+            return ValueTask.FromResult(GetDeviceId());
+        }
 
         /// <summary>
         /// Sets the speed of the ADC.
@@ -525,9 +556,14 @@ namespace Amperka.IO.Devices
             return 0x0001 << value;
         }
 
-        private int Reverse(int value)
+        private int Reverse(int value, bool shortValue)
         {
-            return ((value & 0xFF) << 8) | ((value >> 8) & 0xFF);
+            if (shortValue)
+            {
+                return ((value & 0xFF) << 8) | ((value >> 8) & 0xFF);
+            }
+
+            return BinaryPrimitives.ReverseEndianness(value);
         }
 
         [StackTraceHidden]
@@ -540,7 +576,8 @@ namespace Amperka.IO.Devices
 
                 Unsafe.As<byte, int>(ref MemoryMarshal.GetReference(writeBuffer)) = Unsafe.As<Stm32Command, int>(ref command) | (data << 8);
 
-                _device.WriteRead(writeBuffer, readBuffer);
+                _device.Write(writeBuffer);
+                _device.Read(readBuffer);
 
                 return Unsafe.As<byte, int>(ref MemoryMarshal.GetReference(readBuffer));
             }

@@ -48,6 +48,10 @@
       "commandName": "Project",
       "commandLineArgs": "gpio-expander adc"
     },
+    "Amperka.IO.Debugger.GpioExpander.GetDeviceId": {
+      "commandName": "Project",
+      "commandLineArgs": "gpio-expander get-device-id"
+    },
     "Amperka.IO.Debugger.GpioExpander.ChangeChipAddress": {
       "commandName": "Project",
       "commandLineArgs": "gpio-expander change-chip-address"

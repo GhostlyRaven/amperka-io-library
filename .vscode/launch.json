@@ -146,6 +146,18 @@
             "stopAtEntry": false
         },
         {
+            "name": "Launch Amperka.IO.Debugger.GpioExpander.GetDeviceId",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/src/Amperka.IO.Debugger/bin/Debug/net6.0/Amperka.IO.Debugger.dll",
+            "launchSettingsFilePath": "${workspaceFolder}/src/Amperka.IO.Debugger/Properties/launchSettings.json",
+            "cwd": "${workspaceFolder}/src/Amperka.IO.Debugger",
+            "launchSettingsProfile": "Amperka.IO.Debugger.GpioExpander.GetDeviceId",
+            "console": "integratedTerminal",
+            "stopAtEntry": false
+        },
+        {
             "name": "Launch Amperka.IO.Debugger.GpioExpander.ChangeChipAddress",
             "type": "coreclr",
             "request": "launch",
