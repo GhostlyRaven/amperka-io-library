@@ -10,7 +10,7 @@ namespace Amperka.IO.Debugger.Configurations
     {
         private static void ConfigureXFetCommand(Command root)
         {
-            Command xFet = new Command("x-fet", "Checking the X-Fet functions.");
+            Command xFetCommand = new Command("x-fet", "Checking the X-Fet functions.");
 
             #region Options
 
@@ -61,18 +61,18 @@ namespace Amperka.IO.Debugger.Configurations
 
             #endregion
 
-            xFet.AddGlobalOption(countOption);
-            xFet.AddGlobalOption(delayOption);
-            xFet.AddGlobalOption(busIdOption);
-            xFet.AddGlobalOption(chipSelectLineOption);
+            xFetCommand.AddGlobalOption(countOption);
+            xFetCommand.AddGlobalOption(delayOption);
+            xFetCommand.AddGlobalOption(busIdOption);
+            xFetCommand.AddGlobalOption(chipSelectLineOption);
 
-            xFet.AddCommand(digitalWritePinsCommand);
-            xFet.AddCommand(digitalWriteAllPinsCommand);
-            xFet.AddCommand(digitalWriteManyPinsCommand);
-            xFet.AddCommand(digitalWriteManyAllPinsCommand);
-            xFet.AddCommand(digitalWriteManyAllPinsAndDevicesCommand);
+            xFetCommand.AddCommand(digitalWritePinsCommand);
+            xFetCommand.AddCommand(digitalWriteAllPinsCommand);
+            xFetCommand.AddCommand(digitalWriteManyPinsCommand);
+            xFetCommand.AddCommand(digitalWriteManyAllPinsCommand);
+            xFetCommand.AddCommand(digitalWriteManyAllPinsAndDevicesCommand);
 
-            root.AddCommand(xFet);
+            root.AddCommand(xFetCommand);
         }
 
         #region Handlers

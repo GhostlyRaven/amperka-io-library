@@ -26,35 +26,35 @@
     },
     "Amperka.IO.Debugger.GpioExpander.Port": {
       "commandName": "Project",
-      "commandLineArgs": "gpio-expander port --delay 5000"
+      "commandLineArgs": "gpio-expander port --delay 5000 --device-address 42"
     },
     "Amperka.IO.Debugger.GpioExpander.Digital": {
       "commandName": "Project",
-      "commandLineArgs": "gpio-expander digital"
+      "commandLineArgs": "gpio-expander digital --device-address 42"
     },
     "Amperka.IO.Debugger.GpioExpander.Analog": {
       "commandName": "Project",
-      "commandLineArgs": "gpio-expander analog"
+      "commandLineArgs": "gpio-expander analog --device-address 42"
     },
     "Amperka.IO.Debugger.GpioExpander.Pwm": {
       "commandName": "Project",
-      "commandLineArgs": "gpio-expander pwm"
+      "commandLineArgs": "gpio-expander pwm --device-address 42"
     },
     "Amperka.IO.Debugger.GpioExpander.PwmRandom": {
       "commandName": "Project",
-      "commandLineArgs": "gpio-expander pwm-random"
+      "commandLineArgs": "gpio-expander pwm-random --device-address 42"
     },
     "Amperka.IO.Debugger.GpioExpander.Adc": {
       "commandName": "Project",
-      "commandLineArgs": "gpio-expander adc"
+      "commandLineArgs": "gpio-expander adc --device-address 42"
     },
     "Amperka.IO.Debugger.GpioExpander.GetDeviceId": {
       "commandName": "Project",
-      "commandLineArgs": "gpio-expander get-device-id"
+      "commandLineArgs": "gpio-expander get-device-id --device-address 42"
     },
     "Amperka.IO.Debugger.GpioExpander.ChangeChipAddress": {
       "commandName": "Project",
-      "commandLineArgs": "gpio-expander change-chip-address"
+      "commandLineArgs": "gpio-expander change-chip-address --device-address 42"
     },
     "Amperka.IO.Debugger.GpioExpander.SaveChipAddress": {
       "commandName": "Project",

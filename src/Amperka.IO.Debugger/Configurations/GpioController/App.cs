@@ -11,7 +11,7 @@ namespace Amperka.IO.Debugger.Configurations
     {
         private static void ConfigureGpioControllerCommand(Command root)
         {
-            Command gpioController = new Command("gpio-controller", "Checking the GPIO controller functions.");
+            Command gpioControllerCommand = new Command("gpio-controller", "Checking the GPIO controller functions.");
 
             #region Options
 
@@ -52,15 +52,15 @@ namespace Amperka.IO.Debugger.Configurations
 
             #endregion
 
-            gpioController.AddGlobalOption(useBcmOption);
-            gpioController.AddGlobalOption(readPinOption);
-            gpioController.AddGlobalOption(writePinOption);
+            gpioControllerCommand.AddGlobalOption(useBcmOption);
+            gpioControllerCommand.AddGlobalOption(readPinOption);
+            gpioControllerCommand.AddGlobalOption(writePinOption);
 
-            gpioController.AddCommand(convertCommand);
-            gpioController.AddCommand(syncCommand);
-            gpioController.AddCommand(asyncCommand);
+            gpioControllerCommand.AddCommand(convertCommand);
+            gpioControllerCommand.AddCommand(syncCommand);
+            gpioControllerCommand.AddCommand(asyncCommand);
 
-            root.AddCommand(gpioController);
+            root.AddCommand(gpioControllerCommand);
         }
 
         #region Handlers

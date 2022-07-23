@@ -12,7 +12,7 @@ namespace Amperka.IO.Debugger.Configurations
     {
         private static void ConfigureGpioExpanderCommand(Command root)
         {
-            Command gpioExpander = new Command("gpio-expander", "Checking the GPIO expander functions.");
+            Command gpioExpanderCommand = new Command("gpio-expander", "Checking the GPIO expander functions.");
 
             #region Options
 
@@ -140,20 +140,21 @@ namespace Amperka.IO.Debugger.Configurations
 
             #endregion
 
-            gpioExpander.AddGlobalOption(busIdOption);
-            gpioExpander.AddGlobalOption(deviceAddressOption);
+            gpioExpanderCommand.AddGlobalOption(busIdOption);
+            gpioExpanderCommand.AddGlobalOption(deviceAddressOption);
 
-            gpioExpander.AddCommand(adcCommand);
-            gpioExpander.AddCommand(pwmCommand);
-            gpioExpander.AddCommand(portCommand);
-            gpioExpander.AddCommand(anlogCommand);
-            gpioExpander.AddCommand(digitalCommand);
-            gpioExpander.AddCommand(pwmRandomCommand);
-            gpioExpander.AddCommand(resetChipCommand);
-            gpioExpander.AddCommand(saveChipAddressCommand);
-            gpioExpander.AddCommand(changeChipAddressCommand);
+            gpioExpanderCommand.AddCommand(adcCommand);
+            gpioExpanderCommand.AddCommand(pwmCommand);
+            gpioExpanderCommand.AddCommand(portCommand);
+            gpioExpanderCommand.AddCommand(anlogCommand);
+            gpioExpanderCommand.AddCommand(digitalCommand);
+            gpioExpanderCommand.AddCommand(pwmRandomCommand);
+            gpioExpanderCommand.AddCommand(resetChipCommand);
+            gpioExpanderCommand.AddCommand(getDeviceIdCommand);
+            gpioExpanderCommand.AddCommand(saveChipAddressCommand);
+            gpioExpanderCommand.AddCommand(changeChipAddressCommand);
 
-            root.AddCommand(gpioExpander);
+            root.AddCommand(gpioExpanderCommand);
         }
 
         #region Handlers

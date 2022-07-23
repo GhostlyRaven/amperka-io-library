@@ -11,7 +11,7 @@ namespace Amperka.IO.Debugger.Configurations
     {
         private static void ConfigureI2CHubCommand(Command root)
         {
-            Command i2cHub = new Command("i2c-hub", "Checking the I2C hub functions.");
+            Command i2cHubCommand = new Command("i2c-hub", "Checking the I2C hub functions.");
 
             #region Options
 
@@ -64,14 +64,14 @@ namespace Amperka.IO.Debugger.Configurations
 
             #endregion
 
-            i2cHub.AddGlobalOption(busIdOption);
-            i2cHub.AddGlobalOption(deviceAddressOption);
+            i2cHubCommand.AddGlobalOption(busIdOption);
+            i2cHubCommand.AddGlobalOption(deviceAddressOption);
 
-            i2cHub.AddCommand(forEachCommand);
-            i2cHub.AddCommand(setChannelCommand);
-            i2cHub.AddCommand(forEachAsyncCommand);
+            i2cHubCommand.AddCommand(forEachCommand);
+            i2cHubCommand.AddCommand(setChannelCommand);
+            i2cHubCommand.AddCommand(forEachAsyncCommand);
 
-            root.AddCommand(i2cHub);
+            root.AddCommand(i2cHubCommand);
         }
 
         #region Handlers
